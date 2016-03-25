@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 	
-	private static Dimension panelSize = new Dimension(900,600);
+	private static Dimension panelSize = new Dimension(1000,800);
 	
 	public GamePanel() {
 		this.setLocation(0, 0);
