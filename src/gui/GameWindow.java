@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame {
@@ -13,17 +12,17 @@ public class GameWindow extends JFrame {
 		this.setTitle("Hack And Slash");
 		this.setResizable(false);
 		
-		gamePanel = new GamePanel();
-		this.add(gamePanel);
-		
-		//TEST DE LA POLICE
-		JLabel test = new JLabel();
-		test.setText("Hello World");
-		test.setFont(FontLoader.getFont());
-		gamePanel.add(test);
-		
+		initPanel();
+				
 		this.pack();
 		this.setLocationRelativeTo(null);
 	    this.setVisible(true);
+	}
+	
+	
+	public void initPanel() {
+		gamePanel = new GamePanel();
+		gamePanel.setLayout(null);
+		this.add(gamePanel);
 	}
 }
