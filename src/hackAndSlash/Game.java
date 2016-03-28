@@ -12,7 +12,7 @@ public class Game {
 	}
 	
 	public static void initGraphics() {
-		FontLoader.loadGameFont();
+		FontLoader.loadGameFont();	//Permet d'utiliser la police du jeu
 		gameWindow = new GameWindow();
 	}
 

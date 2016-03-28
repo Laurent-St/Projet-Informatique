@@ -22,7 +22,6 @@ public class GameWindow extends JFrame {
 	
 	public void initPanel() {
 		gamePanel = new GamePanel();
-		gamePanel.setLayout(null);
-		this.add(gamePanel);
+		this.setContentPane(gamePanel);
 	}
 }
