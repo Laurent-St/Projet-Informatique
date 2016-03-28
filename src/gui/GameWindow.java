@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame {
@@ -14,6 +15,12 @@ public class GameWindow extends JFrame {
 		
 		gamePanel = new GamePanel();
 		this.add(gamePanel);
+		
+		//TEST DE LA POLICE
+		JLabel test = new JLabel();
+		test.setText("Hello World");
+		test.setFont(FontLoader.getFont());
+		gamePanel.add(test);
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
