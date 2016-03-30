@@ -6,8 +6,22 @@ public class Player extends Actor{
 	private Weapon weapon;
 
 
-public Player(String name, int damage, int health, Inventory inventory,int level,Weapon weapon){
-	super(name,damage,health);
+public Player(String name, int damage, int health,int position,int level,Weapon weapon){
+	super(name,damage,health,position);
+	Inventory inventory=new Inventory(5);
+	equipWeapon(weapon);
+	setLevel(1);
+}
+
+public Weapon getWeapon(){
+	return weapon;
+}
+public void equipWeapon(Weapon weapon){
+	/*on considère que le joueur a une valeur de degats de base et que le fait d'equiper une arme augmente
+	 * simplement la valeur de degats du joueur. MAIS IL FAUDRA TENIR COMPTE DES TYPES D'ARMES.
+	 */
+	this.weapon=weapon;
+	setDamage(damage+weapon.getDamage());	
 }
 
 public Inventory getInventory(){
@@ -19,14 +33,6 @@ public int getLevel(){
 public void setLevel(int level){
 	this.level=level;
 }
-
-public Weapon getWeapon(){
-	return weapon;
-}
-public void setWeapon(Weapon weapon){
-	this.weapon=weapon;
-}
-
 public void levelup(){
 	setLevel(level+1);
 	setHealth(health+10);
@@ -39,11 +45,10 @@ public void die(){
 	//resetPosition(debut du niveau)
 }
 public void collect(CollectableObject object){
-	setInInventory(object);
+	inventory.setInInventory(object);
 }
 
-public void open(Door door){
-}
+//public void open(){}
 
 
 }
