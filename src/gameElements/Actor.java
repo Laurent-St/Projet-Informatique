@@ -2,11 +2,16 @@ package gameElements;
 
 
 public class Actor {
-	private String name;
-	private int damage;
-	private int health;
+	protected String name;
+	protected int damage;
+	protected int health;
 
-
+public Actor(String name,int damage, int health){
+	setName(name);
+	setDamage(damage);
+	setHealth(health);
+}
+	
 public String getName(){
 	return name;
 }
