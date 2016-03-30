@@ -17,7 +17,9 @@ public void setValue(int value){
 		this.value=value;
 	}
 }
+/*
 public void potionDrinked(){
 	//fonction abstraite qui sera rédéfinie en fonction du type de potion
 } 
+*/
 }

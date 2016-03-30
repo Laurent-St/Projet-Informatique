@@ -21,6 +21,9 @@ public void removeFromInventory(CollectableObject object){
 	content.remove(object);
 	//ATTENTION IL FAUDRA GERER LE FAIT QU'IL PEUT Y AVOIR PLUSIEURS OBJETS DU MEME TYPE!
 }
+public void clearInventory(){
+	content.clear();
+}
 
 public int getMaxSize(){
 	return maxSize;

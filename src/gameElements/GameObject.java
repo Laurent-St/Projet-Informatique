@@ -1,7 +1,7 @@
 package gameElements;
 
 public class GameObject {
-	private int position;
+	protected int position;
 
 
 public GameObject(int position){

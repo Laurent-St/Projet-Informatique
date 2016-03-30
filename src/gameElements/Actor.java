@@ -5,6 +5,7 @@ public class Actor extends GameObject {
 	protected String name;
 	protected int damage;
 	protected int health;
+	protected int maxHealth;
 
 public Actor(String name,int damage, int health, int position){
 	super(position);
@@ -45,10 +46,18 @@ public void setHealth(int health){
 		this.health=health;
 	}else{
 		this.health=0;
-		//il faudra voir le lien entre la méthode die() et la gestion de la santé.
 	}
 }
-
+public int getMaxHealth(){
+	return maxHealth;
+}
+public void setMaxHealth(int maxHealth){
+	if (maxHealth>=0){
+		this.maxHealth=maxHealth;
+	}else{
+		this.maxHealth=0;
+	}
+}
 /*
 public void move(){
 	// a compléter!
