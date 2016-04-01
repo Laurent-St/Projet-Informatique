@@ -1,11 +1,7 @@
 package gui;
 
 import java.awt.Dimension;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import gui.button.GButton;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel {
@@ -16,18 +12,18 @@ public class GamePanel extends JPanel {
 		this.setLocation(0, 0);
 		this.setPreferredSize(panelSize);
 		this.setLayout(null);
-		this.setVisible(true);	
-		
-		//TEST DE LA POLICE
-		JLabel test = new JLabel();
-		test.setText("Hello World");
-		test.setFont(FontLoader.getFont());
-		test.setBounds(10, 10,500,50);
-		this.add(test);
-		
-		//TEST BOUTON
-		GButton b = new GButton("Bouton", new Dimension(200,50));
-		b.setLocation(100, 200);
-		this.add(b);
+		this.setVisible(true);
+	}
+	
+	public Dimension getDimensions() {
+		return panelSize;
+	}
+
+	public void removePanels() {
+		this.removeAll();		
+	}
+
+	public void addPanel(JPanel panel) {
+		this.add(panel);
 	}
 }

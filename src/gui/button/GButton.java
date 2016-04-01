@@ -21,26 +21,26 @@ public class GButton extends JPanel {
 	private Dimension dimensions;
 	private GButtonGraphics buttonImage;
 	
-	public GButton(String text, Dimension dim) {
+	public GButton(String text, int textSize, Dimension dim) {
 		super();
 		
-		initLabel(text);
+		initLabel(text, textSize);
 		
 		this.dimensions = dim;
 		buttonImage = new GButtonGraphics(this);
-		setDimensions(dim);
+		setDimensions(dim);		
 		
 		this.setLayout(null);
 		this.add(label);
 		this.add(buttonImage);
 		this.setVisible(true);
 	}
-	
-	public void initLabel(String text) {
+
+	public void initLabel(String text, int textSize) {
 		label = new JLabel();
-		label.setFont(FontLoader.getFont());
+		label.setFont(FontLoader.getFont(textSize));
 		label.setText(text);
-		label.setForeground(Color.WHITE);
+		label.setForeground(Color.BLUE);
 		label.setVerticalAlignment(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 	}
@@ -55,5 +55,10 @@ public class GButton extends JPanel {
 	
 	public Dimension getDimensions() {
 		return(this.dimensions);
+	}
+	
+	public void addTo(JPanel panel) {
+		panel.add(this);
+		buttonImage.updateImageSize();
 	}
 }
