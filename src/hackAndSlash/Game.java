@@ -1,5 +1,8 @@
 package hackAndSlash;
 
+import controls.PlayerControls;
+import gameElements.Player;
+import gameElements.Weapon;
 import gui.FontLoader;
 import gui.GameWindow;
 import gui.Tile;
