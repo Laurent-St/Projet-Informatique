@@ -2,9 +2,9 @@ package hackAndSlash;
 
 import gui.FontLoader;
 import gui.GameWindow;
-import gui.LevelPanel;
-import gui.MainMenu;
 import gui.Tile;
+import gui.level.LevelPanel;
+import gui.menu.MainMenu;
 import levels.Level1;
 
 public class Game {

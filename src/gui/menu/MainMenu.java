@@ -1,8 +1,10 @@
-package gui;
+package gui.menu;
 
 import java.awt.Dimension;
-import gui.MenuPanel;
+
+import gui.GamePanel;
 import gui.button.GButton;
+import gui.menu.MenuPanel;
 
 @SuppressWarnings("serial")
 public class MainMenu extends MenuPanel {
@@ -12,7 +14,7 @@ public class MainMenu extends MenuPanel {
 	
 	public MainMenu(GamePanel game) {
 		super(game);
-		this.setBackgroundImage("src/gui/gameMenu.png");
+		this.setBackgroundImage("src/gui/menu/gameMenu.png");
 		
 		playButton = new GButton("PLAY",24,new Dimension(250,100));
 		playButton.setLocation(700, 650);

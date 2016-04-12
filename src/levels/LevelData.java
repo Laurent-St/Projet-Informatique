@@ -7,8 +7,8 @@ import gui.Tile;
 public class LevelData {
 	
 	private int[][][] tilesData;
-	private int levelWidth = 50;
-	private int levelHeight = 40;
+	private int levelWidth = 48;
+	private int levelHeight = 34;
 	
 	
 	public LevelData() {

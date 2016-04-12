@@ -1,31 +1,29 @@
-package gui;
+package gui.level;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
+import gui.Tile;
 import levels.LevelData;
 
 @SuppressWarnings("serial")
-public class LevelPanel extends JPanel {
+public class LevelBackground extends JComponent {
 	
+	private LevelPanel levelPanel;
 	private LevelData levelData;
-	private GamePanel gamePanel;
 	
-	public LevelPanel(LevelData levelData, GamePanel gamePanel) {
-		this.gamePanel = gamePanel;
-		this.levelData = levelData;
-		this.setLayout(null);
-		this.setBounds(0,0,(int)gamePanel.getDimensions().getWidth(),(int)gamePanel.getDimensions().getHeight());
-	}
-	
-	public void activate() {
-		gamePanel.removeAll();
-		gamePanel.addPanel(this);
+	public LevelBackground(LevelPanel levelPanel) {
+		this.levelPanel = levelPanel;
+		this.levelData = levelPanel.getLevelData();
+		Rectangle bounds = levelPanel.getLevelBounds();
+		
+		this.setBounds(0, 0, (int)bounds.getWidth(),(int)bounds.getHeight());
+		levelPanel.add(this);
 		this.setVisible(true);
-		this.repaint();
+		this.setLayout(null);
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -39,7 +37,10 @@ public class LevelPanel extends JPanel {
 				Rectangle r = Tile.getBoundsOf(levelData.getTileAt(i, j));
 				g.drawImage(tiles,
 						i*size, j*size, (i+1)*size, (j+1)*size,
-						(int)r.getX(),(int)r.getY(),(int)(r.getX()+r.getWidth()),(int)(r.getY()+r.getHeight()),
+						(int)r.getX(),
+						(int)r.getY(),
+						(int)(r.getX()+r.getWidth()),
+						(int)(r.getY()+r.getHeight()),
 						null);
 			}
 		}

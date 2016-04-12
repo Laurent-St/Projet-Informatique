@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -13,6 +15,7 @@ public class GamePanel extends JPanel {
 		this.setPreferredSize(panelSize);
 		this.setLayout(null);
 		this.setVisible(true);
+		this.setBackground(Color.BLACK);
 	}
 	
 	public Dimension getDimensions() {
@@ -20,7 +23,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void removePanels() {
-		this.removeAll();		
+		this.removeAll();
 	}
 
 	public void addPanel(JPanel panel) {
