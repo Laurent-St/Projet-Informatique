@@ -25,7 +25,7 @@ public class LevelPanel extends JPanel {
 	}
 	
 	public void activate() {
-		levelBackground.repaint();
+		//levelBackground.repaint();
 		gamePanel.removeAll();
 		gamePanel.addPanel(this);
 		this.setVisible(true);
