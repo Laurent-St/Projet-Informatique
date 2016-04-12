@@ -1,7 +1,13 @@
 package hackAndSlash;
 
+<<<<<<< HEAD
 import gameElements.Axe;
 import gameElements.GameObject;
+=======
+import controls.PlayerControls;
+import gameElements.Player;
+import gameElements.Weapon;
+>>>>>>> origin/master
 import gui.FontLoader;
 import gui.GameWindow;
 import gui.Tile;
