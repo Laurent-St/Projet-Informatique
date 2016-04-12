@@ -1,5 +1,6 @@
 package hackAndSlash;
 
+import animation.Animation;
 import controls.PlayerControls;
 import gameElements.Player;
 import gameElements.Weapon;
