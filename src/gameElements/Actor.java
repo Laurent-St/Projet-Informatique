@@ -1,8 +1,10 @@
 package gameElements;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 
-import animation.CharacterAnimation;
+import animation.Count;
+import animation.PlayerUpdater;
 import gui.level.LevelPanel;
 
 public class Actor extends GameObject {
@@ -11,9 +13,12 @@ public class Actor extends GameObject {
 	protected int health;
 	protected int maxHealth;
 	private Dimension hitbox;
+	
+	private Count animationCount;
 
 	private int speed;
 	private String movingState;
+	private String orientation;
 
 	public Actor(String name, int x, int y, int damage, int health, int speed, LevelPanel level, Dimension hitbox) {
 		super(x, y, name, level);
@@ -21,11 +26,15 @@ public class Actor extends GameObject {
 		setDamage(damage);
 		setHealth(health);
 		setActorHitbox(hitbox);
+		movingState = "null";
 		
 		this.speed = speed;
+		Thread playerThread = new Thread(new PlayerUpdater(this));
+		animationCount = new Count(4,100);
 		setMoving("null");
-		Thread animationThread = new Thread(new CharacterAnimation(this));
-		animationThread.start();
+		setOrientation("south");
+
+		playerThread.start();
 	}
 
 	public String getName() {
@@ -34,6 +43,14 @@ public class Actor extends GameObject {
 	
 	public void setActorHitbox(Dimension d) {
 		this.hitbox = d;
+	}
+	
+	public void setOrientation(String val) {
+		this.orientation = val;
+	}
+	
+	public String getOrientation() {
+		return orientation;
 	}
 
 	public void setName(String name) {
@@ -91,7 +108,9 @@ public class Actor extends GameObject {
 	
 	public void setMoving(String state) {
 		this.movingState = state;
-		System.out.println(state);
+		if(state!="null") {
+			setOrientation(state);
+		}
 	}
 
 	/*
@@ -116,6 +135,25 @@ public class Actor extends GameObject {
 		} else if (ms=="left") {
 			this.setX(this.getX()-speed);
 		}
+	}
+	
+	protected void paintComponent(Graphics g) {
+		
+		int xcount = 0;
+		if(getMovingState()!="null") {
+			xcount = animationCount.getCount();
+		}
+		int ycount = 0;
+		if(getOrientation()=="up") {
+			ycount = 2;
+		} else if (getOrientation()=="left") {
+			ycount = 1;
+		} else if (getOrientation()=="right") {
+			ycount = 3;
+		}
+		g.drawImage(this.getImage(), getX(), getY(), getX()+32, getY()+32,
+				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
+				null);
 	}
 
 }
