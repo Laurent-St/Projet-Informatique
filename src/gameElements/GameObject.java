@@ -1,7 +1,12 @@
 package gameElements;
 
-public class GameObject {
+import javax.swing.JComponent;
+
+@SuppressWarnings("serial")
+public class GameObject extends JComponent {
 	protected int position;
+	protected int x;
+	protected int y;
 
 
 public GameObject(int position){

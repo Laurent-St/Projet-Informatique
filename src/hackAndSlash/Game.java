@@ -13,7 +13,7 @@ public class Game {
 	
 	public static void main(String[] args) {
 		initGraphics();
-		initMenu();
+		//initMenu();
 		initLevel1(); //FONCTION DE TEST
 	}
 	
