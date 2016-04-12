@@ -1,5 +1,7 @@
 package hackAndSlash;
 
+import gameElements.Axe;
+import gameElements.GameObject;
 import gui.FontLoader;
 import gui.GameWindow;
 import gui.Tile;
@@ -30,6 +32,7 @@ public class Game {
 		Tile.initImage();
 		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
 		level.activate();
+		new GameObject(25, 45, "src/gameElements/axe.png",level);
 	}
 
 }

@@ -1,3 +1,4 @@
+/*
 package gameElements;
 
 public class CloseWeapon extends Weapon {
@@ -10,4 +11,9 @@ public CloseWeapon(String name, int position, int damage, int range){
 		throw new RuntimeException("Portée trop grande pour une arme au corps-à-corps");
 	}
 }
+
+public void getImage(){
+	
 }
+}
+*/
