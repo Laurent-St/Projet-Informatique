@@ -17,7 +17,7 @@ public class Player extends Actor {
 	private static int playerSpeed  = 1;
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/personnage.png",40,40,0,0, playerSpeed, gameLevel);
+		super("src/gameElements/personnage.png",40,40,0,0, playerSpeed, gameLevel,new Dimension(32,32));
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);
@@ -25,7 +25,6 @@ public class Player extends Actor {
 		//setExperience(0);
 
 		setMoving("null");
-		setActorHitbox(new Dimension(32,32));
 	}
 
 	public int getExperience() {
