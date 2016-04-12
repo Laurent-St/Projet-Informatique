@@ -2,7 +2,6 @@ package gameElements;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -70,7 +69,11 @@ public void setY(int y){
 public void paintComponent(Graphics g) {
 	System.out.println("ok");
 	super.paintComponent(g);
+<<<<<<< HEAD
 	g.drawImage(object_image, 0, 0, x*object_image.getWidth(), y*object_image.getHeight(), null);
+=======
+	g.drawImage(object_image, getX(), getY(), null);
+>>>>>>> origin/master
 }
 
 
