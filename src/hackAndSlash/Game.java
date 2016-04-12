@@ -1,17 +1,14 @@
 package hackAndSlash;
 
-<<<<<<< HEAD
+
 import animation.Animation;
-=======
-<<<<<<< HEAD
+
 import gameElements.Axe;
 import gameElements.GameObject;
-=======
->>>>>>> origin/master
+
 import controls.PlayerControls;
 import gameElements.Player;
 import gameElements.Weapon;
->>>>>>> origin/master
 import gui.FontLoader;
 import gui.GameWindow;
 import gui.Tile;
@@ -43,6 +40,8 @@ public class Game {
 		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
 		level.activate();
 		new GameObject(25, 45, "src/gameElements/axe.png",level);
+		
+		
 	}
 
 }

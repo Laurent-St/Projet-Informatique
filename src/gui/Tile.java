@@ -27,8 +27,23 @@ public class Tile {
 	public final static int[] WALL_T_RIGHT = {14,0};
 	public final static int[] WALL_T_BOTTOM = {15,0};
 	public final static int[] WALL_T_UP = {16,0};
+	public final static int[] DOOR_OPEN ={17,0};
 	
+	private int[] reference={0,0};
+	public boolean isWalkable;		//pour savoir si on peut marcher dessus
 	private static Image tilesImage;
+	
+	
+	public Tile(int value1, int value2){
+		reference[0]=value1;
+		reference[1]=value2;
+	}
+	public boolean getIsWalkable(){
+		return isWalkable;
+	}
+	public void setIsWalkable(boolean isWalkable){
+		this.isWalkable=isWalkable;
+	}
 	
 	public static void initImage() {
 		try {

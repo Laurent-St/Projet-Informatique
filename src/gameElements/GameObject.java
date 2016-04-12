@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import gui.level.LevelPanel;
 
@@ -15,7 +16,7 @@ public class GameObject extends JComponent {
 	//private int position;
 	private int x;
 	private int y;
-	private Image object_image;
+	private BufferedImage object_image;
 	private String image_url;
 	private int image_size;
 	private LevelPanel level;
@@ -44,7 +45,7 @@ public void setImage(){
 }
 
 
-public Image getImage(){
+public BufferedImage getImage(){
 	return object_image;
 }
 
@@ -66,10 +67,10 @@ public void setY(int y){
 	this.y=y;
 }
 
-protected void paintComponent(Graphics g) {
+public void paintComponent(Graphics g) {
 	System.out.println("ok");
 	super.paintComponent(g);
-	g.drawImage(object_image, x, y, null);
+	g.drawImage(object_image, 0, 0, x*object_image.getWidth(), y*object_image.getHeight(), null);
 }
 
 
