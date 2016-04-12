@@ -1,6 +1,9 @@
 package gameElements;
 
+import java.awt.Dimension;
+
 import controls.PlayerControls;
+import gui.level.LevelPanel;
 
 public class Player extends Actor {
 	private Inventory inventory;
@@ -10,10 +13,11 @@ public class Player extends Actor {
 	private int maxMana;
 	private int experience;
 	private int maxExperienceForLevel;
-	private String movingState;
+	
+	private static int playerSpeed  = 1;
 
-	public Player(String name, int damage, int health, int position, int mana) {
-		super(name, damage, health, position);
+	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
+		super("src/gameElements/personnage.png",40,40,0,0, playerSpeed, gameLevel);
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);
@@ -21,7 +25,7 @@ public class Player extends Actor {
 		//setExperience(0);
 
 		setMoving("null");
-		//this.addKeyListener(new PlayerControls(this));
+		setActorHitbox(new Dimension(32,32));
 	}
 
 	public int getExperience() {
@@ -97,10 +101,6 @@ public class Player extends Actor {
 		this.inventory = inventory;
 	}
 
-	public int getLevel() {
-		return level;
-	}
-
 	public void setLevel(int level) {
 		this.level = level;
 	}
@@ -115,7 +115,7 @@ public class Player extends Actor {
 
 	public void die() {
 		setHealth(0);
-		Tomb tomb = new Tomb("Tombe de " + name, position, inventory, experience);
+		//Tomb tomb = new Tomb("Tombe de " + name, position, inventory, experience);
 		// resetPosition(debut du niveau)
 	}
 
@@ -131,10 +131,4 @@ public class Player extends Actor {
 			setMana(mana + potion.getValue());
 		}
 	}
-
-	public void setMoving(String state) {
-		this.movingState = state;
-		System.out.println(state);
-	}
-
 }
