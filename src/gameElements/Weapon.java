@@ -1,5 +1,7 @@
 package gameElements;
 
+import java.awt.Rectangle;
+
 import gui.level.LevelPanel;
 
 public class Weapon extends CollectableObject {
@@ -8,8 +10,8 @@ public class Weapon extends CollectableObject {
 	//range=1 correspond à la case d'à côté(arme au cac), range>1 correspond à une arme à distance.
 
 
-public Weapon(String name, int x,int y, int damage, int range, String image_url, LevelPanel level){
-	super(name, x, y, image_url, level );
+public Weapon(String name, int x,int y, int damage, int range, String image_url, Rectangle hitbox, LevelPanel level){
+	super(name, x, y, image_url, hitbox, level );
 	setDamage(damage);
 	setRange(range);
 }

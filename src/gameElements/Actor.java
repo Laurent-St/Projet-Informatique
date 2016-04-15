@@ -2,6 +2,7 @@ package gameElements;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import animation.Count;
 import animation.PlayerUpdater;
@@ -12,20 +13,18 @@ public class Actor extends GameObject {
 	protected int damage;
 	protected int health;
 	protected int maxHealth;
-	private Dimension hitbox;
 	
 	private Count animationCount;
 
-	private int speed;
+	private double speed;
 	private String movingState;
 	private String orientation;
 
-	public Actor(String name, int x, int y, int damage, int health, int speed, LevelPanel level, Dimension hitbox) {
-		super(x, y, name, level);
+	public Actor(String name, double x, double y, int damage, int health, double speed, LevelPanel level, Rectangle hitbox) {
+		super(x, y, name, hitbox, level);
 		setName(name);
 		setDamage(damage);
 		setHealth(health);
-		setActorHitbox(hitbox);
 		movingState = "null";
 		
 		
@@ -33,10 +32,6 @@ public class Actor extends GameObject {
 
 	public String getName() {
 		return name;
-	}
-	
-	public void setActorHitbox(Dimension d) {
-		this.hitbox = d;
 	}
 	
 	public void setOrientation(String val) {
@@ -92,7 +87,7 @@ public class Actor extends GameObject {
 		}
 	}
 	
-	public int getSpeed() {
+	public double getSpeed() {
 		return this.speed;
 	}
 	
@@ -119,15 +114,15 @@ public class Actor extends GameObject {
 	
 	public void move() {
 		String ms = getMovingState();
-		int speed = getSpeed();
+		double speed = getSpeed();
 		if(ms=="up") {
-			this.setY(this.getY()-speed);
+			this.setY(this.getYdouble()-speed);
 		} else if (ms=="down") {
-			this.setY(this.getY()+speed);
+			this.setY(this.getYdouble()+speed);
 		} else if(ms=="right") {
-			this.setX(this.getX()+speed);
+			this.setX(this.getXdouble()+speed);
 		} else if (ms=="left") {
-			this.setX(this.getX()-speed);
+			this.setX(this.getXdouble()-speed);
 		}
 	}
 	

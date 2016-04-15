@@ -14,7 +14,6 @@ public class Count {
 	}
 	
 	public void increment() {
-		System.out.println(count);
 		count+=1;
 		if (count>=maxCount) {
 			count=0;

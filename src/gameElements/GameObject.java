@@ -14,20 +14,21 @@ import gui.level.LevelPanel;
 @SuppressWarnings("serial")
 public class GameObject extends JComponent {
 	// private int position;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private Image object_image;
 	private String image_url;
-	private int image_size;
 	private LevelPanel level;
+	private Rectangle hitbox;
 
-	public GameObject(int x, int y, String image_url, LevelPanel level) {
+	public GameObject(double x, double y, String image_url, Rectangle hitbox, LevelPanel level) {
 		// x et y sont les positions relatives dans le niveau, pas celles en
 		// nombre de pixels.
 		// Pour afficher l'objet avec ses vraies dimensions, il faudra donc
 		// multiplier par la dimension.
 		setX(x);
 		setY(y);
+		setHitbox(hitbox);
 		this.image_url = image_url;
 		setImage();
 		this.level = level;
@@ -54,19 +55,34 @@ public class GameObject extends JComponent {
 	}
 
 	public int getX() {
-		return x;
+		return (int)Math.round(x);
 	}
 
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x; // temporaire, à lier avec l'interface graphique!
 	}
 
 	public int getY() {
+		return (int)Math.round(y);
+	}
+	
+	public double getYdouble() {
 		return y;
 	}
+	public double getXdouble() {
+		return x;
+	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setY(double d) {
+		this.y = d;
+	}
+	
+	public void setHitbox(Rectangle d) {
+		this.hitbox = d;
+	}
+	
+	public Rectangle getHitbox() {
+		return this.hitbox;
 	}
 
 	protected void paintComponent(Graphics g) {

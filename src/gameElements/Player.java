@@ -1,8 +1,7 @@
 package gameElements;
 
-import java.awt.Dimension;
+import java.awt.Rectangle;
 
-import controls.PlayerControls;
 import gui.level.LevelPanel;
 
 public class Player extends Actor {
@@ -14,10 +13,10 @@ public class Player extends Actor {
 	private int experience;
 	private int maxExperienceForLevel;
 	
-	private static int playerSpeed  = 1;
+	private static double playerSpeed  = 0.75;
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/character.png",40,40,0,0, playerSpeed, gameLevel,new Dimension(32,32));
+		super("src/gameElements/character.png",40,40,0,0, playerSpeed, gameLevel,new Rectangle(6,0,20,32));
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);
