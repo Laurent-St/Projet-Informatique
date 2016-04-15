@@ -27,6 +27,14 @@ public class Actor extends GameObject {
 		setHealth(health);
 		movingState = "null";
 		
+		this.speed = speed;
+		Thread actorThread = new Thread(new PlayerUpdater(this));
+		animationCount = new Count(4,100);
+		setMoving("null");
+		setOrientation("south");
+
+		actorThread.start();
+		
 		
 	}
 
