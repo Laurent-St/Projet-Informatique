@@ -28,13 +28,7 @@ public class Actor extends GameObject {
 		setActorHitbox(hitbox);
 		movingState = "null";
 		
-		this.speed = speed;
-		Thread playerThread = new Thread(new PlayerUpdater(this));
-		animationCount = new Count(4,100);
-		setMoving("null");
-		setOrientation("south");
-
-		playerThread.start();
+		
 	}
 
 	public String getName() {

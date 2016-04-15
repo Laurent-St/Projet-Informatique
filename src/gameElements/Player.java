@@ -25,6 +25,14 @@ public class Player extends Actor {
 		//setExperience(0);
 
 		setMoving("null");
+		
+		this.speed = speed;
+		Thread actorThread = new Thread(new PlayerUpdater(this));
+		animationCount = new Count(4,100);
+		setMoving("null");
+		setOrientation("south");
+
+		playerThread.start();
 	}
 
 	public int getExperience() {
