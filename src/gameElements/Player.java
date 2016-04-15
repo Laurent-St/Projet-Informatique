@@ -2,7 +2,6 @@ package gameElements;
 
 import java.awt.Rectangle;
 
-import animation.Count;
 import animation.PlayerThread;
 import gui.level.LevelPanel;
 

@@ -18,10 +18,10 @@ public class TileLibrary {
 	public final static int[] WALL_V = {5,0};
 	public final static int[] WALL_V_BOTTOM = {6,0};
 	public final static int[] WALL_PLOT = {7,0};
-	public final static int[] WALL_CORNER_BL = {8,0};
-	public final static int[] WALL_CORNER_BR = {9,0};
-	public final static int[] WALL_CORNER_TL = {10,0};
-	public final static int[] WALL_CORNER_TR = {11,0};
+	public final static int[] WALL_CORNER_TR = {8,0};
+	public final static int[] WALL_CORNER_TL = {9,0};
+	public final static int[] WALL_CORNER_BR = {10,0};
+	public final static int[] WALL_CORNER_BL = {11,0};
 	public final static int[] WALL_CROSS = {12,0};
 	public final static int[] WALL_T_LEFT = {13,0};
 	public final static int[] WALL_T_RIGHT = {14,0};

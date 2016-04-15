@@ -13,6 +13,7 @@ import gui.GameWindow;
 import gui.TileLibrary;
 import gui.level.LevelPanel;
 import gui.menu.MainMenu;
+import levels.Level;
 import levels.Level1;
 
 public class Game {
@@ -36,7 +37,7 @@ public class Game {
 	
 	public static void initLevel1() {
 		TileLibrary.initImage();
-		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
+		LevelPanel level = new LevelPanel(new Level(),gameWindow.getGamePanel());
 		level.activate();
 		
 		//Player player = new Player("Couillon", 1, 1, 1, level);

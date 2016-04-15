@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import gui.Floor;
+import gui.TileLibrary;
+import gui.Wall;
 
 public class Level extends LevelData {
 	
@@ -14,18 +16,19 @@ public class Level extends LevelData {
 	
 	public Level() {
 		this.fill(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()), new Floor());
-		this.makeBorder();
+		//this.makeBorder(this.getLevelBounds());
 		
 		rooms = new ArrayList<Rectangle>();
-		rooms.add(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()));
+		rooms.add(this.getLevelBounds());
 		holes = new ArrayList<Point>();
 		
 		generateMaze(0, rooms, holes);
+		renderMaze(rooms, holes);
 		
 	}
-	
+
 	public void generateMaze(int step, ArrayList<Rectangle> subdivisions, ArrayList<Point> holes) {
-		int stepMax = 5;
+		int stepMax = 3;
 		Random rnd = new Random();
 		ArrayList<Rectangle> newObjects = new ArrayList<Rectangle>();
 		
@@ -34,29 +37,32 @@ public class Level extends LevelData {
 			
 			int width = (int) room.getWidth();
 			int height = (int) room.getHeight();
-			int orientation = rnd.nextInt(1);
+			int x = (int) room.getX();
+			int y = (int) room.getY();
+			//int orientation = rnd.nextInt(2);
+			int orientation = step%2;
 			
 			Rectangle r1 = new Rectangle();
 			Rectangle r2 = new Rectangle();
 			boolean newRooms = false;
 			
 			if(orientation==0 && height>=7) { //HORIZONTAL
-				int subHeight = rnd.nextInt(height-6)+4;
-				r1.setBounds((int)room.getX(), (int)room.getY(), width, subHeight);
-				r2.setBounds((int)room.getX(), (int)room.getY()+subHeight, width, height-subHeight);
+				int subHeight = rnd.nextInt(height-5)+3;
+				r1.setBounds(x, y, width, subHeight);
+				r2.setBounds(x, y+subHeight, width, height-subHeight);
 				
-				int holeX = rnd.nextInt(width-1)+(int)room.getX()+1;
-				holes.add(new Point(holeX,(int) (room.getY()+subHeight)));
+				int holeX = rnd.nextInt(width-1)+x+1;
+				holes.add(new Point(holeX,y+subHeight));
 				
 				newRooms = true;
 				
 			} else if (orientation==1 && width>=7) { //VERTICAL
-				int  subWidth = rnd.nextInt(width-6)+4;
-				r1.setBounds((int)room.getX(), (int)room.getY(), subWidth, height);
-				r2.setBounds((int)room.getX()+subWidth, (int)room.getHeight(), width-subWidth, height);
+				int  subWidth = rnd.nextInt(width-5)+3;
+				r1.setBounds(x, y, subWidth, height);
+				r2.setBounds(x+subWidth, y, width-subWidth, height);
 				
-				int holeY = rnd.nextInt(height-1)+(int)room.getY()+1;
-				holes.add(new Point((int) (room.getX()+subWidth), holeY));
+				int holeY = rnd.nextInt(height-1)+y+1;
+				holes.add(new Point(x+subWidth, holeY));
 				
 				newRooms = true;
 			}
@@ -76,6 +82,53 @@ public class Level extends LevelData {
 		} else {
 			generateMaze(step+1, newObjects, holes);
 		}
+	}
+	
+	private void renderMaze(ArrayList<Rectangle> rooms, ArrayList<Point> holes) {
+		
+		ArrayList<Point> corners = new ArrayList<Point>();
+		
+		//MURS PRINCIPAUX
+		for(int i=0;i<rooms.size();i++) {
+			Rectangle room = rooms.get(i);
+			this.makeBorder(room);
+			corners.add(new Point((int)room.getX(), (int)room.getY()));
+			corners.add(new Point((int)room.getMaxX(), (int)room.getY()));
+			corners.add(new Point((int)room.getX(), (int)room.getMaxY()));
+			corners.add(new Point((int)room.getMaxX(),(int)room.getMaxY()));
+		}
+		
+		//INTERSECTIONS DES MURS
+		for(int j=0;j<corners.size();j++) {
+			Point corner = corners.get(j);
+			Wall w = new Wall(determineWallOrientation(corner));
+			setTileAt(corner.x,corner.y,w);
+		}
+		
+		//TOURS ENTRE MURS
+		for(int k=0;k<holes.size();k++) {
+			Point hole = holes.get(k);
+			int x = hole.x;
+			int y = hole.y;
+			setTileAt(x,y,new Floor());
+			Point[] positions = {new Point(x+1,y), new Point(x-1,y), new Point(x,y+1), new Point(x,y-1)};
+			
+			for(int l=0;l<4;l++) {
+				Point[] subPositions = {new Point(1,0), new Point(0,1), new Point(-1,0), new Point(0,-1)};
+				if(onBorder(positions[l])==false) {
+					setTileAt(positions[l].x,positions[l].y,new Floor());
+				}
+				for(int n=0;n<4;n++) {
+					Point subPoint = positions[l].getLocation();
+					subPoint.translate(subPositions[n].x, subPositions[n].y);
+					if(getTileAt(subPoint.x,subPoint.y).getType()=="wall") {
+						setTileAt(subPoint.x,subPoint.y,new Wall(determineWallOrientation(subPoint)));
+					}
+				}
+			}
+			
+		}
+		
 	}
 
 }

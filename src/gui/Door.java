@@ -3,7 +3,7 @@ package gui;
 public class Door extends Tile{
 	private static String name="door";
 	public Door() {
-		super(TileLibrary.DOOR_OPEN);
+		super(TileLibrary.DOOR_OPEN, "door");
 		setIsWalkable(false);		//la porte est fermée à la base
 	}
 	

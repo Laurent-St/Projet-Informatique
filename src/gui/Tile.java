@@ -3,11 +3,13 @@ package gui;
 public class Tile {
 
 	private int[] reference={0,0};
-	public boolean isWalkable;		//pour savoir si on peut marcher dessus	
+	private boolean isWalkable;		//pour savoir si on peut marcher dessus
+	private String type;
 	
-	public Tile(int[] ref){
+	public Tile(int[] ref, String type){
 		reference[0] = ref[0];
 		reference[1] = ref[1];
+		this.type = type;
 	}
 	public boolean getIsWalkable(){
 		return isWalkable;
@@ -17,5 +19,9 @@ public class Tile {
 	}
 	public int[] getReference() {
 		return reference;
+	}
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type;
 	}
 }
