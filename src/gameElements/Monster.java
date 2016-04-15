@@ -27,6 +27,7 @@ public class Monster extends Actor implements Runnable {
 public void run(){
 	try{
 		while(true){
+			this.repaint();
 			Random randomGenerator=new Random();
 			int randomNum=randomGenerator.nextInt(4);
 			if (randomNum==1){
@@ -40,19 +41,18 @@ public void run(){
 			}
 			move();
 			System.out.println("Le monstre bouge");
-			
 			Thread.sleep(1000);
 		}
 	}catch(Exception e){}
 }
 
-public void setImage(){
-	try {
-		monsterImage = ImageIO.read(new File("src/gameElements/zombie.png"));
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-}
+//public void setImage(){
+//	try {
+//		monsterImage = ImageIO.read(new File("src/gameElements/zombie.png"));
+//	} catch (IOException e) {
+//		e.printStackTrace();
+//	}
+//}
 //public paintComponent()
 
 }

@@ -39,14 +39,14 @@ public class Game {
 		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
 		level.activate();
 		
-		Player player = new Player("Couillon", 1, 1, 1, level);
-		gameWindow.getFocusOwner().addKeyListener(new PlayerControls(player));
-		level.setComponentZOrder(player, 0);
+		//Player player = new Player("Couillon", 1, 1, 1, level);
+		//gameWindow.getFocusOwner().addKeyListener(new PlayerControls(player));
+		//level.setComponentZOrder(player, 0);
 		
-		GameObject go = new Axe("axe",25, 45,10,10, "src/gameElements/axe.png", level);
-		level.setComponentZOrder(go, 0);
+		//GameObject go = new Axe("axe",25, 45,10,10, "src/gameElements/axe.png", level);
+		//level.setComponentZOrder(go, 0);
 		
-		Monster monster=new Monster("gros monstre", 80, 230, 50, 200, 5, level);
+		Monster monster=new Monster("src/gameElements/zombie.png", 78, 105, 50, 200, 5, level);
 		level.setComponentZOrder(monster, 0);
 	}
 

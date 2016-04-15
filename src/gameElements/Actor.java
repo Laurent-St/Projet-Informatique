@@ -20,7 +20,7 @@ public class Actor extends GameObject {
 	private String orientation;
 
 	public Actor(String name, double x, double y, int damage, int health, double speed, LevelPanel level, Rectangle hitbox) {
-		super(x, y, name, hitbox, level);
+		super(x, y, name, hitbox, level);		//le name est "image_url" de GameObject
 		setName(name);
 		setDamage(damage);
 		setHealth(health);
