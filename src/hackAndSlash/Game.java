@@ -1,5 +1,6 @@
 package hackAndSlash;
 
+import gameElements.Axe;
 import gameElements.GameObject;
 
 import controls.PlayerControls;
@@ -35,13 +36,12 @@ public class Game {
 		Tile.initImage();
 		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
 		level.activate();
-		new GameObject(25, 45, "src/gameElements/axe.png",level);
 		
 		Player player = new Player("Couillon", 1, 1, 1, level);
 		gameWindow.getFocusOwner().addKeyListener(new PlayerControls(player));
 		level.setComponentZOrder(player, 0);
 		
-		GameObject go = new GameObject(25, 45, "src/gameElements/axe.png",level);
+		GameObject go = new Axe("axe",25, 45,10,10, "src/gameElements/axe.png", level);
 		level.setComponentZOrder(go, 0);
 	}
 
