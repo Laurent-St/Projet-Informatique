@@ -9,6 +9,7 @@ import gameElements.Player;
 import gui.FontLoader;
 import gui.GameWindow;
 import gui.Tile;
+import gui.TileLibrary;
 import gui.level.LevelPanel;
 import gui.menu.MainMenu;
 import levels.Level1;
@@ -33,7 +34,7 @@ public class Game {
 	}
 	
 	public static void initLevel1() {
-		Tile.initImage();
+		TileLibrary.initImage();
 		LevelPanel level = new LevelPanel(new Level1(),gameWindow.getGamePanel());
 		level.activate();
 		

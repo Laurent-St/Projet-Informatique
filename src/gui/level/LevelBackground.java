@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 
 import gui.Tile;
+import gui.TileLibrary;
 import levels.LevelData;
 
 @SuppressWarnings("serial")
@@ -28,14 +29,14 @@ public class LevelBackground extends JComponent {
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Image tiles = Tile.getTilesImage();
-		int size = Tile.getTileSize();
+		Image tilesImage = TileLibrary.getTilesImage();
+		int size = TileLibrary.getTileSize();
 		
 		for(int i=0;i<levelData.getLevelWidth();i++) {
 			for(int j=0;j<levelData.getLevelHeight();j++) {
 				
-				Rectangle r = Tile.getBoundsOf(levelData.getTileAt(i, j));
-				g.drawImage(tiles,
+				Rectangle r = TileLibrary.getBoundsOf(levelData.getTileAt(i, j));
+				g.drawImage(tilesImage,
 						i*size, j*size, (i+1)*size, (j+1)*size,
 						(int)r.getX(),
 						(int)r.getY(),
