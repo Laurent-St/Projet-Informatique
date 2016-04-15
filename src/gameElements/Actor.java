@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import animation.Count;
-import animation.PlayerUpdater;
 import gui.level.LevelPanel;
 
 public class Actor extends GameObject {
@@ -28,12 +27,10 @@ public class Actor extends GameObject {
 		movingState = "null";
 		
 		this.speed = speed;
-		Thread actorThread = new Thread(new PlayerUpdater(this));
+		
 		animationCount = new Count(4,100);
 		setMoving("null");
 		setOrientation("south");
-
-		actorThread.start();
 		
 		
 	}

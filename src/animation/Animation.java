@@ -1,13 +1,14 @@
 package animation;
 
 import gameElements.Actor;
+import gameElements.Player;
 
 public class Animation implements Runnable{
 	
 	private Actor source;
 	private int sleepTime = 15;
 	
-	public Animation(Actor actor) {
+	public Animation(Player actor) {
 		this.source = actor;
 	}
 	@Override

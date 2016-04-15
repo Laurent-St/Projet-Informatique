@@ -2,6 +2,7 @@ package gameElements;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,8 +15,8 @@ import javax.imageio.ImageIO;
 public class Monster extends Actor implements Runnable {
 	private Image monsterImage;
 
-	public Monster(String name,int x, int y, int damage, int health, int speed, LevelPanel level, Dimension hitbox){
-		super(name, x, y, damage, health, speed, level, hitbox);
+	public Monster(String name,double x, double y, int damage, int health, int speed, LevelPanel level){
+		super(name, x, y, damage, health, speed, level, new Rectangle(0,0,32,32));
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		

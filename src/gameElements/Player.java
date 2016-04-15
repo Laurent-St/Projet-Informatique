@@ -2,6 +2,8 @@ package gameElements;
 
 import java.awt.Rectangle;
 
+import animation.Count;
+import animation.PlayerThread;
 import gui.level.LevelPanel;
 
 public class Player extends Actor {
@@ -25,13 +27,8 @@ public class Player extends Actor {
 
 		setMoving("null");
 		
-		this.speed = speed;
-		Thread actorThread = new Thread(new PlayerUpdater(this));
-		animationCount = new Count(4,100);
-		setMoving("null");
-		setOrientation("south");
-
-		playerThread.start();
+		Thread actorThread = new Thread(new PlayerThread(this));
+		actorThread.start();	
 	}
 
 	public int getExperience() {
