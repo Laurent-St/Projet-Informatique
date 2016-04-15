@@ -27,7 +27,8 @@ public class Tile {
 	public final static int[] WALL_T_RIGHT = {14,0};
 	public final static int[] WALL_T_BOTTOM = {15,0};
 	public final static int[] WALL_T_UP = {16,0};
-	public final static int[] DOOR_OPEN ={17,0};
+	public final static int[] DOOR_CLOSED ={17,0};
+	
 	
 	private int[] reference={0,0};
 	public boolean isWalkable;		//pour savoir si on peut marcher dessus
