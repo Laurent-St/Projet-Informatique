@@ -13,7 +13,7 @@ public class Monster extends Actor implements Runnable {
 	private Count AIRefreshCount;
 
 	public Monster(String name,double x, double y, int damage, int health, double speed, LevelPanel level){
-		super(name, x, y, damage, health, speed, level, new Rectangle(6,0,20,32));
+		super(name, x, y, damage, health, speed, level, new Rectangle(5,0,18,31));
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		AIRefreshCount = new Count(100,10);
@@ -40,7 +40,6 @@ public void run(){
 				}
 			}
 			move();
-			System.out.println("Le monstre bouge");
 			Thread.sleep(15);
 		}
 	}catch(Exception e){}

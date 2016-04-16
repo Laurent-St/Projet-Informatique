@@ -103,5 +103,22 @@ public class LevelData {
 	public boolean onBorder(Point pt) {
 		return(pt.x==0 || pt.x==getLevelWidth()-1 || pt.y == 0 || pt.y==getLevelHeight()-1);
 	}
+
+	public boolean isPositionAvailable(double x, double y, Rectangle hitbox) {
+		int tileSize = TileLibrary.getTileSize();
+		int xmin = (int) Math.floor((x+hitbox.getX())/tileSize);
+		int xmax = (int) Math.ceil((x+hitbox.getMaxX())/tileSize);
+		int ymin = (int) Math.floor((y+hitbox.getY())/tileSize);
+		int ymax = (int) Math.ceil((y+hitbox.getMaxY())/tileSize);
+
+		for(int i=xmin;i<xmax;i++) {
+			for(int j=ymin;j<ymax;j++) {
+				if(getTileAt(i,j).getIsWalkable()==false) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
 }

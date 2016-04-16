@@ -37,13 +37,14 @@ public class Game {
 		
 		Player player = new Player("Couillon", 1, 1, 1, level);
 		gameWindow.getFocusOwner().addKeyListener(new PlayerControls(player));
-		level.setComponentZOrder(player, 0);
 		
 		//GameObject go = new Axe("axe",25, 45,10,10, "src/gameElements/axe.png", level);
 		//level.setComponentZOrder(go, 0);
 		
-		Monster monster=new Monster("src/gameElements/zombie.png", 78, 105, 50, 200, 0.25, level);
+		Monster monster=new Monster("src/gameElements/zombie.png", 20, 20, 50, 200, 0.5, level);
+		
 		level.setComponentZOrder(monster, 0);
+		level.setComponentZOrder(player, 0);
 	}
 
 }

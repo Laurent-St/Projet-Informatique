@@ -12,10 +12,11 @@ public class Player extends Actor implements Runnable {
 	private int experience;
 	private int maxExperienceForLevel;
 	
-	private static double playerSpeed  = 0.75;
+	private static double playerSpeed  = 1.5;
+	private static Rectangle playerHitbox = new Rectangle(6,0,18,31);
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/character.png",40,40,0,0, playerSpeed, gameLevel,new Rectangle(6,0,20,32));
+		super("src/gameElements/character.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);

@@ -48,8 +48,8 @@ public class Level extends LevelData {
 			Rectangle r2 = new Rectangle();
 			boolean newRooms = false;
 			
-			if(orientation==0 && height>=7) { //HORIZONTAL
-				int subHeight = rnd.nextInt(height-5)+3;
+			if(orientation==0 && height>=9) { //HORIZONTAL
+				int subHeight = rnd.nextInt(height-6)+4;
 				r1.setBounds(x, y, width, subHeight);
 				r2.setBounds(x, y+subHeight, width, height-subHeight);
 				
@@ -58,8 +58,8 @@ public class Level extends LevelData {
 				
 				newRooms = true;
 				
-			} else if (orientation==1 && width>=7) { //VERTICAL
-				int  subWidth = rnd.nextInt(width-5)+3;
+			} else if (orientation==1 && width>=9) { //VERTICAL
+				int  subWidth = rnd.nextInt(width-6)+4;
 				r1.setBounds(x, y, subWidth, height);
 				r2.setBounds(x+subWidth, y, width-subWidth, height);
 				

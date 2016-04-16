@@ -14,8 +14,8 @@ import gui.level.LevelPanel;
 @SuppressWarnings("serial")
 public class GameObject extends JComponent {
 	// private int position;
-	private double x;
-	private double y;
+	private double posx;
+	private double posy;
 	private Image object_image;
 	private String image_url;
 	private LevelPanel level;
@@ -55,26 +55,26 @@ public class GameObject extends JComponent {
 	}
 
 	public int getX() {
-		return (int)Math.round(x);
+		return (int)Math.round(posx);
 	}
 
 	public void setX(double x) {
-		this.x = x; // temporaire, à lier avec l'interface graphique!
+		this.posx = x; // temporaire, à lier avec l'interface graphique!
 	}
 
 	public int getY() {
-		return (int)Math.round(y);
+		return (int)Math.round(posy);
 	}
 	
 	public double getYdouble() {
-		return y;
+		return posy;
 	}
 	public double getXdouble() {
-		return x;
+		return posx;
 	}
 
 	public void setY(double d) {
-		this.y = d;
+		this.posy = d;
 	}
 	
 	public void setHitbox(Rectangle d) {

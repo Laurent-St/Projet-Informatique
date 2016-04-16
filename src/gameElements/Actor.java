@@ -1,11 +1,11 @@
 package gameElements;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import animation.Count;
 import gui.level.LevelPanel;
+import levels.LevelData;
 
 public class Actor extends GameObject {
 	protected String name;
@@ -119,20 +119,31 @@ public class Actor extends GameObject {
 	
 	public void move() {
 		String ms = getMovingState();
-		double speed = getSpeed();
-		if(ms=="up") {
-			this.setY(this.getYdouble()-speed);
-		} else if (ms=="down") {
-			this.setY(this.getYdouble()+speed);
-		} else if(ms=="right") {
-			this.setX(this.getXdouble()+speed);
-		} else if (ms=="left") {
-			this.setX(this.getXdouble()-speed);
+		if(ms!="null") {
+			double speed = getSpeed();
+			LevelData terrain = getLevel().getLevelData();
+			double newX = getXdouble();
+			double newY = getYdouble();
+			
+			if(ms=="up") {
+				newY-=speed;
+			} else if (ms=="down") {
+				newY+=speed;
+			} else if(ms=="right") {
+				newX+=speed;
+			} else if (ms=="left") {
+				newX-=speed;
+			}
+			if(terrain.isPositionAvailable(newX,newY,getHitbox())) {
+				this.setX(newX);
+				this.setY(newY);
+			}
 		}
 	}
 	
 	protected void paintComponent(Graphics g) {
 		
+		getLevel().repaint();
 		int xcount = 0;
 		if(getMovingState()!="null") {
 			xcount = animationCount.getCount();
@@ -145,7 +156,10 @@ public class Actor extends GameObject {
 		} else if (getOrientation()=="right") {
 			ycount = 3;
 		}
-		g.drawImage(this.getImage(), getX(), getY(), getX()+32, getY()+32,
+		//g.drawImage(this.getImage(), getX(), getY(), getX()+32, getY()+32,
+		//		32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
+		//		null);
+		g.drawImage(this.getImage(), 0, 0, 31, 31,
 				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
 				null);
 	}
