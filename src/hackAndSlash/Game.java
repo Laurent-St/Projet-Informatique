@@ -1,11 +1,7 @@
 package hackAndSlash;
 
-import gameElements.Axe;
-import gameElements.GameObject;
 import gameElements.Monster;
 import gameElements.Player;
-
-import java.awt.Dimension;
 
 import controls.PlayerControls;
 import gui.FontLoader;
@@ -14,7 +10,6 @@ import gui.TileLibrary;
 import gui.level.LevelPanel;
 import gui.menu.MainMenu;
 import levels.Level;
-import levels.Level1;
 
 public class Game {
 	

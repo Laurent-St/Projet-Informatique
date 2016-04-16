@@ -26,7 +26,9 @@ public class Level extends LevelData {
 		renderMaze(rooms, holes);
 		
 	}
-
+	
+	
+	//ALGORITHME DE GENERATION DE TERRAIN PAR DIVISIONS RECURSIVES
 	public void generateMaze(int step, ArrayList<Rectangle> subdivisions, ArrayList<Point> holes) {
 		int stepMax = 3;
 		Random rnd = new Random();
@@ -66,16 +68,13 @@ public class Level extends LevelData {
 				
 				newRooms = true;
 			}
-			
 			if(newRooms) {
 				newObjects.add(r1);
 				newObjects.add(r2);
 			} else {
 				newObjects.add(room);
-			}
-			
+			}	
 		}
-		
 		if(step==stepMax) {
 			this.rooms = newObjects;
 			this.holes = holes;
@@ -84,7 +83,9 @@ public class Level extends LevelData {
 		}
 	}
 	
-	private void renderMaze(ArrayList<Rectangle> rooms, ArrayList<Point> holes) {
+	
+	//PERMET D'AFFICHER LE LABYRINTHE DE FACON COHERENTE
+	public void renderMaze(ArrayList<Rectangle> rooms, ArrayList<Point> holes) {
 		
 		ArrayList<Point> corners = new ArrayList<Point>();
 		
@@ -117,6 +118,8 @@ public class Level extends LevelData {
 				Point[] subPositions = {new Point(1,0), new Point(0,1), new Point(-1,0), new Point(0,-1)};
 				if(onBorder(positions[l])==false) {
 					setTileAt(positions[l].x,positions[l].y,new Floor());
+				} else {
+					setTileAt(positions[l].x,positions[l].y, new Wall(determineWallOrientation(positions[l])));
 				}
 				for(int n=0;n<4;n++) {
 					Point subPoint = positions[l].getLocation();
