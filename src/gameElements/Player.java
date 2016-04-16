@@ -1,11 +1,9 @@
 package gameElements;
 
 import java.awt.Rectangle;
-
-import animation.PlayerThread;
 import gui.level.LevelPanel;
 
-public class Player extends Actor {
+public class Player extends Actor implements Runnable {
 	private Inventory inventory;
 	private int level;
 	private Weapon weapon;
@@ -26,7 +24,7 @@ public class Player extends Actor {
 
 		setMoving("null");
 		
-		Thread actorThread = new Thread(new PlayerThread(this));
+		Thread actorThread = new Thread(this);
 		actorThread.start();	
 	}
 
@@ -131,6 +129,20 @@ public class Player extends Actor {
 			setHealth(health + potion.getValue());
 		} else { // si c'est une potion de mana
 			setMana(mana + potion.getValue());
+		}
+	}
+
+	@Override
+	public void run() {
+		while(true) {
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.move();
+			this.repaint();
 		}
 	}
 }
