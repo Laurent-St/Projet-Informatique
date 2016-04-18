@@ -13,10 +13,10 @@ public class Player extends Actor implements Runnable {
 	private int maxExperienceForLevel;
 	
 	private static double playerSpeed  = 1.5;
-	private static Rectangle playerHitbox = new Rectangle(7,0,16,31);
+	private static Rectangle playerHitbox = new Rectangle(8,0,15,31);
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/character.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
+		super("src/gameElements/characterWarrior.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);
@@ -27,6 +27,13 @@ public class Player extends Actor implements Runnable {
 		
 		Thread actorThread = new Thread(this);
 		actorThread.start();	
+		
+		//TEST DE l'EPEE
+		Sword sword = new Sword("epee",20,20,this.getLevel(), this);
+		equipWeapon(sword);
+		getLevel().add(sword);
+		getLevel().setComponentZOrder(sword, 0);
+		sword.setVisible(true);
 	}
 
 	public int getExperience() {

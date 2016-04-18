@@ -28,7 +28,7 @@ public class Actor extends GameObject {
 		
 		this.speed = speed;
 		
-		animationCount = new Count(4,100);
+		animationCount = new Count(4,90);
 		setMoving("null");
 		setOrientation("south");
 		

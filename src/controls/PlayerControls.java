@@ -11,6 +11,7 @@ public class PlayerControls implements KeyListener {
 	private static int q = 81;
 	private static int s = 83;
 	private static int d = 68;
+	private static int space = 32;
 	
 	private boolean up;
 	private boolean down;
@@ -42,6 +43,8 @@ public class PlayerControls implements KeyListener {
 		} else if (e.getKeyCode()==d) {
 			right = true;
 			player.setMoving("right");
+		} else if (e.getKeyCode()==space) {
+			player.getWeapon().attack();
 		}
 		
 	}

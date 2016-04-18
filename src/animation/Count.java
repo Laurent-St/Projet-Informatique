@@ -1,15 +1,17 @@
 package animation;
 
-public class Count {
+public class Count implements Runnable {
 	
 	private int count = 0;
 	private int maxCount;
+	protected int sleepTime;
 	private Thread clock;
 	
 	public Count(int max, int time) {
 		count = 0;
 		maxCount = max;
-		clock = new Thread(new CountClock(time,this));
+		sleepTime = time;
+		clock = new Thread(this);
 		clock.start();
 	}
 	
@@ -27,6 +29,22 @@ public class Count {
 	
 	public void setCount(int val) {
 		count = val;
+	}
+	
+	public void stop() {
+		clock.stop();
+	}
+
+	@Override
+	public void run() {
+		while(true) {
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				
+			}
+			this.increment();
+		}		
 	}
 
 }
