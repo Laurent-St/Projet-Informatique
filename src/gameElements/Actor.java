@@ -51,7 +51,7 @@ public class Actor extends GameObject {
 		if (name instanceof String) {
 			this.name = name;
 		} else {
-			throw new RuntimeException("Le nom doit être une chaîne de caractères");
+			throw new RuntimeException("Le nom doit ï¿½tre une chaï¿½ne de caractï¿½res");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Actor extends GameObject {
 			this.damage = damage;
 		} else {
 			this.damage = 0;
-			throw new RuntimeException("Dégâts négatifs: valeur mise à 0");
+			throw new RuntimeException("Dï¿½gï¿½ts nï¿½gatifs: valeur mise ï¿½ 0");
 		}
 	}
 
@@ -108,14 +108,14 @@ public class Actor extends GameObject {
 	}
 
 	/*
-	 * public void move(){ // a compléter! }
+	 * public void move(){ // a complï¿½ter! }
 	 */
 	public void basicAttack(Actor target) {
 		target.setHealth(target.getHealth() - damage);
 	}
 
 	public void die() {
-	} // méthode abstraite qui va être implémentée dans Player et Monster
+	} // mï¿½thode abstraite qui va ï¿½tre implï¿½mentï¿½e dans Player et Monster
 	
 	public void move() {
 		String ms = getMovingState();
@@ -143,7 +143,7 @@ public class Actor extends GameObject {
 	
 	protected void paintComponent(Graphics g) {
 		
-		getLevel().repaint();
+		getLevel().repaint(new Rectangle(getX()-10, getY()-10,50,50));
 		int xcount = 0;
 		if(getMovingState()!="null") {
 			xcount = animationCount.getCount();

@@ -13,7 +13,7 @@ public class Player extends Actor implements Runnable {
 	private int maxExperienceForLevel;
 	
 	private static double playerSpeed  = 1.5;
-	private static Rectangle playerHitbox = new Rectangle(6,0,18,31);
+	private static Rectangle playerHitbox = new Rectangle(7,0,16,31);
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
 		super("src/gameElements/character.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
@@ -35,7 +35,7 @@ public class Player extends Actor implements Runnable {
 
 	public void setExperience(int experience) {
 		if (experience < 0) {
-			throw new RuntimeException("Expérience négative");
+			throw new RuntimeException("Expï¿½rience nï¿½gative");
 		} else if (this.experience + experience >= maxExperienceForLevel) {
 			levelup();
 			setExperience(this.experience + experience - maxExperienceForLevel);
@@ -50,7 +50,7 @@ public class Player extends Actor implements Runnable {
 
 	public void setMaxExperienceForLevel(int maxExperienceForLevel) {
 		if (maxExperienceForLevel < 0) {
-			throw new RuntimeException("Expérience maximale négative");
+			throw new RuntimeException("Expï¿½rience maximale nï¿½gative");
 		} else {
 			this.maxExperienceForLevel = maxExperienceForLevel;
 		}
@@ -62,7 +62,7 @@ public class Player extends Actor implements Runnable {
 
 	public void setMana(int mana) {
 		if (mana < 0) {
-			throw new RuntimeException("Valeur de mana négative");
+			throw new RuntimeException("Valeur de mana nï¿½gative");
 		} else {
 			this.mana = mana;
 		}
@@ -74,7 +74,7 @@ public class Player extends Actor implements Runnable {
 
 	public void setMaxMana(int maxMana) {
 		if (maxMana < 0) {
-			throw new RuntimeException("Valeur de mana maximale négative");
+			throw new RuntimeException("Valeur de mana maximale nï¿½gative");
 		} else {
 			this.maxMana = maxMana;
 		}
@@ -86,7 +86,7 @@ public class Player extends Actor implements Runnable {
 
 	public void equipWeapon(Weapon weapon) {
 		/*
-		 * on considère que le joueur a une valeur de degats de base et que le
+		 * on considï¿½re que le joueur a une valeur de degats de base et que le
 		 * fait d'equiper une arme augmente simplement la valeur de degats du
 		 * joueur. MAIS IL FAUDRA TENIR COMPTE DES TYPES D'ARMES.
 		 */
