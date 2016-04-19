@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import gui.level.LevelPanel;
 
-public class Sword extends Weapon {
+public class Sword extends HandWeapon {
 	
 	private static String imageUrl = "src/gameElements/epee.png";
 	private static Rectangle hitbox = new Rectangle(0,0,32,32);

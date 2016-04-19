@@ -44,7 +44,7 @@ public class PlayerControls implements KeyListener {
 			right = true;
 			player.setMoving("right");
 		} else if (e.getKeyCode()==space) {
-			player.getWeapon().attack();
+			player.attack();
 		}
 		
 	}
