@@ -82,11 +82,11 @@ public class Weapon extends CollectableObject implements CountTimerListener {
 			int c = attackAnimationCount.getCount();
 			
 			if(p.getOrientation()=="up") {
-				g.drawImage(this.getImage(), p.getX()+31, p.getY()-20, p.getX(),p.getY()+11,
-					32*c,32,32*c+31,63,null);
+				g.drawImage(this.getImage(), p.getX(), p.getY()-20, p.getX()+31,p.getY()+11,
+					32*c,64,32*c+31,95,null);
 			} else if (p.getOrientation()=="down") {
-				g.drawImage(this.getImage(), p.getX(), p.getY()+15, p.getX()+31,p.getY()+46,
-						32*c,32,32*c+31,63,null);
+				g.drawImage(this.getImage(), p.getX(), p.getY()+31+25, p.getX()+31,p.getY()+25,
+						32*c,64,32*c+31,93,null);
 			} else if (p.getOrientation()=="left") {
 				g.drawImage(this.getImage(), p.getX()+21, p.getY(), p.getX()-10,p.getY()+31,
 						32*c,32,32*c+31,63,null);
