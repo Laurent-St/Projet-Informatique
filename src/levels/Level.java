@@ -8,13 +8,16 @@ import java.util.Random;
 import gui.Floor;
 import gui.TileLibrary;
 import gui.Wall;
+import gui.level.LevelPanel;
 
 public class Level extends LevelData {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
+	//private ArrayList<>
 	
-	public Level() {
+	public Level(LevelPanel levelPanel) {
+		super(levelPanel);
 		this.fill(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()), new Floor());
 		//this.makeBorder(this.getLevelBounds());
 		

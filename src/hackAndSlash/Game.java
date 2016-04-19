@@ -32,7 +32,7 @@ public class Game {
 	
 	public static void initLevel1() {
 		TileLibrary.initImage();
-		LevelPanel level = new LevelPanel(new Level(),gameWindow.getGamePanel());
+		LevelPanel level = new LevelPanel(gameWindow.getGamePanel());
 		level.activate();
 		
 		Player player = new Player("Couillon", 1, 1, 1, level);

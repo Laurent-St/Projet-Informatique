@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import gui.GamePanel;
+import levels.Level;
 import levels.LevelData;
 
 @SuppressWarnings("serial")
@@ -16,9 +17,9 @@ public class LevelPanel extends JPanel {
 	private LevelBackground levelBackground;
 	private static Rectangle levelBounds = new Rectangle(20,20,960,680);
 	
-	public LevelPanel(LevelData levelData, GamePanel gamePanel) {
+	public LevelPanel(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
-		this.levelData = levelData;
+		this.levelData = new Level(this);
 		this.setLayout(null);
 		this.setBounds((int)getLevelBounds().getX(),(int)getLevelBounds().getY(),(int)getLevelBounds().getWidth(),(int)getLevelBounds().getHeight());
 		levelBackground = new LevelBackground(this);

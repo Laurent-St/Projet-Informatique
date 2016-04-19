@@ -7,6 +7,7 @@ import gui.Floor;
 import gui.Tile;
 import gui.TileLibrary;
 import gui.Wall;
+import gui.level.LevelPanel;
 
 public class LevelData {
 	
@@ -14,9 +15,11 @@ public class LevelData {
 	private int levelWidth = 48;
 	private int levelHeight = 34;
 	private Rectangle levelBounds;
+	private LevelPanel levelPanel;
 	
 	
-	public LevelData() {
+	public LevelData(LevelPanel levelPanel) {
+		this.levelPanel = levelPanel;
 		tiles = new Tile[levelHeight][levelWidth];
 		levelBounds = new Rectangle(0,0,getLevelWidth()-1,getLevelHeight()-1);
 	}

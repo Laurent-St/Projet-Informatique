@@ -10,13 +10,13 @@ import animation.Count;
 
 public class Monster extends Actor implements Runnable {
 	private Image monsterImage;
-	private Count AIRefreshCount;
+	private int count;
 
 	public Monster(String name,double x, double y, int damage, int health, double speed, LevelPanel level){
 		super(name, x, y, damage, health, speed, level, new Rectangle(5,0,18,31));
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
-		AIRefreshCount = new Count(100,10);
+		count = 0;
 		
 	}
 
@@ -26,7 +26,8 @@ public void run(){
 	try{
 		while(true){
 			this.repaint();
-			if(AIRefreshCount.getCount()==0) {
+			
+			if(count==0) {
 				Random randomGenerator=new Random();
 				int randomNum=randomGenerator.nextInt(4);
 				if (randomNum==1){
@@ -38,6 +39,10 @@ public void run(){
 				}else{
 					setMoving("left");
 				}
+			}
+			count+=1;
+			if(count==80) {
+				count = 0;
 			}
 			move();
 			Thread.sleep(15);
