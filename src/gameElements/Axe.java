@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import gui.level.LevelPanel;
 
-public class Axe extends Weapon {
+public class Axe extends HandWeapon {
 	
 	private static Rectangle axeHitBox = new Rectangle(0,0,20,20);
 	

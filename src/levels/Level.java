@@ -7,7 +7,6 @@ import java.util.Random;
 
 import gameElements.Monster;
 import gui.Floor;
-import gui.TileLibrary;
 import gui.Wall;
 import gui.level.LevelPanel;
 
@@ -15,7 +14,10 @@ public class Level extends LevelData {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> efa48b5745835d6a7f721920dd7036cdfc559005
 	
 	public Level(LevelPanel levelPanel) {
 		super(levelPanel);

@@ -6,7 +6,7 @@ import gui.level.LevelPanel;
 public class Player extends Actor implements Runnable {
 	private Inventory inventory;
 	private int level;
-	private Weapon weapon;
+	private HandWeapon handWeapon;
 	private int mana;
 	private int maxMana;
 	private int experience;
@@ -29,10 +29,17 @@ public class Player extends Actor implements Runnable {
 		actorThread.start();	
 		
 		//TEST DE l'EPEE
+<<<<<<< HEAD
 		Sword sword = new Sword("epee",20,20,this.getLevelPanel(), this);
 		equipWeapon(sword);
 		getLevelPanel().add(sword);
 		getLevelPanel().setComponentZOrder(sword, 0);
+=======
+		Sword sword = new Sword("epee",20,20,this.getLevel(), this);
+		equipHandWeapon(sword);
+		getLevel().add(sword);
+		getLevel().setComponentZOrder(sword, 0);
+>>>>>>> efa48b5745835d6a7f721920dd7036cdfc559005
 		sword.setVisible(true);
 	}
 
@@ -87,17 +94,17 @@ public class Player extends Actor implements Runnable {
 		}
 	}
 
-	public Weapon getWeapon() {
-		return weapon;
+	public Weapon getHandWeapon() {
+		return handWeapon;
 	}
 
-	public void equipWeapon(Weapon weapon) {
+	public void equipHandWeapon(HandWeapon weapon) {
 		/*
 		 * on consid�re que le joueur a une valeur de degats de base et que le
 		 * fait d'equiper une arme augmente simplement la valeur de degats du
 		 * joueur. MAIS IL FAUDRA TENIR COMPTE DES TYPES D'ARMES.
 		 */
-		this.weapon = weapon;
+		this.handWeapon = weapon;
 		setDamage(damage + weapon.getDamage());
 	}
 
@@ -137,6 +144,14 @@ public class Player extends Actor implements Runnable {
 			setHealth(health + potion.getValue());
 		} else { // si c'est une potion de mana
 			setMana(mana + potion.getValue());
+		}
+	}
+	
+	public void attack() {
+		if(getHandWeapon()==null) {
+			
+		} else {
+			getHandWeapon().attack();
 		}
 	}
 
