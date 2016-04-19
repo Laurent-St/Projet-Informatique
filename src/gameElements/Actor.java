@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import animation.Count;
 import gui.TileLibrary;
 import gui.level.LevelPanel;
-import levels.Level;
-import levels.LevelData;
 
 public class Actor extends GameObject {
 	protected String name;
@@ -122,7 +120,7 @@ public class Actor extends GameObject {
 		String ms = getMovingState();
 		if(ms!="null") {
 			double speed = getSpeed();
-			LevelData terrain = getLevelPanel().getLevelData();
+			LevelPanel terrain = getLevelPanel();
 			double newX = getXdouble();
 			double newY = getYdouble();
 			
@@ -165,7 +163,7 @@ public class Actor extends GameObject {
 				null);
 	}
 	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
-		ArrayList<Monster> monsters=getLevelData().getMonsters();
+		ArrayList<Monster> monsters=getLevelPanel().getMonsters();
 		boolean res=true;
 		Rectangle playerHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(),(int)hitbox.getHeight());
 		int i=0;
@@ -178,10 +176,4 @@ public class Actor extends GameObject {
 		
 		return res;
 	}
-	
-	
-	
-	
-	
-	
 }

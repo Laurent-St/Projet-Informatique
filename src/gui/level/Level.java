@@ -1,4 +1,4 @@
-package levels;
+package gui.level;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import gui.Floor;
+import gui.GamePanel;
 import gui.Wall;
 import gui.level.LevelPanel;
 
-public class Level extends LevelData {
+public class Level extends LevelPanel {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
 	
-	public Level(LevelPanel levelPanel) {
-		super(levelPanel);
+	public Level(GamePanel gamePanel) {
+		super(gamePanel);
 		this.fill(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()), new Floor());
 		//this.makeBorder(this.getLevelBounds());
 		
