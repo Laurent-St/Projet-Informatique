@@ -6,7 +6,6 @@ import gui.level.LevelPanel;
 public class Player extends Actor implements Runnable {
 	private Inventory inventory;
 	private int level;
-	private HandWeapon handWeapon;
 	private int mana;
 	private int maxMana;
 	private int experience;
@@ -14,6 +13,9 @@ public class Player extends Actor implements Runnable {
 	
 	private static double playerSpeed  = 1.5;
 	private static Rectangle playerHitbox = new Rectangle(8,0,15,31);
+	
+	private HandWeapon handWeapon;
+	private ThrowableWeapon throwableWeapon;
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
 		super("src/gameElements/characterWarrior.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
@@ -30,11 +32,15 @@ public class Player extends Actor implements Runnable {
 		
 		//TEST DE l'EPEE
 
-		Sword sword = new Sword("epee",20,20,this.getLevelPanel(), this);
-		equipHandWeapon(sword);
-		getLevelPanel().add(sword);
-		getLevelPanel().setComponentZOrder(sword, 0);
-		sword.setVisible(true);
+		//Sword sword = new Sword("epee",20,20,this.getLevelPanel(), this);
+		//equipHandWeapon(sword);
+		//getLevelPanel().add(sword);
+		//getLevelPanel().setComponentZOrder(sword, 0);
+		//sword.setVisible(true);
+		
+		//TEST DE LA FIREBALL
+		FireballWeapon fw = new FireballWeapon(getLevelPanel(), this);
+		equipThrowableWeapon(fw);
 	}
 
 	public int getExperience() {
@@ -91,6 +97,10 @@ public class Player extends Actor implements Runnable {
 	public Weapon getHandWeapon() {
 		return handWeapon;
 	}
+	
+	public Weapon getThrowableWeapon() {
+		return throwableWeapon;
+	}
 
 	public void equipHandWeapon(HandWeapon weapon) {
 		/*
@@ -100,6 +110,9 @@ public class Player extends Actor implements Runnable {
 		 */
 		this.handWeapon = weapon;
 		setDamage(damage + weapon.getDamage());
+	}
+	public void equipThrowableWeapon(ThrowableWeapon weapon) {
+		this.throwableWeapon = weapon;
 	}
 
 	public Inventory getInventory() {
@@ -142,10 +155,10 @@ public class Player extends Actor implements Runnable {
 	}
 	
 	public void attack() {
-		if(getHandWeapon()==null) {
+		if(getThrowableWeapon()==null) {
 			
 		} else {
-			getHandWeapon().attack();
+			getThrowableWeapon().attack();
 		}
 	}
 

@@ -13,7 +13,7 @@ public class Weapon extends CollectableObject {
 	// range=1 correspond à la case d'à côté(arme au cac), range>1 correspond à
 	// une arme à distance.
 
-	public Weapon(String name, int x, int y, int damage, String image_url, Rectangle hitbox,
+	public Weapon(String name, double x, double y, int damage, String image_url, Rectangle hitbox,
 			LevelPanel level, Player attachedPlayer) {
 		super(name, x, y, image_url, hitbox, level);
 		setDamage(damage);

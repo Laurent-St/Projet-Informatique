@@ -33,10 +33,10 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	public int getRange() {
 		return range;
 	}
+	
 	public void attack() {
 		attackAnimationCount = null;
 		attackAnimationCount = new CountTimer(5,50,this);
-		
 	}
 
 	@Override
