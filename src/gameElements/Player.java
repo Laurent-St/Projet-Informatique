@@ -29,10 +29,10 @@ public class Player extends Actor implements Runnable {
 		actorThread.start();	
 		
 		//TEST DE l'EPEE
-		Sword sword = new Sword("epee",20,20,this.getLevel(), this);
+		Sword sword = new Sword("epee",20,20,this.getLevelPanel(), this);
 		equipWeapon(sword);
-		getLevel().add(sword);
-		getLevel().setComponentZOrder(sword, 0);
+		getLevelPanel().add(sword);
+		getLevelPanel().setComponentZOrder(sword, 0);
 		sword.setVisible(true);
 	}
 

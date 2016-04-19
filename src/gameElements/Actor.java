@@ -2,9 +2,12 @@ package gameElements;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import animation.Count;
+import gui.TileLibrary;
 import gui.level.LevelPanel;
+import levels.Level;
 import levels.LevelData;
 
 public class Actor extends GameObject {
@@ -107,9 +110,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	/*
-	 * public void move(){ // a compl�ter! }
-	 */
+	
 	public void basicAttack(Actor target) {
 		target.setHealth(target.getHealth() - damage);
 	}
@@ -121,7 +122,7 @@ public class Actor extends GameObject {
 		String ms = getMovingState();
 		if(ms!="null") {
 			double speed = getSpeed();
-			LevelData terrain = getLevel().getLevelData();
+			LevelData terrain = getLevelPanel().getLevelData();
 			double newX = getXdouble();
 			double newY = getYdouble();
 			
@@ -143,7 +144,7 @@ public class Actor extends GameObject {
 	
 	protected void paintComponent(Graphics g) {
 		
-		getLevel().repaint(new Rectangle(getX()-10, getY()-10,50,50));
+		getLevelPanel().repaint(new Rectangle(getX()-10, getY()-10,50,50));
 		int xcount = 0;
 		if(getMovingState()!="null") {
 			xcount = animationCount.getCount();
@@ -163,5 +164,24 @@ public class Actor extends GameObject {
 				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
 				null);
 	}
-
+	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
+		ArrayList<Monster> monsters=getLevelData().getMonsters();
+		boolean res=true;
+		Rectangle playerHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(),(int)hitbox.getHeight());
+		int i=0;
+		while(i<monsters.size() && res){
+			
+			if (playerHitbox.intersects(monsters.get(i).getHitbox())){
+				res=false;
+			}
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+	
 }

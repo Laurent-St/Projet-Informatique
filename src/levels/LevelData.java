@@ -2,7 +2,9 @@ package levels;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
+import gameElements.Monster;
 import gui.Floor;
 import gui.Tile;
 import gui.TileLibrary;
@@ -16,7 +18,7 @@ public class LevelData {
 	private int levelHeight = 34;
 	private Rectangle levelBounds;
 	private LevelPanel levelPanel;
-	
+	private ArrayList<Monster> monsters;
 	
 	public LevelData(LevelPanel levelPanel) {
 		this.levelPanel = levelPanel;
@@ -38,6 +40,9 @@ public class LevelData {
 	
 	public Rectangle getLevelBounds() {
 		return this.levelBounds;
+	}
+	public ArrayList<Monster> getMonsters(){
+		return monsters;
 	}
 	
 	public void fill(Rectangle rect, Tile tile) {

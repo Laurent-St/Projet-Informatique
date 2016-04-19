@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import gui.level.LevelPanel;
+import levels.LevelData;
 
 @SuppressWarnings("serial")
 public class GameObject extends JComponent {
@@ -50,8 +51,12 @@ public class GameObject extends JComponent {
 		return object_image;
 	}
 
-	public LevelPanel getLevel() {
+	public LevelPanel getLevelPanel() {
 		return this.level;
+	}
+	
+	public LevelData getLevelData() {
+		return this.getLevelPanel().getLevelData();
 	}
 
 	public int getX() {
