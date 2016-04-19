@@ -14,7 +14,7 @@ public class Level extends LevelData {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
-	//private ArrayList<>
+	private ArrayList<Monster>
 	
 	public Level(LevelPanel levelPanel) {
 		super(levelPanel);
