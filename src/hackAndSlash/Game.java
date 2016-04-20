@@ -3,6 +3,8 @@ package hackAndSlash;
 import gameElements.Monster;
 import gameElements.Player;
 
+import java.util.ArrayList;
+
 import controls.PlayerControls;
 import gui.FontLoader;
 import gui.GameWindow;
@@ -40,9 +42,12 @@ public class Game {
 		//GameObject go = new Axe("axe",25, 45,10,10, "src/gameElements/axe.png", level);
 		//level.setComponentZOrder(go, 0);
 		
-		Monster monster=new Monster("src/gameElements/zombie.png", 20, 20, 50, 200, 0.5, level1);
+		//Monster monster=new Monster("src/gameElements/zombie.png", 80, 100, 50, 200, 0.5, level1);
 		
-		level1.setComponentZOrder(monster, 0);
+		ArrayList<Monster> monsters=level1.getMonsters();
+		for (int i=0; i<monsters.size(); i++){
+			level1.setComponentZOrder(monsters.get(i), 0);
+		}
 		level1.setComponentZOrder(player, 0);
 	}
 

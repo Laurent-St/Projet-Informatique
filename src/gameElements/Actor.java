@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import animation.Count;
 import gui.TileLibrary;
+import gui.level.Level;
 import gui.level.LevelPanel;
 
 public class Actor extends GameObject {
@@ -20,8 +21,8 @@ public class Actor extends GameObject {
 	private String movingState;
 	private String orientation;
 
-	public Actor(String name, double x, double y, int damage, int health, double speed, LevelPanel level, Rectangle hitbox) {
-		super(x, y, name, hitbox, level);		//le name est "image_url" de GameObject
+	public Actor(String name, double x, double y, int damage, int health, double speed, LevelPanel levelPanel, Rectangle hitbox) {
+		super(x, y, name, hitbox, levelPanel);		//le name est "image_url" de GameObject
 		setName(name);
 		setDamage(damage);
 		setHealth(health);
@@ -133,7 +134,8 @@ public class Actor extends GameObject {
 			} else if (ms=="left") {
 				newX-=speed;
 			}
-			if(terrain.isPositionAvailable(newX,newY,getHitbox())) {
+			if(terrain.isPositionAvailable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, getHitbox())==false){
+				System.out.print("Nouvelle position");
 				this.setX(newX);
 				this.setY(newY);
 			}
@@ -163,17 +165,20 @@ public class Actor extends GameObject {
 				null);
 	}
 	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
-		ArrayList<Monster> monsters=getLevelPanel().getMonsters();
-		boolean res=true;
-		Rectangle playerHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(),(int)hitbox.getHeight());
+		ArrayList<Monster> monsters=new ArrayList<Monster>();
+		monsters=getLevelPanel().getMonsters();
+		boolean res=false;  //default result is a free position
+		Rectangle actorHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(), (int)hitbox.getHeight());
 		int i=0;
-		while(i<monsters.size() && res){
-			
-			if (playerHitbox.intersects(monsters.get(i).getHitbox())){
-				res=false;
+		System.out.println("test isPositionOccupied");
+		while(i<monsters.size() && res==false){
+			System.out.println("While fonctionne");
+			if (actorHitbox.intersects(monsters.get(i).getHitbox())){
+				res=true;
+				System.out.println("Position occupée");
 			}
+			i++;
 		}
-		
 		return res;
 	}
 }

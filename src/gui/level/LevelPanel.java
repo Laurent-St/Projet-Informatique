@@ -24,7 +24,9 @@ public class LevelPanel extends JPanel {
 	private static Rectangle levelPanelBounds = new Rectangle(20,20,960,680);
 	private static Rectangle levelBounds = new Rectangle(0,0,levelWidth-1,levelHeight-1);;
 	private Tile[][] tiles;
-	private ArrayList<Monster> monsters;
+	private int numberOfMonsters=5;
+	private ArrayList<Monster> monsters=new ArrayList<Monster>();
+
 	
 	public LevelPanel(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -33,6 +35,16 @@ public class LevelPanel extends JPanel {
 		levelBackground = new LevelBackground(this);
 		
 		tiles = new Tile[levelHeight][levelWidth];
+		for (int i=0; i<numberOfMonsters; i++){
+			Monster newMonster= new Monster("src/gameElements/zombie.png", 50+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
+			System.out.println("Nouveau monstre");
+			monsters.add(newMonster);
+			System.out.println("Monstre ajouté");
+		}
+		
+	}
+	public ArrayList<Monster> getMonsters(){
+		return monsters;
 	}
 	
 	public void activate() {
@@ -72,9 +84,6 @@ public class LevelPanel extends JPanel {
 		return this.levelHeight;
 	}
 
-	public ArrayList<Monster> getMonsters(){
-		return monsters;
-	}
 	
 	public void fill(Rectangle rect, Tile tile) {
 		for(int i=(int) rect.getX(); i<rect.getX()+rect.getWidth(); i++) {

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
+import gameElements.Monster;
 import gui.Floor;
 import gui.GamePanel;
 import gui.Wall;
@@ -14,6 +15,8 @@ public class Level extends LevelPanel {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
+
+	
 	
 	public Level(GamePanel gamePanel) {
 		super(gamePanel);
@@ -29,6 +32,7 @@ public class Level extends LevelPanel {
 		
 	}
 	
+
 
 	//ALGORITHME DE GENERATION DE TERRAIN PAR DIVISIONS RECURSIVES
 	public void generateMaze(int step, ArrayList<Rectangle> subdivisions, ArrayList<Point> holes) {

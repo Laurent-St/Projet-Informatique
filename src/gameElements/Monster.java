@@ -2,6 +2,8 @@ package gameElements;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+
+import gui.level.Level;
 import gui.level.LevelPanel;
 
 import java.util.Random;
@@ -12,8 +14,8 @@ public class Monster extends Actor implements Runnable {
 	private Image monsterImage;
 	private int count;
 
-	public Monster(String name,double x, double y, int damage, int health, double speed, LevelPanel level){
-		super(name, x, y, damage, health, speed, level, new Rectangle(5,0,18,31));
+	public Monster(String name,double x, double y, int damage, int health, double speed, LevelPanel levelPanel, Rectangle hitbox){
+		super(name, x, y, damage, health, speed, levelPanel, hitbox);
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		count = 0;

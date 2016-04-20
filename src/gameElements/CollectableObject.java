@@ -2,13 +2,14 @@ package gameElements;
 
 import java.awt.Rectangle;
 
+import gui.level.Level;
 import gui.level.LevelPanel;
 
 public class CollectableObject extends GameObject {
 	private String name;
 
-	public CollectableObject(String name, double x, double y, String image_url, Rectangle hitbox, LevelPanel level) {
-		super(x, y, image_url, hitbox, level);
+	public CollectableObject(String name, double x, double y, String image_url, Rectangle hitbox, LevelPanel levelPanel) {
+		super(x, y, image_url, hitbox, levelPanel);
 		setName(name);
 	}
 

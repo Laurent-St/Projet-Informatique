@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import gui.level.Level;
 import gui.level.LevelPanel;
 
 @SuppressWarnings("serial")
@@ -18,10 +19,10 @@ public class GameObject extends JComponent {
 	private double posy;
 	private Image object_image;
 	private String image_url;
-	private LevelPanel level;
+	private LevelPanel levelPanel;
 	private Rectangle hitbox;
 
-	public GameObject(double x, double y, String image_url, Rectangle hitbox, LevelPanel level) {
+	public GameObject(double x, double y, String image_url, Rectangle hitbox, LevelPanel levelPanel) {
 		// x et y sont les positions relatives dans le niveau, pas celles en
 		// nombre de pixels.
 		// Pour afficher l'objet avec ses vraies dimensions, il faudra donc
@@ -31,8 +32,8 @@ public class GameObject extends JComponent {
 		setHitbox(hitbox);
 		this.image_url = image_url;
 		setImage();
-		this.level = level;
-		level.add(this);
+		this.levelPanel = levelPanel;
+		levelPanel.add(this);
 		this.setVisible(true);
 		this.setBounds(new Rectangle(0, 0, 1000, 1000));
 		this.repaint();
@@ -51,15 +52,16 @@ public class GameObject extends JComponent {
 	}
 
 	public LevelPanel getLevelPanel() {
-		return this.level;
+		return this.levelPanel;
 	}
+	
 
 	public int getX() {
 		return (int)Math.round(posx);
 	}
 
 	public void setX(double x) {
-		this.posx = x; // temporaire, à lier avec l'interface graphique!
+		this.posx = x; 
 	}
 
 	public int getY() {
