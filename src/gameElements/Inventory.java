@@ -1,9 +1,12 @@
 package gameElements;
 import java.util.ArrayList;
 
+import gui.InventoryWindow;
+
 public class Inventory {
 	private ArrayList<CollectableObject> content;
 	private int maxSize=5;
+	private InventoryWindow inventoryWindow;
 	
 public Inventory(int maxSize){
 	ArrayList<CollectableObject> content=new ArrayList<CollectableObject>();
