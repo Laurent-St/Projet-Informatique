@@ -1,9 +1,9 @@
 package model.gameElements;
 
-import java.awt.Graphics;
+
 import java.awt.Rectangle;
 
-import view.level.LevelPanel;
+import model.Game;
 
 public class Weapon extends CollectableObject {
 	private int damage;
@@ -14,8 +14,8 @@ public class Weapon extends CollectableObject {
 	// une arme à distance.
 
 	public Weapon(String name, double x, double y, int damage, String image_url, Rectangle hitbox,
-			LevelPanel level, Player attachedPlayer) {
-		super(name, x, y, image_url, hitbox, level);
+			Game game, Player attachedPlayer) {
+		super(name, x, y, image_url, hitbox, game);
 		setDamage(damage);
 		setAttachedPlayer(attachedPlayer);
 	}
@@ -51,9 +51,5 @@ public class Weapon extends CollectableObject {
 	
 	public boolean inAttackMode() {
 		return this.attackMode;
-	}
-	
-	protected void paintComponent(Graphics g) {
-		//super.paintComponent(g);
 	}
 }

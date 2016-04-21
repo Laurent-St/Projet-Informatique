@@ -5,14 +5,15 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import animation.Count;
+import model.Game;
 import view.level.LevelPanel;
 
 public class Monster extends Actor implements Runnable {
 	private Image monsterImage;
 	private int count;
 
-	public Monster(String name,double x, double y, int damage, int health, double speed, LevelPanel levelPanel, Rectangle hitbox){
-		super(name, x, y, damage, health, speed, levelPanel, hitbox);
+	public Monster(String name,double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox){
+		super(name, x, y, damage, health, speed, game, hitbox);
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		count = 0;
@@ -24,8 +25,6 @@ public class Monster extends Actor implements Runnable {
 public void run(){
 	try{
 		while(true){
-			this.repaint();
-			
 			if(count==0) {
 				Random randomGenerator=new Random();
 				int randomNum=randomGenerator.nextInt(4);

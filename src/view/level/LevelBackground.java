@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 
-import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
 
 @SuppressWarnings("serial")

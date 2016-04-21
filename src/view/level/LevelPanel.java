@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import model.Game;
 import model.gameElements.Monster;
 import model.graphicElements.Floor;
 import model.graphicElements.Tile;
@@ -17,6 +18,7 @@ import view.GamePanel;
 @SuppressWarnings("serial")
 public class LevelPanel extends JPanel {
 	
+	private Game game;
 	private GamePanel gamePanel;
 	private LevelBackground levelBackground;
 	private static int levelWidth = 48;
@@ -28,28 +30,24 @@ public class LevelPanel extends JPanel {
 	private ArrayList<Monster> monsters=new ArrayList<Monster>();
 
 	
-	public LevelPanel(GamePanel gamePanel) {
-		this.gamePanel = gamePanel;
+	public LevelPanel(Game game) {
+		this.game = game;
+		gamePanel=game.getGameWindow().getGamePanel();
 		this.setLayout(null);
 		this.setBounds((int)getLevelPanelBounds().getX(),(int)getLevelPanelBounds().getY(),(int)getLevelPanelBounds().getWidth(),(int)getLevelPanelBounds().getHeight());
 		levelBackground = new LevelBackground(this);
 		
 		tiles = new Tile[levelHeight][levelWidth];
-		for (int i=0; i<numberOfMonsters; i++){
-			Monster newMonster= new Monster("src/gameElements/zombie.png", 70+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
-			System.out.println("Nouveau monstre");
-			monsters.add(newMonster);
-			System.out.println("Monstre ajouté");
+		
 		}
 		
-	}
+	
 	public ArrayList<Monster> getMonsters(){
 		return monsters;
 	}
 	
 	public void activate() {
-		//levelBackground.repaint();
-		//gamePanel.removeAll();
+		System.out.println("activate");
 		gamePanel.addPanel(this);
 		this.setVisible(true);
 		levelBackground.repaint();

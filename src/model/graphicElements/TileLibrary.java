@@ -33,7 +33,7 @@ public class TileLibrary {
 	
 	public static void initImage() {
 		try {
-			tilesImage = ImageIO.read(new File("src/gui/Tiles.png"));
+			tilesImage = ImageIO.read(new File("src/model/graphicElements/Tiles.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

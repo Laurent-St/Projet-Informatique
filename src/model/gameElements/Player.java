@@ -2,7 +2,7 @@ package model.gameElements;
 
 import java.awt.Rectangle;
 
-import view.level.LevelPanel;
+import model.Game;
 
 public class Player extends Actor implements Runnable {
 	private Inventory inventory;
@@ -18,9 +18,9 @@ public class Player extends Actor implements Runnable {
 	private HandWeapon handWeapon;
 	private ThrowableWeapon throwableWeapon;
 
-	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, gameLevel, playerHitbox);
-		inventory = new Inventory(5, getLevelPanel().getGamePanel());
+	public Player(String name, int damage, int health, int mana, Game game) {
+		super("src/model/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, game, playerHitbox);
+		inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);
 		setMana(mana);
@@ -40,7 +40,7 @@ public class Player extends Actor implements Runnable {
 		//sword.setVisible(true);
 		
 		//TEST DE LA FIREBALL
-		FireballWeapon fw = new FireballWeapon(getLevelPanel(), this);
+		FireballWeapon fw = new FireballWeapon(getGame(), this);
 		equipThrowableWeapon(fw);
 	}
 
@@ -173,7 +173,6 @@ public class Player extends Actor implements Runnable {
 				e.printStackTrace();
 			}
 			this.move();
-			this.repaint();
 		}
 	}
 }

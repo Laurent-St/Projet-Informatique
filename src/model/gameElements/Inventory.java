@@ -2,13 +2,14 @@ package model.gameElements;
 
 import java.util.ArrayList;
 
+import model.Game;
 import view.GamePanel;
 
 public class Inventory {
 	private ArrayList<CollectableObject> content;
 	private int maxSize = 5;
 
-	public Inventory(int maxSize, GamePanel gamePanel) {
+	public Inventory(int maxSize) {
 		ArrayList<CollectableObject> content = new ArrayList<CollectableObject>();
 		setMaxSize(maxSize);
 		

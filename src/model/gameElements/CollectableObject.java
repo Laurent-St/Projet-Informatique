@@ -2,13 +2,13 @@ package model.gameElements;
 
 import java.awt.Rectangle;
 
-import view.level.LevelPanel;
+import model.Game;
 
 public class CollectableObject extends GameObject {
 	private String name;
 
-	public CollectableObject(String name, double x, double y, String image_url, Rectangle hitbox, LevelPanel levelPanel) {
-		super(x, y, image_url, hitbox, levelPanel);
+	public CollectableObject(String name, double x, double y, String image_url, Rectangle hitbox, Game game) {
+		super(x, y, image_url, hitbox, game);
 		setName(name);
 	}
 
