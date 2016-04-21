@@ -3,7 +3,7 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import gameElements.Player;
+import model.gameElements.Player;
 
 public class PlayerControls implements KeyListener {
 	
