@@ -36,7 +36,7 @@ public class LevelPanel extends JPanel {
 		
 		tiles = new Tile[levelHeight][levelWidth];
 		for (int i=0; i<numberOfMonsters; i++){
-			Monster newMonster= new Monster("src/gameElements/zombie.png", 50+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
+			Monster newMonster= new Monster("src/gameElements/zombie.png", 70+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
 			System.out.println("Nouveau monstre");
 			monsters.add(newMonster);
 			System.out.println("Monstre ajouté");

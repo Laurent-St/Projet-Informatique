@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Inventory {
 	private ArrayList<CollectableObject> content;
-	private int maxSize;
+	private int maxSize=5;
 	
 public Inventory(int maxSize){
 	ArrayList<CollectableObject> content=new ArrayList<CollectableObject>();

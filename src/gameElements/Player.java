@@ -18,7 +18,7 @@ public class Player extends Actor implements Runnable {
 	private ThrowableWeapon throwableWeapon;
 
 	public Player(String name, int damage, int health, int mana, LevelPanel gameLevel) {
-		super("src/gameElements/characterWarrior.png",20,20,0,0, playerSpeed, gameLevel, playerHitbox);
+		super("src/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, gameLevel, playerHitbox);
 		Inventory inventory = new Inventory(5);
 		//equipWeapon(weapon);
 		setLevel(1);

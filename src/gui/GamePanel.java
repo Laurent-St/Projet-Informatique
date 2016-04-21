@@ -13,7 +13,7 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		this.setLocation(0, 0);
 		this.setPreferredSize(panelSize);
-		this.setLayout(null);
+		//this.setLayout(null);
 		this.setVisible(true);
 		this.setBackground(Color.BLACK);
 	}
