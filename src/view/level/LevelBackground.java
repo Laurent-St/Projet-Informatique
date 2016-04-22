@@ -3,13 +3,13 @@ package view.level;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import model.graphicElements.TileLibrary;
+import model.map.Map;
 
 @SuppressWarnings("serial")
-public class LevelBackground extends JComponent {
+public class LevelBackground extends JPanel {
 	
 	private LevelPanel levelPanel;
 	
@@ -21,18 +21,19 @@ public class LevelBackground extends JComponent {
 		levelPanel.add(this);
 		this.setVisible(true);
 		this.setLayout(null);
-		System.out.println("new LevelBackground");
+		System.out.println("new Beckground");
 	}
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Image tilesImage = TileLibrary.getTilesImage();
 		int size = TileLibrary.getTileSize();
+		Map map = levelPanel.getMap();
 		
-		for(int i=0;i<levelPanel.getLevelWidth();i++) {
-			for(int j=0;j<levelPanel.getLevelHeight();j++) {
+		for(int i=0;i<map.getLevelWidth();i++) {
+			for(int j=0;j<map.getLevelHeight();j++) {
 				
-				Rectangle r = TileLibrary.getBoundsOf(levelPanel.getTileAt(i, j));
+				Rectangle r = TileLibrary.getBoundsOf(map.getTileAt(i, j));
 				g.drawImage(tilesImage,
 						i*size, j*size, (i+1)*size, (j+1)*size,
 						(int)r.getX(),

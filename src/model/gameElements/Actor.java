@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import animation.Count;
 import model.Game;
+import model.map.Map;
 import view.level.LevelPanel;
 
 
@@ -120,7 +121,7 @@ public class Actor extends GameObject {
 		String ms = getMovingState();
 		if(ms!="null") {
 			double speed = getSpeed();
-			LevelPanel terrain = getGame().getLevelPanel();
+			Map terrain = getGame().getCurrentMap();
 			double newX = getXdouble();
 			double newY = getYdouble();
 			
@@ -134,7 +135,7 @@ public class Actor extends GameObject {
 				newX-=speed;
 			}
 			if(terrain.isPositionAvailable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, getHitbox())==false){
-				System.out.print("Nouvelle position");
+				//System.out.print("Nouvelle position");
 				this.setX(newX);
 				this.setY(newY);
 			}
@@ -165,16 +166,15 @@ public class Actor extends GameObject {
 //	}
 	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
 		ArrayList<Monster> monsters=new ArrayList<Monster>();
-		monsters=getLevelPanel().getMonsters();
+		monsters=getGame().getCurrentMap().getMonsters();
 		boolean res=false;  //default result is a free position
-		Rectangle actorHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(), (int)hitbox.getHeight());
+		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(), (int)hitbox.getHeight());
 		int i=0;
-		System.out.println("test isPositionOccupied");
 		while(i<monsters.size() && res==false){
 			System.out.println("While fonctionne");
-			if (actorHitbox.intersects(monsters.get(i).getHitbox())){
+			if (testHitbox.intersects(monsters.get(i).getHitbox())){
 				res=true;
-				System.out.println("Position occupée");
+				//System.out.println("Position occupée");
 			}
 			i++;
 		}

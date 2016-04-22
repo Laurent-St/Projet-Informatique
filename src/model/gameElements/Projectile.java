@@ -43,7 +43,7 @@ public class Projectile extends Weapon implements Runnable{
 	@Override
 	public void run() {
 		//RAJOUTER && getAttachedPlayer().isPositionOccupied(getX(), getY(), getHitbox())
-		while(getLevelPanel().isPositionAvailable(getX(), getY(), getHitbox()) ) {
+		while(getGame().getCurrentMap().isPositionAvailable(getX(), getY(), getHitbox()) ) {
 			if(this.direction=="up") {
 				setY(getYdouble()-this.speed);
 			} else if (this.direction=="down") {

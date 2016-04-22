@@ -4,9 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.Random;
 
-import animation.Count;
 import model.Game;
-import view.level.LevelPanel;
 
 public class Monster extends Actor implements Runnable {
 	private Image monsterImage;
@@ -17,7 +15,7 @@ public class Monster extends Actor implements Runnable {
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		count = 0;
-		System.out.println("new Monster");
+		//System.out.println("new Monster");
 		
 	}
 

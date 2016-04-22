@@ -44,12 +44,7 @@ public class GameObject {
 
 	public Game getGame() {
 		return this.game;
-	}
-	
-	public LevelPanel getLevelPanel(){
-		return this.game.getLevelPanel();
-	}
-	
+	}	
 
 	public int getX() {
 		return (int)Math.round(posx);

@@ -6,20 +6,15 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame {
 	
-	//private GamePanel mainPanel;
 	private GamePanel gamePanel;
 	
-	
-	public GameWindow() {
+	public GameWindow(GamePanel gamePanel) {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Hack And Slash");
 		this.setResizable(false);
-		//mainPanel=new GamePanel();
-		//mainPanel.setPreferredSize(new Dimension(1000,1000));
 		
+		this.gamePanel = gamePanel;
 		initPanel();
-		
-		//mainPanel.setVisible(true); déjà dans le constructeur de GamePanel
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -29,10 +24,8 @@ public class GameWindow extends JFrame {
 
 	
 	public void initPanel() {
-		gamePanel = new GamePanel();
 		gamePanel.setVisible(true);
 		this.add(gamePanel);
-		//this.setContentPane(gamePanel);
 	}
 
 	
