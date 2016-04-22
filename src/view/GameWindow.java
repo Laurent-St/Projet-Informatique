@@ -24,11 +24,13 @@ public class GameWindow extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 	    this.setVisible(true);
+	    System.out.println("new GameWindow");
 	}
 
 	
 	public void initPanel() {
 		gamePanel = new GamePanel();
+		gamePanel.setVisible(true);
 		this.add(gamePanel);
 		//this.setContentPane(gamePanel);
 	}

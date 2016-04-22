@@ -19,8 +19,8 @@ public class Game {
 	
 	private GameWindow gameWindow;
 	private Player player;
-	private ArrayList<Monster> monsters;
-	private int numberOfMonsters;
+	private ArrayList<Monster> monsters= new ArrayList<Monster>();
+	private int numberOfMonsters=5;
 	private GamePanel gamePanel;
 	private ArrayList<GameObject> gameobjects;
 	
@@ -37,6 +37,7 @@ public class Game {
 		initLevelGraphics();
 		//initMenu();
 		initLevelActors(); //FONCTION DE TEST
+		
 	}
 	
 	public void initLevelGraphics() {
@@ -46,6 +47,9 @@ public class Game {
 		level1= new Level(this); //Ajoute un level au contenu
 		level1.activate();
 		currentLevelPanel = level1;
+		gameWindow.repaint();
+		gameWindow.getGamePanel().repaint();
+		level1.repaint();
 		
 		
 		
@@ -88,7 +92,6 @@ public class Game {
 		player = new Player("Couillon", 1, 1, 1, this);
 		for (int i=0; i<numberOfMonsters; i++){
 			Monster newMonster= new Monster("src/model/gameElements/zombie.png", 70+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
-			System.out.println("Nouveau monstre");
 			monsters.add(newMonster);
 			System.out.println("Monstre ajouté");
 			}

@@ -17,6 +17,7 @@ public class Monster extends Actor implements Runnable {
 		Thread monsterThread=new Thread(this);
 		monsterThread.start();
 		count = 0;
+		System.out.println("new Monster");
 		
 	}
 

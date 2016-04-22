@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
 		this.setVisible(true);
 		this.setBackground(Color.BLACK);
 		initInventoryWindow();
+		System.out.println("new GamePanel");
 	}
 	
 	public Dimension getDimensions() {

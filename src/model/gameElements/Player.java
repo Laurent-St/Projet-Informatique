@@ -30,6 +30,7 @@ public class Player extends Actor implements Runnable {
 		
 		Thread actorThread = new Thread(this);
 		actorThread.start();	
+		System.out.println("new Player");
 		
 		//TEST DE l'EPEE
 

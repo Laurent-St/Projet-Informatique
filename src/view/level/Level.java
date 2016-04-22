@@ -28,6 +28,7 @@ public class Level extends LevelPanel {
 		
 		generateMaze(0, rooms, holes);
 		renderMaze(rooms, holes);
+		System.out.println("new Level");
 		
 	}
 	
@@ -86,6 +87,7 @@ public class Level extends LevelPanel {
 		} else {
 			generateMaze(step+1, newObjects, holes);
 		}
+		System.out.println("Generate appelée");
 	}
 	
 	
@@ -135,5 +137,6 @@ public class Level extends LevelPanel {
 				}
 			}
 		}
+		System.out.println("render appelée");
 	}	
 }

@@ -36,9 +36,12 @@ public class LevelPanel extends JPanel {
 		this.setLayout(null);
 		this.setBounds((int)getLevelPanelBounds().getX(),(int)getLevelPanelBounds().getY(),(int)getLevelPanelBounds().getWidth(),(int)getLevelPanelBounds().getHeight());
 		levelBackground = new LevelBackground(this);
+		this.add(levelBackground);
+		this.setComponentZOrder(levelBackground, 0);
 		
 		tiles = new Tile[levelHeight][levelWidth];
 		
+		System.out.println("new LevelPanel");
 		}
 		
 	
@@ -51,6 +54,8 @@ public class LevelPanel extends JPanel {
 		gamePanel.addPanel(this);
 		this.setVisible(true);
 		levelBackground.repaint();
+//		gamePanel.add(levelBackground);
+//		levelBackground.repaint();
 		this.repaint();
 	}
 	

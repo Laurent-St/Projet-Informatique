@@ -21,6 +21,7 @@ public class LevelBackground extends JComponent {
 		levelPanel.add(this);
 		this.setVisible(true);
 		this.setLayout(null);
+		System.out.println("new LevelBackground");
 	}
 	
 	protected void paintComponent(Graphics g) {
