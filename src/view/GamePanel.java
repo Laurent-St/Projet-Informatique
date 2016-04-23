@@ -30,16 +30,12 @@ public class GamePanel extends JPanel {
 	public void removePanels() {
 		this.removeAll();
 	}
-
-	public void addPanel(JPanel panel) {
-		this.add(panel);
-	}
 	
 	public void initInventoryWindow(){
 		inventoryWindow=new InventoryWindow();
 		//this.setContentPane(inventoryWindow);
 		inventoryWindow.setBounds(0, 700, 1000, 200);
-		addPanel(inventoryWindow);
+		this.add(inventoryWindow);
 		this.setComponentZOrder(inventoryWindow, 0);
 		inventoryWindow.setVisible(true);
 		inventoryWindow.repaint();

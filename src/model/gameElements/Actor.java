@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import animation.Count;
 import model.Game;
 import model.map.Map;
-import view.level.LevelPanel;
 
 
 public class Actor extends GameObject {
@@ -138,7 +137,7 @@ public class Actor extends GameObject {
 			} else if (ms=="left") {
 				newX-=speed;
 			}
-			if(terrain.isPositionAvailable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, getHitbox())==false){
+			if(terrain.isPositionAvailable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, this)==false){
 				//System.out.print("Nouvelle position");
 				this.setX(newX);
 				this.setY(newY);
@@ -146,20 +145,32 @@ public class Actor extends GameObject {
 		}
 	}
 	
-	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
+	public boolean isPositionOccupied(double x, double y, Actor actor){
 		ArrayList<Monster> monsters=new ArrayList<Monster>();
-		monsters=getGame().getCurrentMap().getMonsters();
+		monsters=getGame().getMonsters();
+		Player player = getGame().getPlayer();
+		
 		boolean res=false;  //default result is a free position
-		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(), (int)hitbox.getHeight());
+		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)actor.getHitbox().getWidth(), (int)actor.getHitbox().getHeight());
 		int i=0;
 		while(i<monsters.size() && res==false){
-			System.out.println("While fonctionne");
-			if (testHitbox.intersects(monsters.get(i).getHitbox())){
-				res=true;
-				//System.out.println("Position occupée");
+			Monster m = monsters.get(i);
+			if (m != actor){
+				Rectangle testHitbox2 = new Rectangle(m.getX(), m.getY(), (int)m.getHitbox().getWidth(), (int)m.getHitbox().getHeight());
+				if(testHitbox2.intersects(testHitbox)) {
+					res = true;
+				}
 			}
 			i++;
 		}
+		
+		if(actor!=player) {
+			Rectangle testHitboxPlayer = new Rectangle(player.getX(), player.getY(), (int)player.getHitbox().getWidth(), (int)player.getHitbox().getHeight());
+			if(testHitboxPlayer.intersects(testHitbox)) {
+				res = true;
+			}
+		}
+		
 		return res;
 	}
 }

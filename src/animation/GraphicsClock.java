@@ -17,14 +17,15 @@ public class GraphicsClock implements Runnable {
 
 	@Override
 	public void run() {
-		source.repaint();
-		try {
-			Thread.sleep(delay);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while(true) {
+			source.repaint();
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 	}
 
 }

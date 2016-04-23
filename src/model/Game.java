@@ -22,6 +22,7 @@ public class Game {
 	private LevelPanel levelPanel;
 	
 	private Player player;
+	private PlayerControls playerControls;
 	private int numberOfMonsters=5;
 	private ArrayList<Monster> monsters= new ArrayList<Monster>();
 	private ArrayList<GameObject> gameobjects;
@@ -40,6 +41,7 @@ public class Game {
 		initLevel();
 		initLevelActors();
 		initGraphics();
+		initControls();
 		
 	}
 	
@@ -59,6 +61,13 @@ public class Game {
 	
 	public void initMenu() {
 		new MainMenu(gameWindow.getGamePanel());
+	}
+	
+	public void initControls() {
+		playerControls = new PlayerControls(player);
+		gamePanel.setFocusable(true);
+		gamePanel.requestFocus();
+		gamePanel.addKeyListener(playerControls);
 	}
 	
 	
