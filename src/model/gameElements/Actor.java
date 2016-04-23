@@ -108,6 +108,10 @@ public class Actor extends GameObject {
 			setOrientation(state);
 		}
 	}
+	
+	public int getAnimationCount() {
+		return this.animationCount.getCount();
+	}
 
 	
 	public void basicAttack(Actor target) {
@@ -142,28 +146,6 @@ public class Actor extends GameObject {
 		}
 	}
 	
-//	protected void paintComponent(Graphics g) {
-//		
-//		getLevelPanel().repaint(new Rectangle(getX()-10, getY()-10,50,50));
-//		int xcount = 0;
-//		if(getMovingState()!="null") {
-//			xcount = animationCount.getCount();
-//		}
-//		int ycount = 0;
-//		if(getOrientation()=="up") {
-//			ycount = 2;
-//		} else if (getOrientation()=="left") {
-//			ycount = 1;
-//		} else if (getOrientation()=="right") {
-//			ycount = 3;
-//		}
-//		//g.drawImage(this.getImage(), getX(), getY(), getX()+32, getY()+32,
-//		//		32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
-//		//		null);
-//		g.drawImage(this.getImage(), 0, 0, 31, 31,
-//				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
-//				null);
-//	}
 	public boolean isPositionOccupied(double x, double y, Rectangle hitbox){
 		ArrayList<Monster> monsters=new ArrayList<Monster>();
 		monsters=getGame().getCurrentMap().getMonsters();

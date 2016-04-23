@@ -38,8 +38,8 @@ public class Game {
 	public Game() {
 				
 		initLevel();
+		initLevelActors();
 		initGraphics();
-		initLevelActors(); //FONCTION DE TEST
 		
 	}
 	
@@ -62,17 +62,13 @@ public class Game {
 	}
 	
 	
-	public GamePanel getGamePanel() {
-		return gamePanel;
-	}
-	
 	public void initLevelActors(){
 		player = new Player("Couillon", 1, 1, 1, this);
 		for (int i=0; i<numberOfMonsters; i++){
 			Monster newMonster= new Monster("src/model/gameElements/zombie.png", 70+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
 			monsters.add(newMonster);
 			System.out.println("Monstre ajouté");
-			}
+		}
 	}
 
 	public GameWindow getGameWindow() {	
@@ -81,6 +77,18 @@ public class Game {
 	
 	public Map getCurrentMap() {
 		return this.currentMap;
+	}
+	
+	public GamePanel getGamePanel() {
+		return gamePanel;
+	}
+	
+	public ArrayList<Monster> getMonsters() {
+		return this.monsters;
+	}
+
+	public Player getPlayer() {
+		return this.player;
 	}
 	
 }
