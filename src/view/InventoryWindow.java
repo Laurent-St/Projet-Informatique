@@ -25,7 +25,7 @@ public class InventoryWindow extends JPanel {		//modèle vue-contrôleur pour l'in
 	
 	public InventoryWindow(Inventory inventory){
 		this.inventory=inventory;
-		inventoryWindowSize= new Dimension(1000, 200);
+		inventoryWindowSize= new Dimension(1000, 50);
 		//this.gameWindow=gameWindow;
 		this.setBackground(Color.BLACK);
 		this.setPreferredSize(inventoryWindowSize);

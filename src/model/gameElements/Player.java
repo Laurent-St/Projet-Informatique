@@ -3,8 +3,9 @@ package model.gameElements;
 import java.awt.Rectangle;
 
 import model.Game;
+import view.StatsPanel;
 
-public class Player extends Actor implements Runnable {
+public class Player extends Actor implements Runnable{
 	private Inventory inventory;
 	private int level;
 	private int mana;
@@ -18,6 +19,8 @@ public class Player extends Actor implements Runnable {
 	private HandWeapon handWeapon;
 	private ThrowableWeapon throwableWeapon;
 	private Weapon equipedWeapon;
+	
+	private StatsPanel statsPanel;
 
 	public Player(String name, int damage, int health, int mana, Game game) {
 		super("src/model/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, game, playerHitbox);
@@ -40,6 +43,16 @@ public class Player extends Actor implements Runnable {
 		//TEST DE LA FIREBALL
 		FireballWeapon fw = new FireballWeapon(getGame(), this);
 		equipThrowableWeapon(fw);
+	}
+	
+	public void setStatsPanel(StatsPanel sp) {
+		this.statsPanel = sp;
+	}
+	
+	public void updateStatsPanel() {
+		if(statsPanel!=null) {
+			statsPanel.update();
+		}
 	}
 
 	public int getExperience() {

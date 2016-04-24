@@ -13,6 +13,7 @@ public class GamePanel extends JPanel {
 	
 	private static Dimension panelSize = new Dimension(1000,800);
 	private InventoryWindow inventoryWindow;
+	private StatsPanel statsPanel;
 	private Game game;
 	
 	public GamePanel(Game game) {
@@ -23,6 +24,7 @@ public class GamePanel extends JPanel {
 		this.setVisible(true);
 		this.setBackground(Color.BLACK);
 		initInventoryWindow();
+		initStatsPanel();
 		System.out.println("new GamePanel");
 	}
 	
@@ -36,14 +38,20 @@ public class GamePanel extends JPanel {
 	
 	public void initInventoryWindow(){
 		inventoryWindow=new InventoryWindow(getGame().getPlayer().getInventory());
-		//this.setContentPane(inventoryWindow);
-		inventoryWindow.setBounds(0, 700, 1000, 200);
+		inventoryWindow.setBounds(0, 700, 1000, 50);
 		this.add(inventoryWindow);
 		this.setComponentZOrder(inventoryWindow, 0);
 		inventoryWindow.setVisible(true);
 		inventoryWindow.repaint();
-		//inventoryWindow.setLocation(0, 800);
 	}
+	
+	public void initStatsPanel() {
+		statsPanel = new StatsPanel(getGame());
+		this.add(statsPanel);
+		statsPanel.setVisible(true);
+		getGame().getPlayer().setStatsPanel(statsPanel);
+	}
+	
 	public InventoryWindow getInventoryWindow(){
 		return inventoryWindow;
 	}
