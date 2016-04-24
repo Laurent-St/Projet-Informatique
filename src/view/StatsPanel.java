@@ -35,7 +35,7 @@ public class StatsPanel extends JPanel{
 		this.player = game.getPlayer();
 		this.setBounds(panelBounds);
 		this.setLayout(null);
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.DARK_GRAY);
 		
 		healthLabel = new JLabel();
 		healthLabel.setText("Health");
@@ -108,6 +108,18 @@ public class StatsPanel extends JPanel{
 		xp.setValue((int) Math.floor(100/player.getMaxExperienceForLevel()*player.getExperience()));
 		health.setValue((int) Math.floor(100/player.getMaxHealth()*player.getHealth()));
 		levelLabel.setText("Level "+String.valueOf(player.getLevel()));
+		
+		if(player.getMana()<=10) {
+			manaLabel.setForeground(Color.RED);
+		} else {
+			manaLabel.setForeground(Color.WHITE);
+		}
+		
+		if(player.getHealth()<=10) {
+			healthLabel.setForeground(Color.RED);
+		} else {
+			healthLabel.setForeground(Color.WHITE);
+		}
 	}
 
 }

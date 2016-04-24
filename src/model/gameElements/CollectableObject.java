@@ -23,4 +23,9 @@ public class CollectableObject extends GameObject {
 			throw new RuntimeException("Le nom doit être une chaîne de caractères");
 		}
 	}
+
+	public void inventorySelectAction() {
+		// A redefinir selon l'objet
+		
+	}
 }

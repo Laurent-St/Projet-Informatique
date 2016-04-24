@@ -7,17 +7,19 @@ import model.Game;
 
 public class Weapon extends CollectableObject {
 	private int damage;
+	private int manaConsumption;
 
 	private Player attachedPlayer;
 	private boolean attackMode = false;
 	// range=1 correspond à la case d'à côté(arme au cac), range>1 correspond à
 	// une arme à distance.
 
-	public Weapon(String name, double x, double y, int damage, String image_url, Rectangle hitbox,
+	public Weapon(String name, double x, double y, int damage, int manaConsumption, String image_url, Rectangle hitbox,
 			Game game, Player attachedPlayer) {
 		super(name, x, y, image_url, hitbox, game);
 		setDamage(damage);
 		setAttachedPlayer(attachedPlayer);
+		this.manaConsumption = manaConsumption;
 	}
 
 	private void setAttachedPlayer(Player attachedPlayer) {
@@ -42,7 +44,9 @@ public class Weapon extends CollectableObject {
 	}
 	
 	public void attack() {
-		//A REDEFINIR SELON LE COMPORTEMENT DES ARMES
+		if(enoughMana()) {
+			getAttachedPlayer().setMana(getAttachedPlayer().getMana()-getManaConsumption());
+		}
 	}
 	
 	public Player getAttachedPlayer() {
@@ -52,4 +56,13 @@ public class Weapon extends CollectableObject {
 	public boolean inAttackMode() {
 		return this.attackMode;
 	}
+	
+	public int getManaConsumption() {
+		return this.manaConsumption;
+	}
+	
+	public boolean enoughMana() {
+		return getAttachedPlayer().getMana()>=getManaConsumption();
+	}
+	
 }

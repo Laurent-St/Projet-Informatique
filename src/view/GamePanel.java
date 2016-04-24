@@ -38,7 +38,6 @@ public class GamePanel extends JPanel {
 	
 	public void initInventoryWindow(){
 		inventoryWindow=new InventoryWindow(getGame().getPlayer().getInventory());
-		inventoryWindow.setBounds(0, 700, 1000, 50);
 		this.add(inventoryWindow);
 		this.setComponentZOrder(inventoryWindow, 0);
 		inventoryWindow.setVisible(true);

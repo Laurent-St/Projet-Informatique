@@ -3,6 +3,8 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
+
 import model.gameElements.Player;
 
 public class PlayerControls implements KeyListener {
@@ -12,6 +14,12 @@ public class PlayerControls implements KeyListener {
 	private static int s = 83;
 	private static int d = 68;
 	private static int space = 32;
+	private static int lshift = 16;
+	private static int k1 = 49;
+	private static int k2 = 50;
+	private static int k3 = 51;
+	private static int k4 = 52;
+	private static int k5 = 53;
 	
 	private boolean up;
 	private boolean down;
@@ -44,7 +52,19 @@ public class PlayerControls implements KeyListener {
 			right = true;
 			player.setMoving("right");
 		} else if (e.getKeyCode()==space) {
-			player.attack();
+			player.attackHand();
+		} else if (e.getKeyCode()== lshift) {
+			player.attackSpecial();
+		} else if(e.getKeyCode()==k1) {
+			player.getInventory().select(1);
+		} else if(e.getKeyCode()==k2) {
+			player.getInventory().select(2);
+		} else if(e.getKeyCode()==k3) {
+			player.getInventory().select(3);
+		} else if(e.getKeyCode()==k4) {
+			player.getInventory().select(4);
+		} else if(e.getKeyCode()==k5) {
+			player.getInventory().select(5);
 		}
 		
 	}

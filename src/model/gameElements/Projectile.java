@@ -13,7 +13,7 @@ public class Projectile extends Weapon implements Runnable{
 	private boolean dead;
 	
 	public Projectile(String name, double x, double y, int damage, String direction, double speed, String image_url, Rectangle hitbox, Game game, Player attachedPlayer) {
-		super(name,  x,  y,  damage,  image_url,  hitbox, game,  attachedPlayer);
+		super(name,  x,  y,  damage, 0,  image_url,  hitbox, game,  attachedPlayer);
 		getGame().addProjectile(this);
 		this.direction = direction;
 		this.speed = speed;

@@ -24,7 +24,7 @@ public class Player extends Actor implements Runnable{
 
 	public Player(String name, int damage, int health, int mana, Game game) {
 		super("src/model/gameElements/characterWarrior.png",50,50,10,100, playerSpeed, game, playerHitbox);
-		inventory = new Inventory(5);
+		inventory = new Inventory(5,this);
 		setLevel(1);
 		setMana(100);
 		maxMana = 100;
@@ -37,7 +37,7 @@ public class Player extends Actor implements Runnable{
 		
 		//TEST DE l'EPEE
 		Sword sword = new Sword("epee",20,20,this.getGame(), this);
-		//equipHandWeapon(sword);
+		equipHandWeapon(sword);
 		
 		//TEST DE LA FIREBALL
 		FireballWeapon fw = new FireballWeapon(getGame(), this);
@@ -185,11 +185,15 @@ public class Player extends Actor implements Runnable{
 		}
 	}
 	
-	public void attack() {
+	public void attackHand() {
+		if (getHandWeapon()!=null){
+			getHandWeapon().attack();
+		}
+	}
+	
+	public void attackSpecial() {
 		if(getThrowableWeapon()!=null) {
 			getThrowableWeapon().attack();
-		} else if (getHandWeapon()!=null){
-			getHandWeapon().attack();
 		}
 	}
 

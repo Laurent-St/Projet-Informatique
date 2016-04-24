@@ -11,9 +11,9 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	private int range;
 	private CountTimer attackAnimationCount;
 	
-	public HandWeapon(String name, int x, int y, int damage, int range, String image_url, Rectangle hitbox,
+	public HandWeapon(String name, int x, int y, int damage, int manaConsumption, int range, String image_url, Rectangle hitbox,
 			Game game, Player attachedPlayer) {
-		super(name, x, y, damage, image_url, hitbox, game, attachedPlayer);
+		super(name, x, y, damage, manaConsumption, image_url, hitbox, game, attachedPlayer);
 		
 		setAttackRange(range);
 		attackAnimationCount = new CountTimer(5,1000,this);
@@ -34,12 +34,24 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	}
 	
 	public void attack() {
-		attackAnimationCount = null;
-		attackAnimationCount = new CountTimer(5,50,this);
+		if(enoughMana()) {
+			attackAnimationCount = null;
+			attackAnimationCount = new CountTimer(5,50,this);
+			super.attack();
+		}
 	}
 	
 	public int getAnimationCount() {
 		return attackAnimationCount.getCount();
+	}
+	
+	public void inventorySelectAction() {
+		HandWeapon currentWeapon = getAttachedPlayer().getHandWeapon();
+		getAttachedPlayer().equipHandWeapon(this);
+		getAttachedPlayer().getInventory().removeFromInventory(this);
+		if(currentWeapon!=null) {
+			getAttachedPlayer().getInventory().setInInventory(currentWeapon);
+		}
 	}
 
 	@Override

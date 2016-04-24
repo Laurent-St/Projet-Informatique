@@ -1,21 +1,19 @@
 package model.gameElements;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 
-import model.Game;
-import view.GamePanel;
 import view.InventoryObserver;
-import view.InventoryWindow;
 
 public class Inventory implements InventorySubject{
 	private ArrayList<CollectableObject> content;
 	private int maxSize = 5;
 	private InventoryObserver observer;
+	private Player attachedPlayer;
 	//private Game game;
 
-	public Inventory(int maxSize) {
+	public Inventory(int maxSize, Player attachedPlayer) {
 		
+		this.attachedPlayer = attachedPlayer;
 		content = new ArrayList<CollectableObject>();
 		setMaxSize(maxSize);
 //		for (int i=0; i<maxSize; i++){
@@ -51,6 +49,10 @@ public class Inventory implements InventorySubject{
 	public int getMaxSize() {
 		return maxSize;
 	}
+	
+	public Player getAttachedPlayer() {
+		return this.attachedPlayer;
+	}
 
 	public void setMaxSize(int maxSize) {
 		this.maxSize = maxSize;
@@ -65,9 +67,30 @@ public class Inventory implements InventorySubject{
 //		return res;
 		return content;
 	}
+	
+	public CollectableObject getFromInventory(int i) {
+		if(getExistingContent().size()>i) {
+			if(getExistingContent().get(i)!=null) {
+				return getExistingContent().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public void setInventoryObserver(InventoryObserver o) {
+		this.observer = o;
+	}
+	
 	public void notifyObserver(){
 		if (observer!=null){
-		observer.updateContent();
+			observer.updateContent();
+		}
+	}
+
+	public void select(int i) {
+		CollectableObject object = getFromInventory(i-1);
+		if(object!=null) {
+			object.inventorySelectAction();
 		}
 	}
 	

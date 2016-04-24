@@ -76,11 +76,12 @@ public class Game {
 	
 	public void initLevelActors(){
 		player = new Player("Couillon", 1, 1, 1, this);
-		Axe axe= new Axe("src/model/gameElements/axe.png", 180, 200, 50, 2, "src/model/gameElements/axe.png", this, player);
+		Axe axe= new Axe("hache", 180, 200, this, player);
 		//axe.setX(180);
 		//axe.setY(200);
-		addGameObject(axe);
+		//addGameObject(axe);
 		player.getInventory().setInInventory(axe);
+		player.getInventory().setInInventory(new Sword("epee",0,0,this,player));
 		for (int i=0; i<numberOfMonsters; i++){
 			Random rnd = new Random();
 			Monster newMonster;
