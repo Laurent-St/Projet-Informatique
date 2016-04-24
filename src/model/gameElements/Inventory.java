@@ -1,19 +1,22 @@
 package model.gameElements;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import model.Game;
 import view.GamePanel;
+import view.InventoryObserver;
 import view.InventoryWindow;
 
-public class Inventory {
+public class Inventory implements InventorySubject{
 	private ArrayList<CollectableObject> content;
 	private int maxSize = 5;
-	private InventoryWindow inventoryWindow;
+	private InventoryObserver observer;
 	//private Game game;
 
 	public Inventory(int maxSize) {
-		ArrayList<CollectableObject> content = new ArrayList<CollectableObject>();
+		
+		content = new ArrayList<CollectableObject>();
 		setMaxSize(maxSize);
 //		for (int i=0; i<maxSize; i++){
 //			content.add(i, null);
@@ -25,7 +28,8 @@ public class Inventory {
 	public void setInInventory(CollectableObject object) {
 		if (content.size() < maxSize) {
 			content.add(object);
-			inventoryWindow.repaint();
+//			inventoryWindow.repaint();
+			notifyObserver();
 		} else {
 			System.out.println("Your inventory is full"); // à printer dans
 															// l'interface et
@@ -61,4 +65,11 @@ public class Inventory {
 //		return res;
 		return content;
 	}
+	public void notifyObserver(){
+		if (observer!=null){
+		observer.updateContent();
+		}
+	}
+	
+	
 }

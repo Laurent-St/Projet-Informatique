@@ -16,7 +16,7 @@ import java.awt.Image;
 //import com.sun.prism.paint.Color;
 
 @SuppressWarnings("serial")
-public class InventoryWindow extends JPanel {		//modèle vue-contrôleur pour l'inventaire
+public class InventoryWindow extends JPanel implements InventoryObserver {		//modèle vue-contrôleur pour l'inventaire
 	private static Dimension inventoryWindowSize;
 	private static int[][] cases= new int[5][2];  //première partie: numéro case, 2e: 1 ou 0, occupation case
 	//private GameWindow gameWindow;
@@ -37,9 +37,23 @@ public class InventoryWindow extends JPanel {		//modèle vue-contrôleur pour l'in
 
 
 	protected void paintComponent(Graphics g){
-		for (int i=0; i<5; i++){
-			paintOneCase(g, i);
-			//updateContent(g);
+		for (int j=0; j<5; j++){
+			paintOneCase(g, j);
+		}
+		if (inventory!=null){
+			System.out.println("inventory pas null");
+			if (inventory.getExistingContent()!=null){
+				for (CollectableObject object: inventory.getExistingContent()){
+					Image image=object.getImage();
+					for (int i=0; i<5; i++){
+						if (!isCaseOccupied(i)){
+							g.drawImage(image, i*50, i*50, 40, 40, null);
+							cases[i][1]=1;
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -51,20 +65,9 @@ public class InventoryWindow extends JPanel {		//modèle vue-contrôleur pour l'in
 		
 	}
 	
-	public void updateContent(Graphics g){
-		if (inventory.getExistingContent().isEmpty()==false){
-		for (CollectableObject object: inventory.getExistingContent()){
-			Image image=object.getImage();
-			for (int i=0; i<5; i++){
-				if (!isCaseOccupied(i)){
-					g.drawImage(image, i*50, i*50, 40, 40, null);
-					cases[i][1]=1;
-					break;
-				}
-			}
-			
-		}
-		}
+	public void updateContent(){
+		this.repaint();
+		
 	}
 	
 	public boolean isCaseOccupied(int i){		//argument=numéro de la case

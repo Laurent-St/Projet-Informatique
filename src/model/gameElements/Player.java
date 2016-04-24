@@ -71,7 +71,7 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public int getMaxExperienceForLevel() {
-		return experience;
+		return 100;
 	}
 
 	public void setMaxExperienceForLevel(int maxExperienceForLevel) {
