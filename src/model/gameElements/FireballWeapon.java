@@ -1,6 +1,5 @@
 package model.gameElements;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import model.Game;
@@ -17,13 +16,8 @@ public class FireballWeapon extends ThrowableWeapon {
 	
 	public void attack() {
 		Player p = getAttachedPlayer();
-		Rectangle ph = p.getHitbox();
 		Fireball f = new Fireball(0, 0, p.getOrientation(), getGame(), p);
 		super.attack(f);
 	}
 	
-	protected void paintComponent(Graphics g) {
-		
-	}
-
 }

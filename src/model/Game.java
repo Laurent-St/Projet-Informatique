@@ -11,6 +11,7 @@ import view.menu.MainMenu;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
 
 import controls.PlayerControls;
 import model.gameElements.*;
@@ -23,9 +24,10 @@ public class Game {
 	
 	private Player player;
 	private PlayerControls playerControls;
-	private int numberOfMonsters=5;
+	private int numberOfMonsters=10;
 	private ArrayList<Monster> monsters= new ArrayList<Monster>();
-	private ArrayList<GameObject> gameobjects;
+	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	private RandomMap level1;
 	private RandomMap level2;
@@ -74,7 +76,15 @@ public class Game {
 	public void initLevelActors(){
 		player = new Player("Couillon", 1, 1, 1, this);
 		for (int i=0; i<numberOfMonsters; i++){
-			Monster newMonster= new Monster("src/model/gameElements/zombie.png", 70+20*i, 70+80*i, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
+			Random rnd = new Random();
+			Monster newMonster;
+			do {
+				int randX = rnd.nextInt(920);
+				int randY = rnd.nextInt(640);
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
+			} while(getCurrentMap().isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())== false ||
+					newMonster.isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
+			
 			monsters.add(newMonster);
 			System.out.println("Monstre ajouté");
 		}
@@ -98,6 +108,30 @@ public class Game {
 
 	public Player getPlayer() {
 		return this.player;
+	}
+	
+	public ArrayList<GameObject> getGameObjects() {
+		return this.gameObjects;
+	}
+	
+	public void addGameObject(GameObject o) {
+		gameObjects.add(o);
+	}
+	
+	public void removeGameObject(GameObject o) {
+		gameObjects.remove(o);
+	}
+	
+	public ArrayList<Projectile> getProjectiles() {
+		return this.projectiles;
+	}
+	
+	public void addProjectile(Projectile o) {
+		projectiles.add(o);
+	}
+	
+	public void removeProjectile(Projectile o) {
+		projectiles.remove(o);
 	}
 	
 }

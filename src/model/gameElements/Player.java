@@ -17,6 +17,7 @@ public class Player extends Actor implements Runnable {
 	
 	private HandWeapon handWeapon;
 	private ThrowableWeapon throwableWeapon;
+	private Weapon equipedWeapon;
 
 	public Player(String name, int damage, int health, int mana, Game game) {
 		super("src/model/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, game, playerHitbox);
@@ -33,12 +34,8 @@ public class Player extends Actor implements Runnable {
 		System.out.println("new Player");
 		
 		//TEST DE l'EPEE
-
-		//Sword sword = new Sword("epee",20,20,this.getLevelPanel(), this);
+		Sword sword = new Sword("epee",20,20,this.getGame(), this);
 		//equipHandWeapon(sword);
-		//getLevelPanel().add(sword);
-		//getLevelPanel().setComponentZOrder(sword, 0);
-		//sword.setVisible(true);
 		
 		//TEST DE LA FIREBALL
 		FireballWeapon fw = new FireballWeapon(getGame(), this);
@@ -96,11 +93,11 @@ public class Player extends Actor implements Runnable {
 		}
 	}
 
-	public Weapon getHandWeapon() {
+	public HandWeapon getHandWeapon() {
 		return handWeapon;
 	}
 	
-	public Weapon getThrowableWeapon() {
+	public ThrowableWeapon getThrowableWeapon() {
 		return throwableWeapon;
 	}
 
@@ -111,6 +108,7 @@ public class Player extends Actor implements Runnable {
 		 * joueur. MAIS IL FAUDRA TENIR COMPTE DES TYPES D'ARMES.
 		 */
 		this.handWeapon = weapon;
+		
 		setDamage(damage + weapon.getDamage());
 	}
 	public void equipThrowableWeapon(ThrowableWeapon weapon) {
@@ -157,10 +155,10 @@ public class Player extends Actor implements Runnable {
 	}
 	
 	public void attack() {
-		if(getThrowableWeapon()==null) {
-			
-		} else {
+		if(getThrowableWeapon()!=null) {
 			getThrowableWeapon().attack();
+		} else if (getHandWeapon()!=null){
+			getHandWeapon().attack();
 		}
 	}
 

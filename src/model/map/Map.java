@@ -109,7 +109,7 @@ public class Map {
 		return(pt.x==0 || pt.x==getLevelWidth()-1 || pt.y == 0 || pt.y==getLevelHeight()-1);
 	}
 
-	public boolean isPositionAvailable(double x, double y, Rectangle hitbox) {
+	public boolean isPositionWalkable(double x, double y, Rectangle hitbox) {
 		int tileSize = TileLibrary.getTileSize();
 		int xmin = (int) Math.floor((x+hitbox.getX())/tileSize);
 		int xmax = (int) Math.ceil((x+hitbox.getMaxX())/tileSize);

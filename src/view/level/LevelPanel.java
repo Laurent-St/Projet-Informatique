@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 import animation.GraphicsClock;
 import model.Game;
 import model.gameElements.Actor;
+import model.gameElements.HandWeapon;
 import model.gameElements.Monster;
 import model.gameElements.Player;
+import model.gameElements.Projectile;
+import model.gameElements.Weapon;
 import model.graphicElements.TileLibrary;
 import model.map.Map;
 import view.GamePanel;
@@ -62,6 +65,7 @@ public class LevelPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		paintBackground(g);
 		paintAllActors(g);
+		paintWeapon(g);
 	}
 	
 	public void paintBackground(Graphics g) {
@@ -109,6 +113,45 @@ public class LevelPanel extends JPanel {
 		g.drawImage(a.getImage(), a.getX(), a.getY(), a.getX()+32, a.getY()+32,
 				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
 				null);
+	}
+	
+	public void paintWeapon(Graphics g) {
+		Player p = getGame().getPlayer();
+		HandWeapon hw = p.getHandWeapon();
+		if (hw!=null) {
+			if(hw.inAttackMode()) {
+				int c = hw.getAnimationCount();
+				if(p.getOrientation()=="up") {
+					g.drawImage(hw.getImage(), p.getX(), p.getY()-20, p.getX()+31,p.getY()+11,
+						32*c,64,32*c+31,95,null);
+				} else if (p.getOrientation()=="down") {
+					g.drawImage(hw.getImage(), p.getX(), p.getY()+31+25, p.getX()+31,p.getY()+25,
+							32*c,64,32*c+31,93,null);
+				} else if (p.getOrientation()=="left") {
+					g.drawImage(hw.getImage(), p.getX()+21, p.getY(), p.getX()-10,p.getY()+31,
+							32*c,32,32*c+31,63,null);
+				} else {
+					g.drawImage(hw.getImage(), p.getX()+10, p.getY(), p.getX()+41,p.getY()+31,
+							32*c,32,32*c+31,63,null);
+				}
+			}
+		}
+		
+		ArrayList<Projectile> projectiles = getGame().getProjectiles();
+		for (Projectile pro : projectiles) {
+			if(pro.isTravelling()) {
+				String d = pro.getDirection();
+				if(d=="up") {
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,0,0,31,31,null);
+				} else if (d=="right") {
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,32,0,63,31,null);
+				} else if (d=="down") {
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,64,0,95,31,null);
+				} else if (d=="left") {
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,96,0,127,31,null);
+				}
+			}
+		}
 	}
 	
 	

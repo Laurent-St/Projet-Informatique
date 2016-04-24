@@ -137,7 +137,7 @@ public class Actor extends GameObject {
 			} else if (ms=="left") {
 				newX-=speed;
 			}
-			if(terrain.isPositionAvailable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, this)==false){
+			if(terrain.isPositionWalkable(newX,newY,getHitbox())&& isPositionOccupied(newX, newY, this, true)==false){
 				//System.out.print("Nouvelle position");
 				this.setX(newX);
 				this.setY(newY);
@@ -145,17 +145,17 @@ public class Actor extends GameObject {
 		}
 	}
 	
-	public boolean isPositionOccupied(double x, double y, Actor actor){
+	public boolean isPositionOccupied(double x, double y, GameObject source, boolean playerTransparent){
 		ArrayList<Monster> monsters=new ArrayList<Monster>();
 		monsters=getGame().getMonsters();
 		Player player = getGame().getPlayer();
 		
 		boolean res=false;  //default result is a free position
-		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)actor.getHitbox().getWidth(), (int)actor.getHitbox().getHeight());
+		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)source.getHitbox().getWidth(), (int)source.getHitbox().getHeight());
 		int i=0;
 		while(i<monsters.size() && res==false){
 			Monster m = monsters.get(i);
-			if (m != actor){
+			if (m != source){
 				Rectangle testHitbox2 = new Rectangle(m.getX(), m.getY(), (int)m.getHitbox().getWidth(), (int)m.getHitbox().getHeight());
 				if(testHitbox2.intersects(testHitbox)) {
 					res = true;
@@ -164,7 +164,7 @@ public class Actor extends GameObject {
 			i++;
 		}
 		
-		if(actor!=player) {
+		if(source!=player && playerTransparent) {
 			Rectangle testHitboxPlayer = new Rectangle(player.getX(), player.getY(), (int)player.getHitbox().getWidth(), (int)player.getHitbox().getHeight());
 			if(testHitboxPlayer.intersects(testHitbox)) {
 				res = true;
