@@ -70,11 +70,7 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public int getMaxExperienceForLevel() {
-<<<<<<< HEAD
-		return maxExperienceForLevel;
-=======
 		return 100;
->>>>>>> refs/remotes/origin/master
 	}
 
 	public void setMaxExperienceForLevel(int maxExperienceForLevel) {
