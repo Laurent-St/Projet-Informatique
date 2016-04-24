@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import model.Game;
-import view.level.LevelPanel;
 
 public class GameObject {
 	// private int position;

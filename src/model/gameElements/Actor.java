@@ -11,8 +11,8 @@ import model.map.Map;
 public class Actor extends GameObject {
 	protected String name;
 	protected int damage;
-	protected int health;
-	protected int maxHealth;
+	protected int health = 100;
+	protected int maxHealth = 100;
 	
 	private Count animationCount;
 
@@ -25,6 +25,7 @@ public class Actor extends GameObject {
 		setName(name);
 		setDamage(damage);
 		setHealth(health);
+		this.maxHealth = health;
 		movingState = "null";
 		
 		this.speed = speed;

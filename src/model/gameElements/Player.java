@@ -7,11 +7,11 @@ import view.StatsPanel;
 
 public class Player extends Actor implements Runnable{
 	private Inventory inventory;
-	private int level;
-	private int mana;
-	private int maxMana;
-	private int experience;
-	private int maxExperienceForLevel;
+	private int level=1;
+	private int mana=50;
+	private int maxMana=100;
+	private int experience=0;
+	private int maxExperienceForLevel=100;
 	
 	private static double playerSpeed  = 1.5;
 	private static Rectangle playerHitbox = new Rectangle(8,0,15,31);
@@ -23,12 +23,11 @@ public class Player extends Actor implements Runnable{
 	private StatsPanel statsPanel;
 
 	public Player(String name, int damage, int health, int mana, Game game) {
-		super("src/model/gameElements/characterWarrior.png",50,50,0,0, playerSpeed, game, playerHitbox);
+		super("src/model/gameElements/characterWarrior.png",50,50,10,100, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5);
-		//equipWeapon(weapon);
 		setLevel(1);
-		setMana(mana);
-		//setExperience(0);
+		setMana(100);
+		maxMana = 100;
 
 		setMoving("null");
 		
@@ -71,7 +70,7 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public int getMaxExperienceForLevel() {
-		return experience;
+		return maxExperienceForLevel;
 	}
 
 	public void setMaxExperienceForLevel(int maxExperienceForLevel) {
@@ -79,7 +78,18 @@ public class Player extends Actor implements Runnable{
 			throw new RuntimeException("Exp�rience maximale n�gative");
 		} else {
 			this.maxExperienceForLevel = maxExperienceForLevel;
+			updateStatsPanel();
 		}
+	}
+	
+	public void setHealth(int h) {
+		super.setHealth(h);
+		updateStatsPanel();
+	}
+	
+	public void setMaxHealth(int mh) {
+		super.setMaxHealth(mh);
+		updateStatsPanel();
 	}
 
 	public int getMana() {
@@ -91,6 +101,7 @@ public class Player extends Actor implements Runnable{
 			throw new RuntimeException("Valeur de mana n�gative");
 		} else {
 			this.mana = mana;
+			updateStatsPanel();
 		}
 	}
 
@@ -103,6 +114,7 @@ public class Player extends Actor implements Runnable{
 			throw new RuntimeException("Valeur de mana maximale n�gative");
 		} else {
 			this.maxMana = maxMana;
+			updateStatsPanel();
 		}
 	}
 
@@ -138,6 +150,7 @@ public class Player extends Actor implements Runnable{
 
 	public void setLevel(int level) {
 		this.level = level;
+		updateStatsPanel();
 	}
 
 	public void levelup() {
@@ -145,7 +158,12 @@ public class Player extends Actor implements Runnable{
 		setMaxHealth(maxHealth + 10);
 		setMaxMana(maxMana + 10);
 		setDamage(damage + 5);
+		updateStatsPanel();
 		// unlockNewAbility(); DEBLOCAGE DE SORTS ET TALENTS
+	}
+	
+	public int getLevel() {
+		return this.level;
 	}
 
 	public void die() {

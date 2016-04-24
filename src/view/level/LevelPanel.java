@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import animation.GraphicsClock;
 import model.Game;
 import model.gameElements.Actor;
+import model.gameElements.GameObject;
 import model.gameElements.HandWeapon;
 import model.gameElements.Monster;
 import model.gameElements.Player;
@@ -64,8 +65,10 @@ public class LevelPanel extends JPanel {
 	
 	protected void paintComponent(Graphics g) {
 		paintBackground(g);
+		//paintGameObjects(g); //JE LAI DEJA RAJOUTE A TA PLACE ;)
 		paintAllActors(g);
 		paintWeapon(g);
+		paintGameObjects(g);
 	}
 	
 	public void paintBackground(Graphics g) {
@@ -150,6 +153,15 @@ public class LevelPanel extends JPanel {
 				} else if (d=="left") {
 					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,96,0,127,31,null);
 				}
+			}
+		}
+	}
+	
+	public void paintGameObjects(Graphics g){
+		if (game.getGameObjects()!=null){
+			for (GameObject object: game.getGameObjects()){
+				Image image=object.getImage();
+				g.drawImage(image, (int)object.getXdouble(), (int)object.getYdouble(),(int)object.getHitbox().getWidth(), (int)object.getHitbox().getHeight(), null);
 			}
 		}
 	}
