@@ -41,6 +41,7 @@ public class Game {
 	public Game() {
 				
 		initLevel();
+		//initGraphics();   		//initGraphics avant initLevelActor pour que Inventory et son inventoryWindow y aient accès
 		initLevelActors();
 		initGraphics();
 		initControls();
@@ -56,7 +57,7 @@ public class Game {
 	public void initGraphics() {
 		FontLoader.loadGameFont();
 		TileLibrary.initImage();
-		gamePanel = new GamePanel();
+		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel); //Affiche la fenêtre principale
 		levelPanel = new LevelPanel(this, getCurrentMap());
 	}

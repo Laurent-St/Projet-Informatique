@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import model.Game;
 import model.gameElements.Inventory;
 
 @SuppressWarnings("serial")
@@ -12,8 +13,10 @@ public class GamePanel extends JPanel {
 	
 	private static Dimension panelSize = new Dimension(1000,800);
 	private InventoryWindow inventoryWindow;
+	private Game game;
 	
-	public GamePanel() {
+	public GamePanel(Game game) {
+		this.game=game;
 		this.setLocation(0, 0);
 		this.setPreferredSize(panelSize);
 		this.setLayout(null);
@@ -32,7 +35,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void initInventoryWindow(){
-		inventoryWindow=new InventoryWindow();
+		inventoryWindow=new InventoryWindow(getGame().getPlayer().getInventory());
 		//this.setContentPane(inventoryWindow);
 		inventoryWindow.setBounds(0, 700, 1000, 200);
 		this.add(inventoryWindow);
@@ -40,5 +43,11 @@ public class GamePanel extends JPanel {
 		inventoryWindow.setVisible(true);
 		inventoryWindow.repaint();
 		//inventoryWindow.setLocation(0, 800);
+	}
+	public InventoryWindow getInventoryWindow(){
+		return inventoryWindow;
+	}
+	public Game getGame(){
+		return game;
 	}
 }
