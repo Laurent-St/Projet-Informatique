@@ -148,7 +148,7 @@ public class Actor extends GameObject {
 	
 	public boolean isPositionOccupied(double x, double y, GameObject source, boolean playerTransparent){
 		ArrayList<Monster> monsters=new ArrayList<Monster>();
-		monsters=getGame().getMonsters();
+		monsters=getGame().getCurrentMap().getMonsters();
 		Player player = getGame().getPlayer();
 		
 		boolean res=false;  //default result is a free position

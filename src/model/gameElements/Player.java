@@ -1,6 +1,7 @@
 package model.gameElements;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import model.Game;
 import view.StatsPanel;
@@ -171,10 +172,10 @@ public class Player extends Actor implements Runnable{
 		//Tomb tomb = new Tomb("Tombe de " + name, position, inventory, experience);
 		// resetPosition(debut du niveau)
 	}
-
-	public void collect(CollectableObject object) {
-		inventory.setInInventory(object);
-	}
+//
+//	public void collect(CollectableObject object) {
+//		inventory.setInInventory(object);
+//	}
 
 	// public void open(){}
 	public void drinkPotion(Potion potion) {
@@ -194,6 +195,15 @@ public class Player extends Actor implements Runnable{
 	public void attackSpecial() {
 		if(getThrowableWeapon()!=null) {
 			getThrowableWeapon().attack();
+		}
+	}
+	
+	public void collect(){
+		ArrayList<CollectableObject> res=getGame().getCurrentMap().detectAnObject(this.getX(),this.getY(), this.getHitbox());
+		if (res!=null){
+			for (CollectableObject object: res){
+				inventory.setInInventory(object);
+			}
 		}
 	}
 

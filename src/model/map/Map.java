@@ -3,8 +3,15 @@ package model.map;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
 
+import model.Game;
+import model.gameElements.Axe;
+import model.gameElements.CollectableObject;
+import model.gameElements.GameObject;
 import model.gameElements.Monster;
+import model.gameElements.Player;
+import model.gameElements.Projectile;
 import model.graphicElements.Floor;
 import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
@@ -16,14 +23,74 @@ public class Map {
 	private static Rectangle levelBounds = new Rectangle(0,0,levelWidth-1,levelHeight-1);
 	private Tile[][] tiles;
 	private int numberOfMonsters=5;
-	private ArrayList<Monster> monsters=new ArrayList<Monster>();
+	private ArrayList<Monster> monsters= new ArrayList<Monster>();
+	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	private ArrayList<CollectableObject> collectableObjects=new ArrayList<CollectableObject>();
+	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	private Game game;
 	
 	public Map() {
+		//this.game=game;
 		tiles = new Tile[levelHeight][levelWidth];
+		//initMonsters();
+	}
+	
+	public Game getGame(){
+		return game;
+	}
+	
+	public void initMonsters(){
+		for (int i=0; i<numberOfMonsters; i++){
+			Random rnd = new Random();
+			Monster newMonster;
+			do {
+				int randX = rnd.nextInt(920);
+				int randY = rnd.nextInt(640);
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, getGame(), new Rectangle(8,0,15,31));
+			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())== false ||
+					newMonster.isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
+			
+			monsters.add(newMonster);
+			System.out.println("Monstre ajouté");
+		}
+	}
+	
+	//public void initGameObjects(){
+		//Axe axe= new Axe("hache", 180, 200, game, game.getPlayer());
+		//collectableObjects.add(axe);
+		//axe.setX(180);
+		//axe.setY(200);
+		//addGameObject(axe);
+	//}
+	public ArrayList<GameObject> getGameObjects() {
+		return this.gameObjects;
+	}
+	public ArrayList<CollectableObject> getCollectableObjects(){
+		return collectableObjects;
 	}
 	
 	public ArrayList<Monster> getMonsters(){
 		return monsters;
+	}
+	
+	public void addGameObject(GameObject o) {
+		gameObjects.add(o);
+	}
+	
+	public void removeGameObject(GameObject o) {
+		gameObjects.remove(o);
+	}
+	
+	public ArrayList<Projectile> getProjectiles() {
+		return this.projectiles;
+	}
+	
+	public void addProjectile(Projectile o) {
+		projectiles.add(o);
+	}
+	
+	public void removeProjectile(Projectile o) {
+		projectiles.remove(o);
 	}
 	
 	public Rectangle getLevelBounds() {
@@ -73,8 +140,11 @@ public class Map {
 	
 	public Tile getTileAt(int x, int y) {
 		if(x<0 || y<0 || x>getLevelWidth()-1 || y>getLevelHeight()-1) {
+			System.out.println("new Floor");
 			return new Floor();
+			
 		} else {
+			System.out.println("new tile");
 			return(tiles[y][x]);
 		}
 	}
@@ -126,4 +196,31 @@ public class Map {
 		return true;
 	}
 
+	public ArrayList<CollectableObject> detectAnObject(int x, int y, Rectangle hitbox){	//la hitbox sera celle du Player
+		Rectangle testHitbox=new Rectangle((int)x,(int)y, (int)hitbox.getWidth(), (int)hitbox.getHeight());
+		ArrayList<CollectableObject> res=new ArrayList<CollectableObject>();
+		int i=0;
+		while(i<collectableObjects.size()){
+			CollectableObject o = collectableObjects.get(i);
+			//if (m != source){
+			//Rectangle testHitbox2 = new Rectangle(m.getX(), m.getY(), (int)m.getHitbox().getWidth(), (int)m.getHitbox().getHeight());
+			if(testHitbox.intersects(o.getHitbox())) {
+				res.add(o);
+			}
+		//}
+			i++;
+		}
+		return res;
+		
+//		if(source!=player && playerTransparent) {
+//			Rectangle testHitboxPlayer = new Rectangle(player.getX(), player.getY(), (int)player.getHitbox().getWidth(), (int)player.getHitbox().getHeight());
+//			if(testHitboxPlayer.intersects(testHitbox)) {
+//				res = true;
+//			}
+//		}
+//		
+//		return res;
+//	}
+}
+	
 }

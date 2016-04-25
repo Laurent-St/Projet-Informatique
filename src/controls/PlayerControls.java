@@ -20,6 +20,8 @@ public class PlayerControls implements KeyListener {
 	private static int k3 = 51;
 	private static int k4 = 52;
 	private static int k5 = 53;
+	private static int f = 70;
+	//private static int e =KeyEvent.VK_E; 
 	
 	private boolean up;
 	private boolean down;
@@ -65,6 +67,8 @@ public class PlayerControls implements KeyListener {
 			player.getInventory().select(4);
 		} else if(e.getKeyCode()==k5) {
 			player.getInventory().select(5);
+		} else if(e.getKeyCode()==f){
+			player.collect();
 		}
 		
 	}

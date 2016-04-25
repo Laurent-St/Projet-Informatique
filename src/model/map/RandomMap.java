@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.Game;
 import model.graphicElements.Floor;
 import model.graphicElements.Wall;
 
@@ -12,7 +13,7 @@ public class RandomMap extends Map {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
-
+	
 	public RandomMap() {
 		this.fill(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()), new Floor());
 		

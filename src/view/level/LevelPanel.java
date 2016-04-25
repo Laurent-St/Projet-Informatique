@@ -92,7 +92,7 @@ public class LevelPanel extends JPanel {
 	}
 	
 	public void paintAllActors(Graphics g) {
-		ArrayList<Monster> monsters = getGame().getMonsters();
+		ArrayList<Monster> monsters = getGame().getCurrentMap().getMonsters();
 		Player player = getGame().getPlayer();
 		for(Monster m : monsters) {
 			paintActor(g,m);
@@ -140,7 +140,7 @@ public class LevelPanel extends JPanel {
 			}
 		}
 		
-		ArrayList<Projectile> projectiles = getGame().getProjectiles();
+		ArrayList<Projectile> projectiles = getGame().getCurrentMap().getProjectiles();
 		for (Projectile pro : projectiles) {
 			if(pro.isTravelling()) {
 				String d = pro.getDirection();
@@ -158,8 +158,8 @@ public class LevelPanel extends JPanel {
 	}
 	
 	public void paintGameObjects(Graphics g){
-		if (game.getGameObjects()!=null){
-			for (GameObject object: game.getGameObjects()){
+		if (game.getCurrentMap().getGameObjects()!=null){
+			for (GameObject object: game.getCurrentMap().getGameObjects()){
 				Image image=object.getImage();
 				g.drawImage(image, (int)object.getXdouble(), (int)object.getYdouble(),(int)object.getHitbox().getWidth(), (int)object.getHitbox().getHeight(), null);
 			}

@@ -25,9 +25,9 @@ public class Game {
 	private Player player;
 	private PlayerControls playerControls;
 	private int numberOfMonsters=10;
-	private ArrayList<Monster> monsters= new ArrayList<Monster>();
-	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+//	private ArrayList<Monster> monsters= new ArrayList<Monster>();
+//	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+//	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	private RandomMap level1;
 	private RandomMap level2;
@@ -50,6 +50,7 @@ public class Game {
 	
 	public void initLevel() {
 		level1= new RandomMap();
+		//level1.setGame(this);
 		currentMap = level1;
 		
 	}
@@ -76,25 +77,24 @@ public class Game {
 	
 	public void initLevelActors(){
 		player = new Player("Couillon", 1, 1, 1, this);
-		Axe axe= new Axe("hache", 180, 200, this, player);
 		//axe.setX(180);
 		//axe.setY(200);
 		//addGameObject(axe);
-		player.getInventory().setInInventory(axe);
+		//player.getInventory().setInInventory(axe);
 		player.getInventory().setInInventory(new Sword("epee",0,0,this,player));
-		for (int i=0; i<numberOfMonsters; i++){
-			Random rnd = new Random();
-			Monster newMonster;
-			do {
-				int randX = rnd.nextInt(920);
-				int randY = rnd.nextInt(640);
-				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
-			} while(getCurrentMap().isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())== false ||
-					newMonster.isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
-			
-			monsters.add(newMonster);
-			System.out.println("Monstre ajouté");
-		}
+//		for (int i=0; i<numberOfMonsters; i++){
+//			Random rnd = new Random();
+//			Monster newMonster;
+//			do {
+//				int randX = rnd.nextInt(920);
+//				int randY = rnd.nextInt(640);
+//				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
+//			} while(getCurrentMap().isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())== false ||
+//					newMonster.isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
+//			
+//			monsters.add(newMonster);
+//			System.out.println("Monstre ajouté");
+//		}
 	}
 
 	public GameWindow getGameWindow() {	
@@ -109,37 +109,37 @@ public class Game {
 		return gamePanel;
 	}
 	
-	public ArrayList<Monster> getMonsters() {
-		return this.monsters;
-	}
+//	public ArrayList<Monster> getMonsters() {
+//		return this.monsters;
+//	}
 
 	public Player getPlayer() {
 		return this.player;
 	}
 	
-	public ArrayList<GameObject> getGameObjects() {
-		return this.gameObjects;
-	}
+//	public ArrayList<GameObject> getGameObjects() {
+//		return this.gameObjects;
+//	}
 	
-	public void addGameObject(GameObject o) {
-		gameObjects.add(o);
-	}
-	
-	public void removeGameObject(GameObject o) {
-		gameObjects.remove(o);
-	}
-	
-	public ArrayList<Projectile> getProjectiles() {
-		return this.projectiles;
-	}
-	
-	public void addProjectile(Projectile o) {
-		projectiles.add(o);
-	}
-	
-	public void removeProjectile(Projectile o) {
-		projectiles.remove(o);
-	}
+//	public void addGameObject(GameObject o) {
+//		gameObjects.add(o);
+//	}
+//	
+//	public void removeGameObject(GameObject o) {
+//		gameObjects.remove(o);
+//	}
+//	
+//	public ArrayList<Projectile> getProjectiles() {
+//		return this.projectiles;
+//	}
+//	
+//	public void addProjectile(Projectile o) {
+//		projectiles.add(o);
+//	}
+//	
+//	public void removeProjectile(Projectile o) {
+//		projectiles.remove(o);
+//	}
 	
 }
 		
