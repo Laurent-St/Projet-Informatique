@@ -14,7 +14,7 @@ public class Projectile extends Weapon implements Runnable{
 	
 	public Projectile(String name, double x, double y, int damage, String direction, double speed, String image_url, Rectangle hitbox, Game game, Player attachedPlayer) {
 		super(name,  x,  y,  damage, 0,  image_url,  hitbox, game,  attachedPlayer);
-		getGame().addProjectile(this);
+		getGame().getCurrentMap().addProjectile(this);
 		this.direction = direction;
 		this.speed = speed;
 		this.travelling = true;
@@ -46,7 +46,7 @@ public class Projectile extends Weapon implements Runnable{
 	@Override
 	public void run() {
 		while(getGame().getCurrentMap().isPositionWalkable(getX(), getY(), getHitbox()) 
-				&& getAttachedPlayer().isPositionOccupied(getX(), getY(), this, false)==false) {
+				&& getGame().getCurrentMap().isPositionOccupied(getX(), getY(), this, false)==false) {
 			if(this.direction=="up") {
 				setY(getYdouble()-this.speed);
 			} else if (this.direction=="down") {
@@ -82,7 +82,7 @@ public class Projectile extends Weapon implements Runnable{
 
 	private void delete() {
 		this.dead = true;
-		getGame().removeProjectile(this);
+		getGame().getCurrentMap().removeProjectile(this);
 	}
 
 }

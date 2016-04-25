@@ -7,7 +7,7 @@ public class Tile {
 	private String type;
 	
 	public Tile(int[] ref, String type){
-		System.out.println("constru Tile");
+		//System.out.println("constru Tile");
 		reference[0] = ref[0];
 		reference[1] = ref[1];
 		this.type = type;

@@ -199,11 +199,10 @@ public class Player extends Actor implements Runnable{
 	}
 	
 	public void collect(){
-		ArrayList<CollectableObject> res=getGame().getCurrentMap().detectAnObject(this.getX(),this.getY(), this.getHitbox());
-		if (res!=null){
-			for (CollectableObject object: res){
-				inventory.setInInventory(object);
-			}
+		CollectableObject res=getGame().getCurrentMap().detectAnObject(this.getX(),this.getY(), this.getHitbox());
+		if (res!=null && inventory.isFull()==false){
+			inventory.setInInventory(res);
+			getGame().getCurrentMap().removeCollectableObject(res);
 		}
 	}
 

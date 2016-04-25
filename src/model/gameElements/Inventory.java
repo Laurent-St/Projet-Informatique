@@ -93,6 +93,10 @@ public class Inventory implements InventorySubject{
 			object.inventorySelectAction();
 		}
 	}
+
+	public boolean isFull() {
+		return content.size()>=getMaxSize();
+	}
 	
 	
 }

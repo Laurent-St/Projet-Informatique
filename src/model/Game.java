@@ -39,17 +39,17 @@ public class Game {
 	}
 	
 	public Game() {
-				
+		
 		initLevel();
-		//initGraphics();   		//initGraphics avant initLevelActor pour que Inventory et son inventoryWindow y aient accès
-		initLevelActors();
+		initPlayer();
+		getCurrentMap().initActorsAndObjects();
 		initGraphics();
 		initControls();
 		
 	}
 	
 	public void initLevel() {
-		level1= new RandomMap();
+		level1= new RandomMap(this);
 		//level1.setGame(this);
 		currentMap = level1;
 		
@@ -75,26 +75,9 @@ public class Game {
 	}
 	
 	
-	public void initLevelActors(){
+	public void initPlayer(){
 		player = new Player("Couillon", 1, 1, 1, this);
-		//axe.setX(180);
-		//axe.setY(200);
-		//addGameObject(axe);
-		//player.getInventory().setInInventory(axe);
 		player.getInventory().setInInventory(new Sword("epee",0,0,this,player));
-//		for (int i=0; i<numberOfMonsters; i++){
-//			Random rnd = new Random();
-//			Monster newMonster;
-//			do {
-//				int randX = rnd.nextInt(920);
-//				int randY = rnd.nextInt(640);
-//				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, this, new Rectangle(8,0,15,31));
-//			} while(getCurrentMap().isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())== false ||
-//					newMonster.isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
-//			
-//			monsters.add(newMonster);
-//			System.out.println("Monstre ajouté");
-//		}
 	}
 
 	public GameWindow getGameWindow() {	
@@ -108,38 +91,10 @@ public class Game {
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}
-	
-//	public ArrayList<Monster> getMonsters() {
-//		return this.monsters;
-//	}
 
 	public Player getPlayer() {
 		return this.player;
 	}
-	
-//	public ArrayList<GameObject> getGameObjects() {
-//		return this.gameObjects;
-//	}
-	
-//	public void addGameObject(GameObject o) {
-//		gameObjects.add(o);
-//	}
-//	
-//	public void removeGameObject(GameObject o) {
-//		gameObjects.remove(o);
-//	}
-//	
-//	public ArrayList<Projectile> getProjectiles() {
-//		return this.projectiles;
-//	}
-//	
-//	public void addProjectile(Projectile o) {
-//		projectiles.add(o);
-//	}
-//	
-//	public void removeProjectile(Projectile o) {
-//		projectiles.remove(o);
-//	}
 	
 }
 		

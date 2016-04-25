@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import animation.GraphicsClock;
 import model.Game;
 import model.gameElements.Actor;
+import model.gameElements.CollectableObject;
 import model.gameElements.GameObject;
 import model.gameElements.HandWeapon;
 import model.gameElements.Monster;
@@ -65,10 +66,9 @@ public class LevelPanel extends JPanel {
 	
 	protected void paintComponent(Graphics g) {
 		paintBackground(g);
-		//paintGameObjects(g); //JE LAI DEJA RAJOUTE A TA PLACE ;)
+		paintObjects(g);
 		paintAllActors(g);
 		paintWeapon(g);
-		paintGameObjects(g);
 	}
 	
 	public void paintBackground(Graphics g) {
@@ -157,15 +157,19 @@ public class LevelPanel extends JPanel {
 		}
 	}
 	
-	public void paintGameObjects(Graphics g){
+	public void paintObjects(Graphics g){
 		if (game.getCurrentMap().getGameObjects()!=null){
 			for (GameObject object: game.getCurrentMap().getGameObjects()){
 				Image image=object.getImage();
-				g.drawImage(image, (int)object.getXdouble(), (int)object.getYdouble(),(int)object.getHitbox().getWidth(), (int)object.getHitbox().getHeight(), null);
+				g.drawImage(image, object.getX(), object.getY(),(int)object.getHitbox().getWidth(), (int)object.getHitbox().getHeight(), null);
+			}
+		}
+		if (game.getCurrentMap().getCollectableObjects()!=null){
+			for (CollectableObject object: game.getCurrentMap().getCollectableObjects()){
+				Image image=object.getImage();
+				g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+						0,0,32,32,null);
 			}
 		}
 	}
-	
-	
-	
 }

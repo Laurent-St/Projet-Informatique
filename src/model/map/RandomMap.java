@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Game;
+import model.gameElements.Axe;
+import model.gameElements.Monster;
 import model.graphicElements.Floor;
 import model.graphicElements.Wall;
 
@@ -14,8 +16,11 @@ public class RandomMap extends Map {
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
 	
-	public RandomMap() {
-		this.fill(new Rectangle(0,0,this.getLevelWidth(),this.getLevelHeight()), new Floor());
+	private int numberOfMonsters=10;
+	
+	public RandomMap(Game game) {
+		super(game);
+		this.fill(new Rectangle(0,0,getLevelWidth(),getLevelHeight()), new Floor());
 		
 		rooms = new ArrayList<Rectangle>();
 		rooms.add(this.getLevelBounds());
@@ -24,6 +29,35 @@ public class RandomMap extends Map {
 		generateMaze(0, rooms, holes);
 		renderMaze(rooms, holes);
 		System.out.println("new Level");
+	}
+	
+	public void initActorsAndObjects() {
+		initMonsters();
+		initGameObjects();
+	}
+	
+	
+	public void initMonsters(){
+		for (int i=0; i<numberOfMonsters; i++){
+			Random rnd = new Random();
+			Monster newMonster;
+			do {
+				int randX = rnd.nextInt(920);
+				int randY = rnd.nextInt(640);
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, getGame(), new Rectangle(8,0,15,31));
+			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
+					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
+			
+			addMonster(newMonster);
+			System.out.println("Monstre ajouté");
+		}
+	}
+	
+	public void initGameObjects(){
+		Axe axe= new Axe("hache", 180, 200, getGame(), getGame().getPlayer());
+		addCollectableObject(axe);
+		axe.setX(180);
+		axe.setY(200);
 	}
 	
 
@@ -41,7 +75,6 @@ public class RandomMap extends Map {
 			int height = (int) room.getHeight();
 			int x = (int) room.getX();
 			int y = (int) room.getY();
-			//int orientation = rnd.nextInt(2);
 			int orientation = step%2;
 			
 			Rectangle r1 = new Rectangle();
