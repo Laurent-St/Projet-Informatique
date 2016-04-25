@@ -9,7 +9,6 @@ import model.map.Map;
 
 
 public class Actor extends GameObject {
-	protected String name;
 	protected int damage;
 	protected int health = 100;
 	protected int maxHealth = 100;
@@ -20,13 +19,12 @@ public class Actor extends GameObject {
 	private String movingState;
 	private String orientation;
 
-	public Actor(String name, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
-		super(x, y, name, hitbox, game);		//le name est "image_url" de GameObject
-		setName(name);
+	public Actor(String imageUrl, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
+		super(x, y, imageUrl, hitbox, game);
 		setDamage(damage);
+		setMaxHealth(health);
 		setHealth(health);
-		this.maxHealth = health;
-		movingState = "null";
+		this.setMoving("null");
 		
 		this.speed = speed;
 		
@@ -36,10 +34,6 @@ public class Actor extends GameObject {
 		
 		
 	}
-
-	public String getName() {
-		return name;
-	}
 	
 	public void setOrientation(String val) {
 		this.orientation = val;
@@ -47,14 +41,6 @@ public class Actor extends GameObject {
 	
 	public String getOrientation() {
 		return orientation;
-	}
-
-	public void setName(String name) {
-		if (name instanceof String) {
-			this.name = name;
-		} else {
-			throw new RuntimeException("Le nom doit �tre une cha�ne de caract�res");
-		}
 	}
 
 	public int getDamage() {
@@ -75,9 +61,10 @@ public class Actor extends GameObject {
 	}
 
 	public void setHealth(int health) {
-		if (health >= 0) {
-			this.health = health;
-		} else {
+		this.health = health;
+		if(this.health >= getMaxHealth()) {
+			this.health = getMaxHealth();
+		} else if (this.health<=0) {
 			this.health = 0;
 		}
 	}

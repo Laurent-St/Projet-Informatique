@@ -76,8 +76,10 @@ public class Game {
 	
 	
 	public void initPlayer(){
-		player = new Player("Couillon", 1, 1, 1, this);
-		player.getInventory().setInInventory(new Sword("epee",0,0,this,player));
+		player = new Player(1, 1, 1, this);
+		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
+		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
+		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
 	}
 
 	public GameWindow getGameWindow() {	

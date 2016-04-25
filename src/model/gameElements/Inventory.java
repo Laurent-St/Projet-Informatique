@@ -38,8 +38,7 @@ public class Inventory implements InventorySubject{
 
 	public void removeFromInventory(CollectableObject object) {
 		content.remove(object);
-		// ATTENTION IL FAUDRA GERER LE FAIT QU'IL PEUT Y AVOIR PLUSIEURS OBJETS
-		// DU MEME TYPE!
+		notifyObserver();
 	}
 
 	public void clearInventory() {
@@ -58,13 +57,6 @@ public class Inventory implements InventorySubject{
 		this.maxSize = maxSize;
 	}
 	public ArrayList<CollectableObject> getExistingContent(){		//retourne une liste avec juste les éléments existants
-//		ArrayList<CollectableObject> res=new ArrayList<CollectableObject>();
-//		for (int i=0;i<maxSize;i++){
-//			if (content.get(i)!=null){
-//				res.add(content.get(i));
-//			}
-//		}
-//		return res;
 		return content;
 	}
 	

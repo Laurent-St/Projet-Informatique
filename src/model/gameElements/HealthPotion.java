@@ -1,13 +1,14 @@
 package model.gameElements;
 
-public class HealthPotion extends Potion{
+import java.awt.Rectangle;
+
+import model.Game;
+
+public class HealthPotion extends Potion {
 	
-	public HealthPotion(String name, int position, int value){
-	super(name,position,value);
-}
-	/*
-	public void potionDrinked(){
-		Player.setHealth(getValue());
+	private static String imageUrl = "src/model/gameElements/potionHealth.png";
+	
+	public HealthPotion(double x, double y, int value, Game game){
+		super("Health Potion",x,y,value,imageUrl,game);
 	}
-	*/
 }

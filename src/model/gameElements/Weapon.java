@@ -24,10 +24,7 @@ public class Weapon extends CollectableObject {
 
 	private void setAttachedPlayer(Player attachedPlayer) {
 		this.attachedPlayer = attachedPlayer;
-		this.attackMode = true;
-		this.setX(0);
-		this.setY(0);
-		
+		this.attackMode = true;		
 	}
 
 	public int getDamage() {

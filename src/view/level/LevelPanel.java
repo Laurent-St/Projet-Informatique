@@ -168,7 +168,7 @@ public class LevelPanel extends JPanel {
 			for (CollectableObject object: game.getCurrentMap().getCollectableObjects()){
 				Image image=object.getImage();
 				g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
-						0,0,32,32,null);
+						0,0,31,31,null);
 			}
 		}
 	}

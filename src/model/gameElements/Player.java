@@ -23,7 +23,7 @@ public class Player extends Actor implements Runnable{
 	
 	private StatsPanel statsPanel;
 
-	public Player(String name, int damage, int health, int mana, Game game) {
+	public Player(int damage, int health, int mana, Game game) {
 		super("src/model/gameElements/characterWarrior.png",50,50,10,100, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
@@ -102,6 +102,9 @@ public class Player extends Actor implements Runnable{
 			throw new RuntimeException("Valeur de mana n�gative");
 		} else {
 			this.mana = mana;
+			if(this.mana>getMaxMana()) {
+				this.mana = getMaxMana();
+			}
 			updateStatsPanel();
 		}
 	}
@@ -178,11 +181,14 @@ public class Player extends Actor implements Runnable{
 //	}
 
 	// public void open(){}
+	
 	public void drinkPotion(Potion potion) {
 		if (potion instanceof HealthPotion) {
 			setHealth(health + potion.getValue());
-		} else { // si c'est une potion de mana
+			inventory.removeFromInventory(potion);
+		} else if (potion instanceof ManaPotion) {
 			setMana(mana + potion.getValue());
+			inventory.removeFromInventory(potion);
 		}
 	}
 	

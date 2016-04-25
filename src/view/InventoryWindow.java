@@ -43,7 +43,7 @@ public class InventoryWindow extends JPanel implements InventoryObserver {		//mo
 					Image image=object.getImage();
 					for (int i=0; i<inventory.getMaxSize(); i++){
 						if (!isCaseOccupied(i)){
-							g.drawImage(image, i*50+5, 5, i*50+45, 45,
+							g.drawImage(image, i*50+5, 5, i*50+44, 44,
 									0,0,31,31,null);
 							cases[i][1]=1;
 							break;

@@ -1,25 +1,27 @@
 package model.gameElements;
 
-public class Potion extends CollectableObject{
-	private int value;
+import java.awt.Rectangle;
 
-public Potion(String name, int position, int value){
-	super(name,position);
-	setValue(value);
-}
-public int getValue(){
-	return value;
-}
-public void setValue(int value){
-	if (value<=0){
-		throw new RuntimeException("Potion inutile!");
-	}else{
-		this.value=value;
+import model.Game;
+
+public class Potion extends CollectableObject {
+	private int value=0;
+	private static Rectangle hitbox = new Rectangle(3,5,25,20);
+	
+	public Potion(String name, double x, double y, int value, String imageUrl, Game game) {
+		super(name, x, y, imageUrl, hitbox, game);
+		setValue(value);
 	}
-}
-/*
-public void potionDrinked(){
-	//fonction abstraite qui sera rédéfinie en fonction du type de potion
-} 
-*/
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public void inventorySelectAction() {
+		getGame().getPlayer().drinkPotion(this);
+	}
 }
