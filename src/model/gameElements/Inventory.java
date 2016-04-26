@@ -36,11 +36,22 @@ public class Inventory implements InventorySubject{
 		}
 	}
 
+	public void dropObject(CollectableObject object){
+		attachedPlayer.getGame().getCurrentMap().addCollectableObject(object);
+		object.setX(attachedPlayer.getXdouble());
+		object.setY(attachedPlayer.getYdouble());
+		removeFromInventory(object);
+	}
+	
 	public void removeFromInventory(CollectableObject object) {
 		content.remove(object);
 		notifyObserver();
 	}
 
+	public ArrayList<CollectableObject> getContent(){
+		return content;
+	}
+	
 	public void clearInventory() {
 		content.clear();
 	}
@@ -89,6 +100,5 @@ public class Inventory implements InventorySubject{
 	public boolean isFull() {
 		return content.size()>=getMaxSize();
 	}
-	
 	
 }

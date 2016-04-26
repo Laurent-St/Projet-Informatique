@@ -3,8 +3,6 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
-
 import model.gameElements.Player;
 
 public class PlayerControls implements KeyListener {
@@ -21,12 +19,15 @@ public class PlayerControls implements KeyListener {
 	private static int k4 = 52;
 	private static int k5 = 53;
 	private static int f = 70;
+	private static int ctrl= 17;
 	//private static int e =KeyEvent.VK_E; 
 	
 	private boolean up;
 	private boolean down;
 	private boolean left;
 	private boolean right;
+	
+	private boolean readyToRemove;
 	
 	private Player player;
 	
@@ -36,6 +37,7 @@ public class PlayerControls implements KeyListener {
 		down = false;
 		left = false;
 		right = false;
+		readyToRemove=false;
 		
 	}
 	
@@ -58,17 +60,39 @@ public class PlayerControls implements KeyListener {
 		} else if (e.getKeyCode()== lshift) {
 			player.attackSpecial();
 		} else if(e.getKeyCode()==k1) {
-			player.getInventory().select(1);
+			if (readyToRemove){
+				player.getInventory().dropObject(player.getInventory().getContent().get(0));
+			} else{
+				player.getInventory().select(1);
+			}
 		} else if(e.getKeyCode()==k2) {
-			player.getInventory().select(2);
+			if (readyToRemove){
+				player.getInventory().dropObject(player.getInventory().getContent().get(1));
+			} else{
+				player.getInventory().select(2);
+			}
 		} else if(e.getKeyCode()==k3) {
-			player.getInventory().select(3);
+			if (readyToRemove){
+				player.getInventory().dropObject(player.getInventory().getContent().get(2));
+			} else{
+				player.getInventory().select(3);
+			}
 		} else if(e.getKeyCode()==k4) {
-			player.getInventory().select(4);
+			if (readyToRemove){
+				player.getInventory().dropObject(player.getInventory().getContent().get(3));
+			} else{
+				player.getInventory().select(4);
+			}
 		} else if(e.getKeyCode()==k5) {
-			player.getInventory().select(5);
+			if (readyToRemove){
+				player.getInventory().dropObject(player.getInventory().getContent().get(4));
+			} else{
+				player.getInventory().select(5);
+			}
 		} else if(e.getKeyCode()==f){
 			player.collect();
+		} else if (e.getKeyCode()==ctrl){
+			readyToRemove=true;
 		}
 		
 	}
@@ -95,6 +119,10 @@ public class PlayerControls implements KeyListener {
 			player.setMoving("left");
 		} else {
 			player.setMoving("null");
+		}
+		
+		if (e.getKeyCode()==ctrl){
+			readyToRemove=false;
 		}
 		
 	}

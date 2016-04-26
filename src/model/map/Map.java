@@ -89,15 +89,15 @@ public class Map {
 		int height = (int) bounds.getHeight();
 		int width = (int) bounds.getWidth();
 		
-		setTileAt(x,y, new Wall(TileLibrary.WALL_CORNER_TL));
-		setTileAt(x,y+height, new Wall(TileLibrary.WALL_CORNER_BL));
-		setTileAt(x+width,y, new Wall(TileLibrary.WALL_CORNER_TR));
-		setTileAt(x+width,y+height, new Wall(TileLibrary.WALL_CORNER_BR));
+		setTileAt(x,y, new Wall(TileLibrary.WALL_CORNER_TL, game));
+		setTileAt(x,y+height, new Wall(TileLibrary.WALL_CORNER_BL, game));
+		setTileAt(x+width,y, new Wall(TileLibrary.WALL_CORNER_TR, game));
+		setTileAt(x+width,y+height, new Wall(TileLibrary.WALL_CORNER_BR, game));
 
-		fill(new Rectangle(x+1,y,width-1,1), new Wall(TileLibrary.WALL_H));
-		fill(new Rectangle(x+1,y+height,width-1,1), new Wall(TileLibrary.WALL_H));
-		fill(new Rectangle(x,y+1,1,height-1), new Wall(TileLibrary.WALL_V));
-		fill(new Rectangle(x+width,y+1,1,height-1), new Wall(TileLibrary.WALL_V));
+		fill(new Rectangle(x+1,y,width-1,1), new Wall(TileLibrary.WALL_H, game));
+		fill(new Rectangle(x+1,y+height,width-1,1), new Wall(TileLibrary.WALL_H, game));
+		fill(new Rectangle(x,y+1,1,height-1), new Wall(TileLibrary.WALL_V, game));
+		fill(new Rectangle(x+width,y+1,1,height-1), new Wall(TileLibrary.WALL_V, game));
 	}
 	
 	public void setTileAt(int x, int y, Tile tile) {
@@ -107,7 +107,7 @@ public class Map {
 	public Tile getTileAt(int x, int y) {
 		if(x<0 || y<0 || x>getLevelWidth()-1 || y>getLevelHeight()-1) {
 			//System.out.println("new Floor");
-			return new Floor();
+			return new Floor(game);
 			
 		} else {
 			//System.out.println("new tile");
@@ -207,6 +207,20 @@ public class Map {
 
 	public void initActorsAndObjects() {
 		// A REDEFINIR DANS LES SOUS-CLASSES
+	}
+
+	public ArrayList<Monster> getMonstersInRectangle(int x, int y, Rectangle hitbox) {
+		ArrayList<Monster> detectedMonsters = new ArrayList<Monster>();
+		ArrayList<Monster> monsters = getGame().getCurrentMap().getMonsters();
+		Rectangle testHitbox=new Rectangle(x+(int)hitbox.getX(),y+(int)hitbox.getY(), (int)hitbox.getWidth(), (int)hitbox.getHeight());
+		for (Monster m : monsters) {
+			Rectangle testHitbox2 = new Rectangle(m.getX(), m.getY(), (int)m.getHitbox().getWidth(), (int)m.getHitbox().getHeight());
+			if(testHitbox2.intersects(testHitbox)) {
+				detectedMonsters.add(m);
+				System.out.println("Monstre touché");
+			}
+		}
+		return detectedMonsters;
 	}
 	
 }

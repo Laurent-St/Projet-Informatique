@@ -37,7 +37,26 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 		if(enoughMana()) {
 			attackAnimationCount = null;
 			attackAnimationCount = new CountTimer(5,50,this);
+			updatePosition();
+			inflictDirectDamage(getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox()));
 			super.attack();
+		}
+	}
+	
+	public void updatePosition() {
+		Player p = getAttachedPlayer();
+		if (p.getOrientation()=="left") {
+			setX(p.getX()-10);
+			setY(p.getY());
+		} else if (getAttachedPlayer().getOrientation()=="right"){
+			setX(p.getX()+10);
+			setY(p.getY());
+		} else if (getAttachedPlayer().getOrientation()=="down") {
+			setX(p.getX());
+			setY(p.getY()+25);
+		} else if (getAttachedPlayer().getOrientation()=="up") {
+			setX(p.getX());
+			setY(p.getY()-20);
 		}
 	}
 	
@@ -56,6 +75,7 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 
 	@Override
 	public void atCount(CountTimer ck) {
+		updatePosition();
 		if (ck.getCount()==4) {
 			ck.stop();
 			ck.setCount(4);

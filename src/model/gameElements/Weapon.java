@@ -2,6 +2,7 @@ package model.gameElements;
 
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import model.Game;
 
@@ -43,6 +44,12 @@ public class Weapon extends CollectableObject {
 	public void attack() {
 		if(enoughMana()) {
 			getAttachedPlayer().setMana(getAttachedPlayer().getMana()-getManaConsumption());
+		}
+	}
+	
+	public void inflictDirectDamage(ArrayList<Monster> hitMonsters) {
+		for (Monster m : hitMonsters) {
+			m.setHealth(m.getHealth()-getDamage());
 		}
 	}
 	

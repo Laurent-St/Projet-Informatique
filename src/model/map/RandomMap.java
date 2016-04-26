@@ -9,18 +9,21 @@ import model.Game;
 import model.gameElements.Axe;
 import model.gameElements.Monster;
 import model.graphicElements.Floor;
+import model.graphicElements.Tile;
+import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
 
 public class RandomMap extends Map {
 	
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
+	private Game game;
 	
 	private int numberOfMonsters=10;
 	
 	public RandomMap(Game game) {
 		super(game);
-		this.fill(new Rectangle(0,0,getLevelWidth(),getLevelHeight()), new Floor());
+		this.fill(new Rectangle(0,0,getLevelWidth(),getLevelHeight()), new Floor(game));
 		
 		rooms = new ArrayList<Rectangle>();
 		rooms.add(this.getLevelBounds());
@@ -28,6 +31,7 @@ public class RandomMap extends Map {
 		
 		generateMaze(0, rooms, holes);
 		renderMaze(rooms, holes);
+		setTileAt(5,5, new Tile(TileLibrary.POISON_TRAP, "poisonous tile", game));
 		System.out.println("new Level");
 	}
 	
@@ -44,7 +48,7 @@ public class RandomMap extends Map {
 			do {
 				int randX = rnd.nextInt(920);
 				int randY = rnd.nextInt(640);
-				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 200, 0.5, getGame(), new Rectangle(8,0,15,31));
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 100, 0.5, getGame(), new Rectangle(8,0,15,31));
 			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
 					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
 			
@@ -135,7 +139,7 @@ public class RandomMap extends Map {
 		//INTERSECTIONS DES MURS
 		for(int j=0;j<corners.size();j++) {
 			Point corner = corners.get(j);
-			Wall w = new Wall(determineWallOrientation(corner));
+			Wall w = new Wall(determineWallOrientation(corner), game);
 			setTileAt(corner.x,corner.y,w);
 		}
 		
@@ -144,21 +148,21 @@ public class RandomMap extends Map {
 			Point hole = holes.get(k);
 			int x = hole.x;
 			int y = hole.y;
-			setTileAt(x,y,new Floor());
+			setTileAt(x,y,new Floor(game));
 			Point[] positions = {new Point(x+1,y), new Point(x-1,y), new Point(x,y+1), new Point(x,y-1)};
 			
 			for(int l=0;l<4;l++) {
 				Point[] subPositions = {new Point(1,0), new Point(0,1), new Point(-1,0), new Point(0,-1)};
 				if(onBorder(positions[l])==false) {
-					setTileAt(positions[l].x,positions[l].y,new Floor());
+					setTileAt(positions[l].x,positions[l].y,new Floor(game));
 				} else {
-					setTileAt(positions[l].x,positions[l].y, new Wall(determineWallOrientation(positions[l])));
+					setTileAt(positions[l].x,positions[l].y, new Wall(determineWallOrientation(positions[l]), game));
 				}
 				for(int n=0;n<4;n++) {
 					Point subPoint = positions[l].getLocation();
 					subPoint.translate(subPositions[n].x, subPositions[n].y);
 					if(getTileAt(subPoint.x,subPoint.y).getType()=="wall") {
-						setTileAt(subPoint.x,subPoint.y,new Wall(determineWallOrientation(subPoint)));
+						setTileAt(subPoint.x,subPoint.y,new Wall(determineWallOrientation(subPoint), game));
 					}
 				}
 			}

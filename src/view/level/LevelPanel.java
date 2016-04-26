@@ -125,16 +125,16 @@ public class LevelPanel extends JPanel {
 			if(hw.inAttackMode()) {
 				int c = hw.getAnimationCount();
 				if(p.getOrientation()=="up") {
-					g.drawImage(hw.getImage(), p.getX(), p.getY()-20, p.getX()+31,p.getY()+11,
+					g.drawImage(hw.getImage(), hw.getX(), hw.getY(), hw.getX()+31,hw.getY()+31,
 						32*c,64,32*c+31,95,null);
 				} else if (p.getOrientation()=="down") {
-					g.drawImage(hw.getImage(), p.getX(), p.getY()+31+25, p.getX()+31,p.getY()+25,
+					g.drawImage(hw.getImage(), hw.getX(), hw.getY()+31, hw.getX()+31,hw.getY(),
 							32*c,64,32*c+31,93,null);
 				} else if (p.getOrientation()=="left") {
-					g.drawImage(hw.getImage(), p.getX()+21, p.getY(), p.getX()-10,p.getY()+31,
+					g.drawImage(hw.getImage(), hw.getX()+31, hw.getY(), hw.getX(),hw.getY()+31,
 							32*c,32,32*c+31,63,null);
 				} else {
-					g.drawImage(hw.getImage(), p.getX()+10, p.getY(), p.getX()+41,p.getY()+31,
+					g.drawImage(hw.getImage(), hw.getX(), hw.getY(), hw.getX()+31,hw.getY()+31,
 							32*c,32,32*c+31,63,null);
 				}
 			}
@@ -161,7 +161,8 @@ public class LevelPanel extends JPanel {
 		if (game.getCurrentMap().getGameObjects()!=null){
 			for (GameObject object: game.getCurrentMap().getGameObjects()){
 				Image image=object.getImage();
-				g.drawImage(image, object.getX(), object.getY(),(int)object.getHitbox().getWidth(), (int)object.getHitbox().getHeight(), null);
+				g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+						0,0,31,31,null);
 			}
 		}
 		if (game.getCurrentMap().getCollectableObjects()!=null){

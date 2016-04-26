@@ -1,7 +1,5 @@
 package model.gameElements;
 
-import java.awt.Rectangle;
-
 import model.Game;
 
 public class HealthPotion extends Potion {

@@ -66,6 +66,7 @@ public class Actor extends GameObject {
 			this.health = getMaxHealth();
 		} else if (this.health<=0) {
 			this.health = 0;
+			die();
 		}
 	}
 

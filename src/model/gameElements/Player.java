@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import model.Game;
+import model.graphicElements.Tile;
 import view.StatsPanel;
 
 public class Player extends Actor implements Runnable{
@@ -19,8 +20,6 @@ public class Player extends Actor implements Runnable{
 	
 	private HandWeapon handWeapon;
 	private ThrowableWeapon throwableWeapon;
-	private Weapon equipedWeapon;
-	
 	private StatsPanel statsPanel;
 
 	public Player(int damage, int health, int mana, Game game) {
@@ -45,6 +44,13 @@ public class Player extends Actor implements Runnable{
 		equipThrowableWeapon(fw);
 	}
 	
+	public void move(){
+		super.move();
+		Tile currentTile=getGame().getCurrentMap().getTileAt((int)((getX()+getHitbox().getCenterX())/20), (int)((getY() + getHitbox().getMaxY()))/20);
+		if (currentTile.getIsPoisonous()){
+			currentTile.envenom();
+		}
+	}
 	public void setStatsPanel(StatsPanel sp) {
 		this.statsPanel = sp;
 	}

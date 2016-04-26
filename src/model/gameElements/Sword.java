@@ -8,7 +8,7 @@ public class Sword extends HandWeapon {
 	
 	private static String imageUrl = "src/model/gameElements/epee.png";
 	private static Rectangle hitbox = new Rectangle(0,0,32,32);
-	private static int damage = 10;
+	private static int damage = 20;
 	private static int range = 2;
 	private static int manaSword = 0;
 

@@ -1,6 +1,5 @@
 package model.gameElements;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.Random;
 
@@ -9,14 +8,35 @@ import model.Game;
 public class Monster extends Actor implements Runnable {
 
 	private int count;
+	private Thread monsterThread;
 
 	public Monster(String name, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
 		super(name, x, y, damage, health, speed, game, hitbox);
-		Thread monsterThread = new Thread(this);
+		monsterThread = new Thread(this);
 		monsterThread.start();
 		count = 0;
 		// System.out.println("new Monster");
 
+	}
+	
+	public void die() {
+		monsterThread.stop();
+		randomDrop();
+		getGame().getCurrentMap().removeMonster(this);
+	}
+	
+	public void randomDrop() {
+		Random random = new Random();
+		int rnd = random.nextInt(100);
+		if(rnd<=10) {
+			getGame().getCurrentMap().addCollectableObject(new HealthPotion(getX(),getY(),50,getGame()));
+		} else if(rnd>10 && rnd <=20) {
+			getGame().getCurrentMap().addCollectableObject(new ManaPotion(getX(),getY(),50,getGame()));
+
+		} else {
+			getGame().getCurrentMap().addGameObject(new Skull(getX(),getY(),getGame()));
+		}
+		
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package model.gameElements;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import model.Game;
 
@@ -45,8 +46,9 @@ public class Projectile extends Weapon implements Runnable{
 
 	@Override
 	public void run() {
+		ArrayList<Monster> hitMonsters = new ArrayList<Monster>();
 		while(getGame().getCurrentMap().isPositionWalkable(getX(), getY(), getHitbox()) 
-				&& getGame().getCurrentMap().isPositionOccupied(getX(), getY(), this, false)==false) {
+				&& hitMonsters.size()==0) {
 			if(this.direction=="up") {
 				setY(getYdouble()-this.speed);
 			} else if (this.direction=="down") {
@@ -62,9 +64,10 @@ public class Projectile extends Weapon implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			hitMonsters = getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox());
 		}
 		
-		attack();
+		explode(hitMonsters);
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -75,9 +78,14 @@ public class Projectile extends Weapon implements Runnable{
 		
 	}
 	
-	public void attack() {
+	public void explode(ArrayList<Monster> hitMonsters) {
+		inflictDirectDamage(hitMonsters);
 		System.out.println("exploded");
 		this.travelling = false;
+	}
+	
+	public void attack() {
+		
 	}
 
 	private void delete() {
