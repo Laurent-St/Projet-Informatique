@@ -101,7 +101,9 @@ public class Map {
 	}
 	
 	public void setTileAt(int x, int y, Tile tile) {
-		tiles[y][x] = tile;
+		if(x>=0 && y>=0 && x<=getLevelWidth()-1 && y<=getLevelHeight()-1) {
+			tiles[y][x] = tile;
+		}
 	}
 	
 	public Tile getTileAt(int x, int y) {

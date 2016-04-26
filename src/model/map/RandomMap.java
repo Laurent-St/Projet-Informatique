@@ -7,7 +7,9 @@ import java.util.Random;
 
 import model.Game;
 import model.gameElements.Axe;
+import model.gameElements.Bow;
 import model.gameElements.Monster;
+import model.graphicElements.Door;
 import model.graphicElements.Floor;
 import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
@@ -31,10 +33,11 @@ public class RandomMap extends Map {
 		
 		generateMaze(0, rooms, holes);
 		renderMaze(rooms, holes);
-		setTileAt(5,5, new Tile(TileLibrary.POISON_TRAP, "poisonous tile", game));
+		initDoors();
+		initTraps();
 		System.out.println("new Level");
 	}
-	
+
 	public void initActorsAndObjects() {
 		initMonsters();
 		initGameObjects();
@@ -60,8 +63,11 @@ public class RandomMap extends Map {
 	public void initGameObjects(){
 		Axe axe= new Axe("hache", 180, 200, getGame(), getGame().getPlayer());
 		addCollectableObject(axe);
-		axe.setX(180);
-		axe.setY(200);
+		
+		Bow bow = new Bow(getGame(),getGame().getPlayer());
+		bow.setX(300);
+		bow.setY(300);
+		addCollectableObject(bow);
 	}
 	
 
@@ -167,6 +173,33 @@ public class RandomMap extends Map {
 				}
 			}
 		}
-	}	
+	}
+	
+	private void initDoors() {
+		Door door1 = new Door(getGame());
+		door1.doorOpen();
+		Door door2 = new Door(getGame());
+		setTileAt(2,0,door1);
+		setTileAt(getLevelWidth()-3, getLevelHeight()-1, door2);
+		setTileAt(1,0,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+		setTileAt(3,0,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		setTileAt(getLevelWidth()-4, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+		setTileAt(getLevelWidth()-2, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+	}
+	
+	private void initTraps() {
+		Random rnd = new Random();
+		for(int i=0;i<6;i++) {
+			int x = rnd.nextInt(getLevelWidth()-2)+1;
+			int y = rnd.nextInt(getLevelHeight()-2)+1;
+			for(int j=0;j<6;j++) {
+				int nx = x+rnd.nextInt(5)-2;
+				int ny = y+rnd.nextInt(5)-2;			
+				if(getTileAt(nx,ny).getType()=="floor") {;
+					setTileAt(nx,ny,new Tile(TileLibrary.POISON_TRAP, "poisonous tile", getGame()));
+				}
+			}
+		}
+	}
 
 }

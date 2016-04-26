@@ -7,7 +7,7 @@ public class Tile implements PoisonDamage, Runnable {
 
 	private int[] reference = { 0, 0 };
 	private boolean isWalkable = true; // pour savoir si on peut marcher dessus
-	private boolean isPoisonous;
+	private boolean isPoisonous = false;
 	private String type;
 	private Game game;
 	private Thread tileThread;
@@ -19,7 +19,7 @@ public class Tile implements PoisonDamage, Runnable {
 		reference[0] = ref[0];
 		reference[1] = ref[1];
 		this.type = type;
-		if (reference[0] == 18) {
+		if (reference[0] == TileLibrary.POISON_TRAP[0]) {
 			isPoisonous = true;
 		}
 	}
@@ -67,9 +67,15 @@ public class Tile implements PoisonDamage, Runnable {
 	public int[] getReference() {
 		return reference;
 	}
+	
+	public void setReference(int[] ref) {
+		this.reference = ref;
+	}
 
 	public String getType() {
 		// TODO Auto-generated method stub
 		return type;
 	}
+	
+	public void doorOpen(){}
 }

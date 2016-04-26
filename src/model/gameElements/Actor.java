@@ -1,5 +1,6 @@
 package model.gameElements;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -80,6 +81,14 @@ public class Actor extends GameObject {
 		} else {
 			this.maxHealth = 0;
 		}
+	}
+	
+	public Point getFootPosition() {
+		Point p = new Point();
+		double x = getX()+getHitbox().getCenterX();
+		double y = getY()+getHitbox().getMaxY();
+		p.setLocation(x, y);
+		return p;
 	}
 	
 	public double getSpeed() {

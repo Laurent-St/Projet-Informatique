@@ -27,8 +27,9 @@ public class TileLibrary {
 	public final static int[] WALL_T_RIGHT = {14,0};
 	public final static int[] WALL_T_BOTTOM = {15,0};
 	public final static int[] WALL_T_UP = {16,0};
-	public final static int[] DOOR_OPEN ={17,0};
-	public final static int[] POISON_TRAP={18,0};
+	public final static int[] DOOR_OPEN ={18,0};
+	public final static int[] DOOR_CLOSED ={17,0};
+	public final static int[] POISON_TRAP={19,0};
 	
 	private static Image tilesImage;
 	

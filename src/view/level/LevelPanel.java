@@ -145,13 +145,13 @@ public class LevelPanel extends JPanel {
 			if(pro.isTravelling()) {
 				String d = pro.getDirection();
 				if(d=="up") {
-					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,0,0,31,31,null);
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,0,32,31,63,null);
 				} else if (d=="right") {
-					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,32,0,63,31,null);
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,32,32,63,63,null);
 				} else if (d=="down") {
-					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,64,0,95,31,null);
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,64,32,95,63,null);
 				} else if (d=="left") {
-					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,96,0,127,31,null);
+					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,96,32,127,63,null);
 				}
 			}
 		}

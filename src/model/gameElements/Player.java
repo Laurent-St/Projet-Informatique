@@ -1,5 +1,6 @@
 package model.gameElements;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -46,7 +47,10 @@ public class Player extends Actor implements Runnable{
 	
 	public void move(){
 		super.move();
-		Tile currentTile=getGame().getCurrentMap().getTileAt((int)((getX()+getHitbox().getCenterX())/20), (int)((getY() + getHitbox().getMaxY()))/20);
+		Point footPosition = getFootPosition();
+		int x = (int)Math.floor(footPosition.getX()/20);
+		int y = (int)Math.floor(footPosition.getY()/20);
+		Tile currentTile=getGame().getCurrentMap().getTileAt(x,y);
 		if (currentTile.getIsPoisonous()){
 			currentTile.envenom();
 		}
@@ -137,11 +141,6 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void equipHandWeapon(HandWeapon weapon) {
-		/*
-		 * on consid�re que le joueur a une valeur de degats de base et que le
-		 * fait d'equiper une arme augmente simplement la valeur de degats du
-		 * joueur. MAIS IL FAUDRA TENIR COMPTE DES TYPES D'ARMES.
-		 */
 		this.handWeapon = weapon;
 		
 		setDamage(damage + weapon.getDamage());
@@ -178,15 +177,7 @@ public class Player extends Actor implements Runnable{
 
 	public void die() {
 		setHealth(0);
-		//Tomb tomb = new Tomb("Tombe de " + name, position, inventory, experience);
-		// resetPosition(debut du niveau)
 	}
-//
-//	public void collect(CollectableObject object) {
-//		inventory.setInInventory(object);
-//	}
-
-	// public void open(){}
 	
 	public void drinkPotion(Potion potion) {
 		if (potion instanceof HealthPotion) {
@@ -210,12 +201,39 @@ public class Player extends Actor implements Runnable{
 		}
 	}
 	
+	public void tryInteraction() {
+		collect();
+		openDoors();
+	}
+	
 	public void collect(){
 		CollectableObject res=getGame().getCurrentMap().detectAnObject(this.getX(),this.getY(), this.getHitbox());
 		if (res!=null && inventory.isFull()==false){
 			inventory.setInInventory(res);
 			getGame().getCurrentMap().removeCollectableObject(res);
 		}
+	}
+	
+	public void openDoors() {
+		Tile facingTile = null;
+		Tile currentTile;
+		Point footPosition = getFootPosition();
+		int x = (int)Math.floor(footPosition.getX()/20);
+		int y = (int)Math.floor(footPosition.getY()/20);
+		
+		currentTile = getGame().getCurrentMap().getTileAt(x, y);		
+		if(getOrientation()=="up") {
+			facingTile = getGame().getCurrentMap().getTileAt(x, y-1);
+		} else if(getOrientation()=="down") {
+			facingTile = getGame().getCurrentMap().getTileAt(x, y+1);
+		} else if(getOrientation()=="left") {
+			facingTile = getGame().getCurrentMap().getTileAt(x-1, y);
+		} else if (getOrientation()=="right") {
+			facingTile = getGame().getCurrentMap().getTileAt(x+1, y);
+		}
+		
+		if(facingTile!=null){facingTile.doorOpen();};
+		currentTile.doorOpen();
 	}
 
 	@Override

@@ -50,9 +50,7 @@ public class Game {
 	
 	public void initLevel() {
 		level1= new RandomMap(this);
-		//level1.setGame(this);
 		currentMap = level1;
-		
 	}
 	
 	public void initGraphics() {

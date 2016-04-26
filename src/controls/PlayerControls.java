@@ -90,7 +90,7 @@ public class PlayerControls implements KeyListener {
 				player.getInventory().select(5);
 			}
 		} else if(e.getKeyCode()==f){
-			player.collect();
+			player.tryInteraction();
 		} else if (e.getKeyCode()==ctrl){
 			readyToRemove=true;
 		}
