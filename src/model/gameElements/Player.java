@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import model.Game;
+//import model.graphicElements.PoisonousTile;
 import model.graphicElements.Tile;
 import view.StatsPanel;
 
@@ -51,7 +52,10 @@ public class Player extends Actor implements Runnable{
 		int x = (int)Math.floor(footPosition.getX()/20);
 		int y = (int)Math.floor(footPosition.getY()/20);
 		Tile currentTile=getGame().getCurrentMap().getTileAt(x,y);
+		//if (currentTile instanceof PoisonousTile){
 		if (currentTile.getIsPoisonous()){
+//			PoisonousTile poisonousTile=(PoisonousTile)currentTile;
+//			poisonousTile.startPoisonThread();
 			currentTile.envenom();
 		}
 	}

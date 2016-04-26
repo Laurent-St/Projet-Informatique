@@ -3,7 +3,7 @@ package model.graphicElements;
 import model.Game;
 import model.PoisonDamage;
 
-public class Tile implements PoisonDamage, Runnable {
+public class Tile implements Runnable, PoisonDamage{
 
 	private int[] reference = { 0, 0 };
 	private boolean isWalkable = true; // pour savoir si on peut marcher dessus
@@ -55,6 +55,9 @@ public class Tile implements PoisonDamage, Runnable {
 	public boolean getIsPoisonous() {
 		return isPoisonous;
 	}
+	public void setIsPoisonous(boolean isPoisonous){
+		this.isPoisonous=isPoisonous;
+	}
 
 	public boolean getIsWalkable() {
 		return isWalkable;
@@ -79,3 +82,4 @@ public class Tile implements PoisonDamage, Runnable {
 	
 	public void doorOpen(){}
 }
+

@@ -11,6 +11,7 @@ import model.gameElements.Bow;
 import model.gameElements.Monster;
 import model.graphicElements.Door;
 import model.graphicElements.Floor;
+//import model.graphicElements.PoisonousTile;
 import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
