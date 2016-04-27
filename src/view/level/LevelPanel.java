@@ -92,7 +92,7 @@ public class LevelPanel extends JPanel {
 	}
 	
 	public void paintAllActors(Graphics g) {
-		ArrayList<Monster> monsters = getGame().getCurrentMap().getMonsters();
+		ArrayList<Monster> monsters = getMap().getMonsters();
 		Player player = getGame().getPlayer();
 		for(Monster m : monsters) {
 			paintActor(g,m);
@@ -140,7 +140,7 @@ public class LevelPanel extends JPanel {
 			}
 		}
 		
-		ArrayList<Projectile> projectiles = getGame().getCurrentMap().getProjectiles();
+		ArrayList<Projectile> projectiles = getMap().getProjectiles();
 		for (Projectile pro : projectiles) {
 			if(pro.isTravelling()) {
 				String d = pro.getDirection();
@@ -158,19 +158,15 @@ public class LevelPanel extends JPanel {
 	}
 	
 	public void paintObjects(Graphics g){
-		if (game.getCurrentMap().getGameObjects()!=null){
-			for (GameObject object: game.getCurrentMap().getGameObjects()){
-				Image image=object.getImage();
-				g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
-						0,0,31,31,null);
-			}
+		for (GameObject object: getMap().getGameObjects()){
+			Image image=object.getImage();
+			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+					0,0,31,31,null);
 		}
-		if (game.getCurrentMap().getCollectableObjects()!=null){
-			for (CollectableObject object: game.getCurrentMap().getCollectableObjects()){
-				Image image=object.getImage();
-				g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
-						0,0,31,31,null);
-			}
+		for (CollectableObject object: getMap().getCollectableObjects()){
+			Image image=object.getImage();
+			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+					0,0,31,31,null);
 		}
 	}
 }

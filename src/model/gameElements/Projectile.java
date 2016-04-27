@@ -93,4 +93,12 @@ public class Projectile extends Weapon implements Runnable{
 		getGame().getCurrentMap().removeProjectile(this);
 	}
 
+	public void interruptThread() {
+		movingWeaponThread.suspend();
+	}
+	
+	public void resumeThread() {
+		movingWeaponThread.resume();
+	}
+
 }

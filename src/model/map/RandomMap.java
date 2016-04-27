@@ -25,8 +25,9 @@ public class RandomMap extends Map {
 	
 	private int numberOfMonsters=10;
 	
-	public RandomMap(Game game) {
-		super(game);
+	public RandomMap(int levelNum, Game game) {
+		super(levelNum, game);
+		
 		this.fill(new Rectangle(0,0,getLevelWidth(),getLevelHeight()), new Floor(game));
 		
 		rooms = new ArrayList<Rectangle>();
@@ -37,6 +38,7 @@ public class RandomMap extends Map {
 		renderMaze(rooms, holes);
 		initDoors();
 		initTraps();
+
 		System.out.println("new Level");
 	}
 
@@ -178,15 +180,19 @@ public class RandomMap extends Map {
 	}
 	
 	private void initDoors() {
-		Door door1 = new Door(getGame());
+		Door door1 = new Door(getLevelNum()-1,getGame());
 		door1.doorOpen();
-		Door door2 = new Door(getGame());
-		setTileAt(2,0,door1);
-		setTileAt(getLevelWidth()-3, getLevelHeight()-1, door2);
-		setTileAt(1,0,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
-		setTileAt(3,0,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
-		setTileAt(getLevelWidth()-4, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
-		setTileAt(getLevelWidth()-2, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		Door door2 = new Door(getLevelNum()+1,getGame());
+		if(getLevelNum()!=1) {
+			setTileAt(2,0,door1);
+			setTileAt(1,0,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+			setTileAt(3,0,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		}
+		if(getLevelNum() !=10) {
+			setTileAt(getLevelWidth()-3, getLevelHeight()-1, door2);
+			setTileAt(getLevelWidth()-4, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+			setTileAt(getLevelWidth()-2, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		}
 	}
 	
 	private void initTraps() {
@@ -197,7 +203,7 @@ public class RandomMap extends Map {
 			for(int j=0;j<6;j++) {
 				int nx = x+rnd.nextInt(5)-2;
 				int ny = y+rnd.nextInt(5)-2;			
-				if(getTileAt(nx,ny).getType()=="floor") {;
+				if(getTileAt(nx,ny).getType()=="floor" && (nx>=5 || ny >=5)) {;
 					setTileAt(nx,ny,new PoisonousTile(getGame()));
 				}
 			}

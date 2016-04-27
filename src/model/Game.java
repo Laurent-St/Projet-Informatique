@@ -25,13 +25,9 @@ public class Game {
 	private Player player;
 	private PlayerControls playerControls;
 	private int numberOfMonsters=10;
-//	private ArrayList<Monster> monsters= new ArrayList<Monster>();
-//	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-//	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
-	private RandomMap level1;
-	private RandomMap level2;
 	
+	private ArrayList<Map> levels = new ArrayList<Map>(); 
 	private Map currentMap;
 	
 	public static void main(String[] args) {
@@ -49,8 +45,9 @@ public class Game {
 	}
 	
 	public void initLevel() {
-		level1= new RandomMap(this);
-		currentMap = level1;
+		RandomMap level1 = new RandomMap(1,this);
+		levels.add(level1);
+		setCurrentMap(level1);
 	}
 	
 	public void initGraphics() {
@@ -87,6 +84,10 @@ public class Game {
 	public Map getCurrentMap() {
 		return this.currentMap;
 	}
+
+	private void setCurrentMap(Map map) {
+		this.currentMap = map;	
+	}
 	
 	public GamePanel getGamePanel() {
 		return gamePanel;
@@ -95,7 +96,30 @@ public class Game {
 	public Player getPlayer() {
 		return this.player;
 	}
-	
+
+	public void changeLevel(int levelNum) {
+		System.out.println("go to "+String.valueOf(levelNum));
+		getCurrentMap().stopAllThreads();
+		if(getCurrentMap().getLevelNum()<levelNum) {
+			player.setX(40);
+			player.setY(30);
+		} else {
+			player.setX(890);
+			player.setY(610);
+		}
+		
+		if(levelNum>levels.size()) {
+			RandomMap newLevel = new RandomMap(levelNum,this);
+			levels.add(newLevel);
+			newLevel.initActorsAndObjects();
+			setCurrentMap(newLevel);
+		} else {
+			setCurrentMap(levels.get(levelNum-1));
+			getCurrentMap().resumeAllThreads();
+		}
+		
+		levelPanel.setMap(getCurrentMap());
+	}
 }
 		
 	

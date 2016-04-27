@@ -49,5 +49,8 @@ public class Tile {
 	public void doorOpen(){}
 
 	public void envenom() {}
+	
+	public boolean canTeleportToLevel() {return false;}
+	public int getLinkedLevel() {return 0;}
 }
 

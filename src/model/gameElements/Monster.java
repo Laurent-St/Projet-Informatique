@@ -67,4 +67,12 @@ public class Monster extends Actor implements Runnable {
 		}
 	}
 
+	public void interruptThread() {
+		monsterThread.suspend();
+	}
+	
+	public void resumeThread() {
+		monsterThread.resume();
+	}
+
 }

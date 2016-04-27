@@ -15,7 +15,7 @@ public class Player extends Actor implements Runnable{
 	private int experience=0;
 	private int maxExperienceForLevel=100;
 	
-	private static double playerSpeed  = 1.5;
+	private static double playerSpeed  = 1.8;
 	private static Rectangle playerHitbox = new Rectangle(8,0,15,31);
 	
 	private HandWeapon handWeapon;
@@ -23,7 +23,7 @@ public class Player extends Actor implements Runnable{
 	private StatsPanel statsPanel;
 
 	public Player(int damage, int health, int mana, Game game) {
-		super("src/model/gameElements/characterWarrior.png",50,50,10,100, playerSpeed, game, playerHitbox);
+		super("src/model/gameElements/characterWarrior.png",40,30,10,100, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
 		setMana(100);
@@ -52,6 +52,8 @@ public class Player extends Actor implements Runnable{
 		Tile currentTile=getGame().getCurrentMap().getTileAt(x,y);
 		if (currentTile.getIsPoisonous()){
 			currentTile.envenom();
+		} else if(currentTile.canTeleportToLevel()) {
+			getGame().changeLevel(currentTile.getLinkedLevel());
 		}
 	}
 	public void setStatsPanel(StatsPanel sp) {

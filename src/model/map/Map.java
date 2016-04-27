@@ -18,6 +18,7 @@ import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
 
 public class Map {
+	private int levelNum;
 	private static int levelWidth = 48;
 	private static int levelHeight = 34;
 	private static Rectangle levelBounds = new Rectangle(0,0,levelWidth-1,levelHeight-1);
@@ -28,8 +29,9 @@ public class Map {
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private Game game;
 	
-	public Map(Game game) {
+	public Map(int levelNum, Game game) {
 		this.game=game;
+		this.levelNum = levelNum;
 		tiles = new Tile[levelHeight][levelWidth];
 	}
 	
@@ -73,6 +75,10 @@ public class Map {
 	
 	public int getLevelHeight() {
 		return levelHeight;
+	}
+	
+	public int getLevelNum() {
+		return levelNum;
 	}
 	
 	public void fill(Rectangle rect, Tile tile) {
@@ -223,6 +229,24 @@ public class Map {
 			}
 		}
 		return detectedMonsters;
+	}
+
+	public void stopAllThreads() {
+		for(Projectile p: getProjectiles()) {
+			p.interruptThread();
+		}
+		for(Monster m: getMonsters()) {
+			m.interruptThread();
+		}
+	}
+	
+	public void resumeAllThreads() {
+		for(Projectile p: getProjectiles()) {
+			p.resumeThread();
+		}
+		for(Monster m: getMonsters()) {
+			m.resumeThread();
+		}
 	}
 	
 }
