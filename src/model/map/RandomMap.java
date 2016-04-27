@@ -11,6 +11,7 @@ import model.gameElements.Bow;
 import model.gameElements.Monster;
 import model.graphicElements.Door;
 import model.graphicElements.Floor;
+import model.graphicElements.PoisonousTile;
 //import model.graphicElements.PoisonousTile;
 import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
@@ -197,7 +198,7 @@ public class RandomMap extends Map {
 				int nx = x+rnd.nextInt(5)-2;
 				int ny = y+rnd.nextInt(5)-2;			
 				if(getTileAt(nx,ny).getType()=="floor") {;
-					setTileAt(nx,ny,new Tile(TileLibrary.POISON_TRAP, "poisonous tile", getGame()));
+					setTileAt(nx,ny,new PoisonousTile(getGame()));
 				}
 			}
 		}
