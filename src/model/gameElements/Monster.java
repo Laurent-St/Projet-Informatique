@@ -7,12 +7,10 @@ import model.Game;
 
 public class Monster extends Actor implements Runnable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int count;
 	private transient Thread monsterThread;
+	private boolean threadSuspended = false;
 
 	public Monster(String name, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
 		super(name, x, y, damage, health, speed, game, hitbox);
@@ -27,11 +25,6 @@ public class Monster extends Actor implements Runnable {
 		monsterThread.interrupt();
 		randomDrop();
 		getGame().getCurrentMap().removeMonster(this);
-	}
-	
-	public void activeMonsterThread(){		//va être utilisé pour la restauration de la sauvegarde.
-		monsterThread=new Thread(this);
-		monsterThread.start();
 	}
 	
 	public void randomDrop() {
@@ -52,27 +45,29 @@ public class Monster extends Actor implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				if (count == 0) {
-					Random randomGenerator = new Random();
-					int randomNum = randomGenerator.nextInt(4);
-					if (randomNum == 1) {
-						setMoving("up");
-					} else if (randomNum == 2) {
-						setMoving("down");
-					} else if (randomNum == 3) {
-						setMoving("right");
-					} else {
-						setMoving("left");
+				if(!threadSuspended) {
+					if (count == 0) {
+						Random randomGenerator = new Random();
+						int randomNum = randomGenerator.nextInt(4);
+						if (randomNum == 1) {
+							setMoving("up");
+						} else if (randomNum == 2) {
+							setMoving("down");
+						} else if (randomNum == 3) {
+							setMoving("right");
+						} else {
+							setMoving("left");
+						}
 					}
+					count += 1;
+					if (count == 80) {
+						count = 0;
+					}
+					if(count%40 == 0) {
+						tryAttack();
+					}
+					move();
 				}
-				count += 1;
-				if (count == 80) {
-					count = 0;
-				}
-				if(count%40 == 0) {
-					tryAttack();
-				}
-				move();
 				Thread.sleep(15);
 			}
 		} catch (Exception e) {
@@ -93,17 +88,23 @@ public class Monster extends Actor implements Runnable {
 				(int)player.getHitbox().getHeight());
 		if(testHitbox1.intersects(testHitbox2)) {
 			System.out.print("Player tabassé");
-			player.setHealth(player.getHealth()-getDamage());
+			basicAttack(player);
 		}
 				
 	}
 
 	public void interruptThread() {
-		monsterThread.suspend();
+		threadSuspended = true;
 	}
 	
 	public void resumeThread() {
-		monsterThread.resume();
+		threadSuspended = false;
 	}
 
+	
+	public void reloadAction(Game game) {
+		monsterThread=new Thread(this);
+		monsterThread.start();
+		super.reloadAction(game);
+	}
 }

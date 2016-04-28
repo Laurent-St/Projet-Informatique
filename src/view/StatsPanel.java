@@ -8,13 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import model.Game;
 import model.gameElements.Player;
 
 public class StatsPanel extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private static Rectangle panelBounds = new Rectangle(0,750,1000,50);
-	private Game game;
 	private Player player;
 	
 	private JLabel healthLabel;
@@ -30,9 +29,8 @@ public class StatsPanel extends JPanel{
 	
 	private Dimension barSize = new Dimension(100,20);
 	
-	public StatsPanel(Game game){
-		this.game = game;
-		this.player = game.getPlayer();
+	public StatsPanel(Player player){
+		this.player = player;
 		this.setBounds(panelBounds);
 		this.setLayout(null);
 		this.setBackground(Color.DARK_GRAY);

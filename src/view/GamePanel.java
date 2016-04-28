@@ -7,14 +7,17 @@ import javax.swing.JPanel;
 
 import model.Game;
 import model.gameElements.Inventory;
+import model.gameElements.Player;
+import view.menu.MenuPanel;
 
-@SuppressWarnings("serial")
 public class GamePanel extends JPanel {
-	
+
+	private static final long serialVersionUID = 1L;
 	private static Dimension panelSize = new Dimension(1000,800);
 	private InventoryWindow inventoryWindow;
 	private StatsPanel statsPanel;
 	private Game game;
+	private MenuPanel currentMenu;
 	
 	public GamePanel(Game game) {
 		this.game=game;
@@ -29,13 +32,17 @@ public class GamePanel extends JPanel {
 	public Dimension getDimensions() {
 		return panelSize;
 	}
-
-	public void removePanels() {
-		this.removeAll();
+	
+	public void setMenu(MenuPanel menu) {
+		removeMenus();
+		this.currentMenu = menu;
+		this.add(menu);
+		menu.setVisible(true);
+		repaint();
 	}
 	
-	public void initInventoryWindow(){
-		inventoryWindow=new InventoryWindow(getGame().getPlayer().getInventory());
+	public void initInventoryWindow(Inventory inventory){
+		inventoryWindow=new InventoryWindow(inventory);
 		this.add(inventoryWindow);
 		this.setComponentZOrder(inventoryWindow, 0);
 		inventoryWindow.setVisible(true);
@@ -43,11 +50,11 @@ public class GamePanel extends JPanel {
 		inventoryWindow.repaint();
 	}
 	
-	public void initStatsPanel() {
-		statsPanel = new StatsPanel(getGame());
+	public void initStatsPanel(Player player) {
+		statsPanel = new StatsPanel(player);
 		this.add(statsPanel);
 		statsPanel.setVisible(true);
-		getGame().getPlayer().setStatsPanel(statsPanel);
+		player.setStatsPanel(statsPanel);
 	}
 	
 	public InventoryWindow getInventoryWindow(){
@@ -55,5 +62,9 @@ public class GamePanel extends JPanel {
 	}
 	public Game getGame(){
 		return game;
+	}
+
+	public void removeMenus() {
+		if(currentMenu!=null) {this.remove(currentMenu);}
 	}
 }

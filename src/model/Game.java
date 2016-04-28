@@ -34,44 +34,46 @@ public class Game implements Serializable {
 	
 	private Player player;
 	private transient PlayerControls playerControls;
-	private int numberOfMonsters=10;
-	
 	
 	private ArrayList<Map> levels = new ArrayList<Map>(); 
 	private Map currentMap;
 	
 	public static void main(String[] args) {
+		FontLoader.loadGameFont();
+		TileLibrary.initImage();
 		new Game();
 	}
 	
 	public Game() {
+		initGUI();
 		initMenu();
 	}
 	
 	public void play(boolean loadGame) {
-		gamePanel.remove(mainMenu);		
 		if(!loadGame) {
 			initLevel();
 			initPlayer();
 			getCurrentMap().initActorsAndObjects();
-			initGraphics();
-			initControls();
 		} else {
 			restoreGame();
-			initGraphics();
-			initControls();
 		}
-		gamePanel.initInventoryWindow();
-		gamePanel.initStatsPanel();
-		gamePanel.getInventoryWindow().setInventory(player.getInventory());
+		
+		gamePanel.removeMenus();
+		initGraphics();
+		initControls();
+		
+		gamePanel.initInventoryWindow(player.getInventory());
+		gamePanel.initStatsPanel(player);
+	}
+	
+	public void initGUI() {
+		gamePanel = new GamePanel(this);
+		gameWindow = new GameWindow(gamePanel); //Affiche la fenêtre principale
 	}
 	
 	public void initMenu(){
-		FontLoader.loadGameFont();
-		TileLibrary.initImage();
-		gamePanel = new GamePanel(this);
-		gameWindow = new GameWindow(gamePanel); //Affiche la fenêtre principale
-		mainMenu = new MainMenu(gamePanel, this);
+		mainMenu = new MainMenu(this);
+		gamePanel.setMenu(mainMenu);
 	}
 	public void initLevel() {
 		RandomMap level1 = new RandomMap(1,this);
@@ -83,7 +85,6 @@ public class Game implements Serializable {
 		levelPanel = new LevelPanel(this, getCurrentMap());
 	}
 
-	
 	public void initControls() {
 		playerControls = new PlayerControls(player);
 		gamePanel.setFocusable(true);
@@ -93,9 +94,8 @@ public class Game implements Serializable {
 	
 	
 	public void initPlayer(){
-		player = new Player(1, 1, 1, this);
+		player = new Player(10, 100, 100, this);
 		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
-		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
 		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
 	}
 
@@ -161,19 +161,8 @@ public class Game implements Serializable {
 			this.currentMap = savedGame.currentMap;
 			this.player = savedGame.player;
 			player.reloadAction(this);
-			player.getCount().activeCountThread();
-			if(player.getHandWeapon()!=null) {
-				player.getHandWeapon().activateCountThread();
-				player.getHandWeapon().reloadAction(this);
-			}
-			if(player.getThrowableWeapon()!=null) {
-				player.getThrowableWeapon().reloadAction(this);
-			}
-			for(CollectableObject co : player.getInventory().getExistingContent()) {
-				co.reloadAction(this);
-			}
 			for(Map m : levels) {
-				m.setGame(this);
+				m.reloadAction(this);
 			}
 			ois.close();
 		} catch(Exception e){

@@ -20,11 +20,9 @@ public class FireballWeapon extends ThrowableWeapon {
 	}
 	
 	public void attack() {
-		if(enoughMana()) {
-			Player p = getAttachedPlayer();
-			Fireball f = new Fireball(0, 0, p.getOrientation(), getGame(), p);
-			super.attack(f);
-		}
+		Player p = getAttachedPlayer();
+		Fireball f = new Fireball(0, 0, p.getOrientation(), getGame(), p);
+		super.attack(f);
 	}
 	
 }

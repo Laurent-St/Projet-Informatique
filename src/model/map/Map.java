@@ -42,19 +42,16 @@ public class Map implements Serializable {
 	
 	public Game getGame(){return game;}
 	
-	public void setGame(Game game){
+	public void reloadAction(Game game){
 		this.game = game;
 		for(Monster m : monsters) {
 			m.reloadAction(game);
-			m.activeMonsterThread();
-			m.getCount().activeCountThread();
 		}
 		for(GameObject go : gameObjects) {
 			go.reloadAction(game);
 		}
 		for(Projectile p: projectiles) {
 			p.reloadAction(game);
-			p.activateProjectileThread();
 		}
 		for(CollectableObject co : collectableObjects) {
 			co.reloadAction(game);

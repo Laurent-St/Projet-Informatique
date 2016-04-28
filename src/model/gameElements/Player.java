@@ -33,8 +33,11 @@ public class Player extends Actor implements Runnable{
 		super("src/model/gameElements/characterWarrior.png",40,30,10,100, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
-		setMana(100);
-		maxMana = 100;
+		setMana(mana);
+		setHealth(health);
+		setMaxHealth(health);
+		setDamage(damage);
+		setMaxMana(mana);
 
 		setMoving("null");
 		
@@ -42,11 +45,11 @@ public class Player extends Actor implements Runnable{
 		actorThread.start();	
 		System.out.println("new Player");
 		
-		//TEST DE l'EPEE
-		Sword sword = new Sword("epee",20,20,this.getGame(), this);
+		//EPEE PAR DEFAUT
+		Sword sword = new Sword("epee",0,0,getGame(), this);
 		equipHandWeapon(sword);
 		
-		//TEST DE LA FIREBALL
+		//FIREBALL PAR DEFAUT
 		FireballWeapon fw = new FireballWeapon(getGame(), this);
 		equipThrowableWeapon(fw);
 	}
@@ -54,6 +57,16 @@ public class Player extends Actor implements Runnable{
 	public void reloadAction(Game game) {
 		Thread actorThread = new Thread(this);
 		actorThread.start();
+		if(getHandWeapon()!=null) {
+			getHandWeapon().activateCountThread();
+			getHandWeapon().reloadAction();
+		}
+		if(getThrowableWeapon()!=null) {
+			getThrowableWeapon().reloadAction(getGame());
+		}
+		for(CollectableObject co : getInventory().getExistingContent()) {
+			co.reloadAction(game);
+		}
 		super.reloadAction(game);
 	}
 	

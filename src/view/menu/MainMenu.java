@@ -18,8 +18,8 @@ public class MainMenu extends MenuPanel {
 	private GButton loadButton;
 	private Game game;
 	
-	public MainMenu(GamePanel gamePanel, Game game) {
-		super(gamePanel);
+	public MainMenu(Game game) {
+		super(game.getGamePanel());
 		this.setBackgroundImage("src/view/menu/gameMenu.png");
 		
 		playButton = new GButton("PLAY",24,new Dimension(250,100));

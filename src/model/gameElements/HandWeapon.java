@@ -89,4 +89,9 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 			ck.setCount(4);
 		}
 	}
+
+	public void reloadAction() {
+		attackAnimationCount.activeCountThread();
+		super.reloadAction(getGame());
+	}
 }

@@ -17,9 +17,6 @@ public class MenuPanel extends JPanel {
 	public MenuPanel(GamePanel gp) {
 		this.setLayout(null);
 		this.setBounds(0,0,(int)gp.getDimensions().getWidth(),(int)gp.getDimensions().getHeight());
-		gp.removePanels();
-		gp.add(this);
-		this.setVisible(true);
 	}
 	
 	public void setBackgroundImage(String ImageURL) {

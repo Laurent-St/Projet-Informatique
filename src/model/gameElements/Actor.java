@@ -2,8 +2,6 @@ package model.gameElements;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-
 import animation.Count;
 import model.Game;
 import model.map.Map;
@@ -36,7 +34,6 @@ public class Actor extends GameObject {
 		animationCount = new Count(4,90);
 		setMoving("null");
 		setOrientation("south");
-		
 		
 	}
 	
@@ -113,10 +110,15 @@ public class Actor extends GameObject {
 	public int getAnimationCount() {
 		return this.animationCount.getCount();
 	}
-	public Count getCount(){
-		return this.animationCount;
+	
+	public void launchAnimationCount(){
+		animationCount.activeCountThread();
 	}
-
+	
+	public void reloadAction(Game game) {
+		launchAnimationCount();
+		super.reloadAction(game);
+	}
 	
 	public void basicAttack(Actor target) {
 		target.setHealth(target.getHealth() - damage);
