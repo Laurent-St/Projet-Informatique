@@ -10,7 +10,7 @@ public class PoisonousTile extends Tile implements PoisonningObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	private PoisonRunnable poisonRunnable;
-	private Thread poisonThread;
+	private transient Thread poisonThread;
 	private boolean poisonThreadRunning = false;
 	private Game game;
 

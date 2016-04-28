@@ -25,6 +25,10 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 		attackAnimationCount.setCount(4);
 	}
 	
+	public void activateCountThread(){	//utilisé pour la sérialisation
+		attackAnimationCount.activeCountThread();
+	}
+	
 	public void setAttackRange(int range) {
 		if (range < 1) {
 			throw new RuntimeException("Portée négative");

@@ -12,7 +12,7 @@ public class Monster extends Actor implements Runnable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int count;
-	private Thread monsterThread;
+	private transient Thread monsterThread;
 
 	public Monster(String name, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
 		super(name, x, y, damage, health, speed, game, hitbox);
@@ -27,6 +27,11 @@ public class Monster extends Actor implements Runnable {
 		monsterThread.stop();
 		randomDrop();
 		getGame().getCurrentMap().removeMonster(this);
+	}
+	
+	public void activeMonsterThread(){		//va être utilisé pour la restauration de la sauvegarde.
+		monsterThread=new Thread(this);
+		monsterThread.start();
 	}
 	
 	public void randomDrop() {

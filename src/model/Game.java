@@ -63,6 +63,7 @@ public class Game implements Serializable {
 		}
 		gamePanel.initInventoryWindow();
 		gamePanel.initStatsPanel();
+		gamePanel.getInventoryWindow().setInventory(player.getInventory());
 	}
 	
 	public void initMenu(){
@@ -156,13 +157,20 @@ public class Game implements Serializable {
 		try{
 			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("save_game.serial"));
 			Game savedGame = (Game) ois.readObject();
+			this.levels = savedGame.levels;
+			this.currentMap = savedGame.currentMap;
 			this.player = savedGame.player;
 			player.reloadAction(this);
-			this.levels = savedGame.levels;
+			player.getCount().activeCountThread();
+			player.getHandWeapon().activateCountThread();
+			player.getHandWeapon().reloadAction(this);
+			player.getThrowableWeapon().reloadAction(this);
+			for(CollectableObject co : player.getInventory().getExistingContent()) {
+				co.reloadAction(this);
+			}
 			for(Map m : levels) {
 				m.setGame(this);
 			}
-			this.currentMap = savedGame.currentMap;
 			ois.close();
 		} catch(Exception e){
 			e.printStackTrace();

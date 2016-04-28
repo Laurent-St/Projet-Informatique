@@ -113,6 +113,9 @@ public class Actor extends GameObject {
 	public int getAnimationCount() {
 		return this.animationCount.getCount();
 	}
+	public Count getCount(){
+		return this.animationCount;
+	}
 
 	
 	public void basicAttack(Actor target) {

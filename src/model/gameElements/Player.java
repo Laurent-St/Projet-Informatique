@@ -48,6 +48,12 @@ public class Player extends Actor implements Runnable{
 		equipThrowableWeapon(fw);
 	}
 	
+	public void reloadAction(Game game) {
+		Thread actorThread = new Thread(this);
+		actorThread.start();
+		super.reloadAction(game);
+	}
+	
 	public void move(){
 		super.move();
 		Point footPosition = getFootPosition();

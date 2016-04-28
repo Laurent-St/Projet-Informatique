@@ -1,8 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 import model.gameElements.Player;
 
-public class PoisonRunnable implements Runnable {
+public class PoisonRunnable implements Serializable, Runnable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Game game;
 	private Player player;
 	private PoisonningObject poisonner;

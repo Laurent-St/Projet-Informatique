@@ -11,13 +11,17 @@ public class Count implements Serializable, Runnable {
 	private int count = 0;
 	private int maxCount;
 	protected int sleepTime;
-	private Thread clock;
+	private transient Thread clock;
 	
 	public Count(int max, int time) {
 		count = 0;
 		maxCount = max;
 		sleepTime = time;
 		clock = new Thread(this);
+		clock.start();
+	}
+	public void activeCountThread(){	//utilisé pour la sérialisation
+		clock=new Thread(this);
 		clock.start();
 	}
 	

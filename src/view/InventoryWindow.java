@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import model.gameElements.CollectableObject;
@@ -23,6 +22,12 @@ public class InventoryWindow extends JPanel implements InventoryObserver {		//mo
 		this.setBackground(Color.BLACK);
 		this.setVisible(true);
 		this.repaint();
+	}
+	
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+		inventory.setInventoryObserver(this);
+		updateContent();
 	}
 	
 

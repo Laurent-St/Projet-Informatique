@@ -11,7 +11,7 @@ public class Projectile extends Weapon implements Runnable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Thread movingWeaponThread;
+	private transient Thread movingWeaponThread;
 	private String direction;
 	private double speed;
 	private boolean travelling;
@@ -27,12 +27,16 @@ public class Projectile extends Weapon implements Runnable{
 		
 	}
 	
-	public void activate() {
+	public void activate() {		
 		double x = getAttachedPlayer().getXdouble()+getAttachedPlayer().getHitbox().getCenterX()-getHitbox().getCenterX();
 		double y = getAttachedPlayer().getYdouble()+getAttachedPlayer().getHitbox().getCenterY()-getHitbox().getCenterY();
 		this.setX(x);
 		this.setY(y);
 		movingWeaponThread = new Thread(this);
+		movingWeaponThread.start();
+	}
+	public void activateProjectileThread(){	//sera aussi utilisé pour la restauration de sauvegarde
+		movingWeaponThread=new Thread(this);
 		movingWeaponThread.start();
 	}
 	
