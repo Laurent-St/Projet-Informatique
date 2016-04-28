@@ -9,21 +9,23 @@ public class Monster extends Actor implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	private int count;
+	private int xpReward;
 	private transient Thread monsterThread;
 	private boolean threadSuspended = false;
 
-	public Monster(String name, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
+	public Monster(String name, double x, double y, int damage, int health, double speed, int xp, Game game, Rectangle hitbox) {
 		super(name, x, y, damage, health, speed, game, hitbox);
+		this.xpReward = xp;
 		monsterThread = new Thread(this);
 		monsterThread.start();
 		count = 0;
-		// System.out.println("new Monster");
 
 	}
 	
 	public void die() {
 		monsterThread.interrupt();
 		randomDrop();
+		getGame().getPlayer().gainXP(this.xpReward);
 		getGame().getCurrentMap().removeMonster(this);
 	}
 	
@@ -76,7 +78,7 @@ public class Monster extends Actor implements Runnable {
 	
 	public void tryAttack() {
 		Player player = getGame().getPlayer();
-		int range = 15;
+		int range = 10;
 		
 		Rectangle testHitbox1 = new Rectangle(getX()+(int)getHitbox().getMinX()-range,
 				getY()+(int)getHitbox().getMinY()-range,

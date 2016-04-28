@@ -20,8 +20,7 @@ public class Player extends Actor implements Runnable{
 	private int mana=50;
 	private int maxMana=100;
 	private int experience=0;
-	private int maxExperienceForLevel=100;
-	
+	private int experienceForLevel=30;
 	private static double playerSpeed  = 1.8;
 	private static Rectangle playerHitbox = new Rectangle(8,0,15,31);
 	
@@ -30,16 +29,14 @@ public class Player extends Actor implements Runnable{
 	private StatsPanel statsPanel;
 
 	public Player(int damage, int health, int mana, Game game) {
-		super("src/model/gameElements/characterWarrior.png",40,30,10,100, playerSpeed, game, playerHitbox);
+		super("src/model/gameElements/characterWarrior.png",40,30,damage,health, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
 		setMana(mana);
-		setHealth(health);
-		setMaxHealth(health);
 		setDamage(damage);
 		setMaxMana(mana);
-
 		setMoving("null");
+		setExperienceForLevel(10);
 		
 		Thread actorThread = new Thread(this);
 		actorThread.start();	
@@ -53,7 +50,7 @@ public class Player extends Actor implements Runnable{
 		FireballWeapon fw = new FireballWeapon(getGame(), this);
 		equipThrowableWeapon(fw);
 	}
-	
+
 	public void reloadAction(Game game) {
 		Thread actorThread = new Thread(this);
 		actorThread.start();
@@ -95,29 +92,28 @@ public class Player extends Actor implements Runnable{
 	public int getExperience() {
 		return experience;
 	}
+	
+
+	public void gainXP(int xpReward) {
+		this.setExperience(getExperience()+xpReward);
+	}
 
 	public void setExperience(int experience) {
-		if (experience < 0) {
-			throw new RuntimeException("Exp�rience n�gative");
-		} else if (this.experience + experience >= maxExperienceForLevel) {
+		this.experience = experience;
+		if(experience>=getMaxExperienceForLevel()) {
+			int lastMXP = getMaxExperienceForLevel();
 			levelup();
-			setExperience(this.experience + experience - maxExperienceForLevel);
-		} else {
-			this.experience = experience;
+			setExperience(experience-lastMXP);
 		}
+		updateStatsPanel();
 	}
 
 	public int getMaxExperienceForLevel() {
-		return 100;
+		return this.experienceForLevel;
 	}
 
-	public void setMaxExperienceForLevel(int maxExperienceForLevel) {
-		if (maxExperienceForLevel < 0) {
-			throw new RuntimeException("Exp�rience maximale n�gative");
-		} else {
-			this.maxExperienceForLevel = maxExperienceForLevel;
-			updateStatsPanel();
-		}
+	public void setExperienceForLevel(int xp) {
+		this.experienceForLevel = xp;
 	}
 	
 	public void setHealth(int h) {
@@ -135,15 +131,15 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void setMana(int mana) {
-		if (mana < 0) {
-			throw new RuntimeException("Valeur de mana n�gative");
+		if (mana <= 0) {
+			this.mana = 0;
 		} else {
 			this.mana = mana;
 			if(this.mana>getMaxMana()) {
 				this.mana = getMaxMana();
 			}
-			updateStatsPanel();
 		}
+		updateStatsPanel();
 	}
 
 	public int getMaxMana() {
@@ -151,12 +147,8 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void setMaxMana(int maxMana) {
-		if (maxMana < 0) {
-			throw new RuntimeException("Valeur de mana maximale n�gative");
-		} else {
-			this.maxMana = maxMana;
-			updateStatsPanel();
-		}
+		this.maxMana = maxMana;
+		updateStatsPanel();
 	}
 
 	public HandWeapon getHandWeapon() {
@@ -169,8 +161,6 @@ public class Player extends Actor implements Runnable{
 
 	public void equipHandWeapon(HandWeapon weapon) {
 		this.handWeapon = weapon;
-		
-		setDamage(damage + weapon.getDamage());
 	}
 	public void equipThrowableWeapon(ThrowableWeapon weapon) {
 		this.throwableWeapon = weapon;
@@ -190,10 +180,11 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void levelup() {
-		setLevel(level + 1);
-		setMaxHealth(maxHealth + 10);
-		setMaxMana(maxMana + 10);
-		setDamage(damage + 5);
+		setLevel(getLevel() + 1);
+		setMaxHealth(getMaxHealth() + 10);
+		setMaxMana(getMaxMana() + 10);
+		setDamage(getDamage() + 5);
+		setExperienceForLevel(getLevel()*10);
 		updateStatsPanel();
 		// unlockNewAbility(); DEBLOCAGE DE SORTS ET TALENTS
 	}

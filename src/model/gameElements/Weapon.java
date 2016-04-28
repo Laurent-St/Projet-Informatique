@@ -53,7 +53,7 @@ public class Weapon extends CollectableObject {
 	
 	public void inflictDirectDamage(ArrayList<Monster> hitMonsters) {
 		for (Monster m : hitMonsters) {
-			m.setHealth(m.getHealth()-getDamage());
+			m.setHealth(m.getHealth()-getDamage()-getAttachedPlayer().getDamage());
 		}
 	}
 	

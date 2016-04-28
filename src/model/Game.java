@@ -94,7 +94,7 @@ public class Game implements Serializable {
 	
 	
 	public void initPlayer(){
-		player = new Player(10, 100, 100, this);
+		player = new Player(0, 100, 100, this);
 		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
 		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
 	}
@@ -126,7 +126,7 @@ public class Game implements Serializable {
 			player.setX(40);
 			player.setY(30);
 		} else {
-			player.setX(890);
+			player.setX(900);
 			player.setY(620);
 		}
 		

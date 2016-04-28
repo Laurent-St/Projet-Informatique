@@ -142,7 +142,7 @@ public class LevelPanel extends JPanel {
 		
 		ArrayList<Projectile> projectiles = getMap().getProjectiles();
 		for (Projectile pro : projectiles) {
-			if(pro.isTravelling()) {
+			if(!pro.isDead()) {
 				String d = pro.getDirection();
 				if(d=="up") {
 					g.drawImage(pro.getImage(), pro.getX(), pro.getY(), pro.getX()+32,pro.getY()+32,0,32,31,63,null);

@@ -44,22 +44,20 @@ public class Map implements Serializable {
 	
 	public void reloadAction(Game game){
 		this.game = game;
+		this.projectiles = new ArrayList<Projectile>();
+		for(int i=0;i<tiles.length;i++) {
+			for(int j=0;j<tiles[0].length;j++) {
+				getTileAt(i,j).setGame(game);
+			}
+		}
 		for(Monster m : monsters) {
 			m.reloadAction(game);
 		}
 		for(GameObject go : gameObjects) {
 			go.reloadAction(game);
 		}
-		for(Projectile p: projectiles) {
-			p.reloadAction(game);
-		}
 		for(CollectableObject co : collectableObjects) {
 			co.reloadAction(game);
-		}
-		for(int i=0;i<tiles.length;i++) {
-			for(int j=0;j<tiles[0].length;j++) {
-				getTileAt(i,j).setGame(game);
-			}
 		}
 	}
 	

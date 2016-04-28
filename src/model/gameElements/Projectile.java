@@ -26,7 +26,8 @@ public class Projectile extends Weapon implements Runnable{
 		this.dead = false;
 	}
 	
-	public void activate() {		
+	public void activate() {
+		threadSuspended = false;
 		double x = getAttachedPlayer().getXdouble()+getAttachedPlayer().getHitbox().getCenterX()-getHitbox().getCenterX();
 		double y = getAttachedPlayer().getYdouble()+getAttachedPlayer().getHitbox().getCenterY()-getHitbox().getCenterY();
 		this.setX(x);
@@ -51,10 +52,10 @@ public class Projectile extends Weapon implements Runnable{
 	@Override
 	public void run() {
 		ArrayList<Monster> hitMonsters = new ArrayList<Monster>();
-
 		while(true) {
-			if(!threadSuspended) {
-				if(!getGame().getCurrentMap().isPositionWalkable(getX(), getY(), getHitbox()) 
+			if(threadSuspended==false) {
+				hitMonsters = getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox());
+				if(getGame().getCurrentMap().isPositionWalkable(getX(), getY(), getHitbox()) 
 				&& hitMonsters.size()==0) {
 					if(this.direction=="up") {
 						setY(getYdouble()-this.speed);
@@ -66,7 +67,8 @@ public class Projectile extends Weapon implements Runnable{
 						setX(getXdouble()-this.speed);
 					}
 				} else {
-					break;
+					explode(hitMonsters);
+					this.threadSuspended = true;
 				}
 			}
 			try {
@@ -75,12 +77,7 @@ public class Projectile extends Weapon implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		hitMonsters = getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox());
-		explode(hitMonsters);
-		this.threadSuspended = true;
-		
+		}		
 	}
 	
 	public void explode(ArrayList<Monster> hitMonsters) {
@@ -102,10 +99,4 @@ public class Projectile extends Weapon implements Runnable{
 	public void resumeThread() {
 		threadSuspended = false;
 	}
-	
-	public void reloadAction(Game game) {
-		movingWeaponThread=new Thread(this);
-		movingWeaponThread.start();
-	}
-
 }

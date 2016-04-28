@@ -106,6 +106,7 @@ public class StatsPanel extends JPanel{
 		xp.setValue((int) Math.floor(100/player.getMaxExperienceForLevel()*player.getExperience()));
 		health.setValue((int) Math.floor(100/player.getMaxHealth()*player.getHealth()));
 		levelLabel.setText("Level "+String.valueOf(player.getLevel()));
+		attackBonus.setText("Damage Bonus: "+String.valueOf(player.getDamage()));
 		
 		if(player.getMana()<=10) {
 			manaLabel.setForeground(Color.RED);
@@ -118,6 +119,8 @@ public class StatsPanel extends JPanel{
 		} else {
 			healthLabel.setForeground(Color.WHITE);
 		}
+		xp.repaint();
+		health.repaint();
 	}
 
 }
