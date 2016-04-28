@@ -6,6 +6,11 @@ import model.Game;
 
 public class ThrowableWeapon extends Weapon {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ThrowableWeapon(String name, int x, int y, int damage, int manaConsumption, String image_url, Rectangle hitbox, Game game,
 			Player attachedPlayer) {
 		super(name, x, y, damage, manaConsumption, image_url, hitbox, game, attachedPlayer);

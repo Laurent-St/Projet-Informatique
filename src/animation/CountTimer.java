@@ -1,6 +1,10 @@
 package animation;
 
 public class CountTimer extends Count {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private CountTimerListener source;
 	
 	public CountTimer(int max, int time, CountTimerListener source) {

@@ -8,6 +8,10 @@ import model.Game;
 
 public class HandWeapon extends Weapon implements CountTimerListener  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int range;
 	private CountTimer attackAnimationCount;
 	

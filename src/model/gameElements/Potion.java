@@ -5,6 +5,10 @@ import java.awt.Rectangle;
 import model.Game;
 
 public class Potion extends CollectableObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int value=0;
 	private static Rectangle hitbox = new Rectangle(3,5,25,20);
 	

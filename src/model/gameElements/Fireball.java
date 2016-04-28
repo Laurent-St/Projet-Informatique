@@ -6,6 +6,10 @@ import model.Game;
 
 public class Fireball extends Projectile {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int fireballDamage = 80;
 	private static Rectangle fireballHitbox = new Rectangle(7,5,16,26);
 	private static double speed = 5;

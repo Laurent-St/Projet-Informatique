@@ -6,6 +6,10 @@ import model.Game;
 
 public class Arrow extends Projectile {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int arrowDamage = 30;
 	private static Rectangle arrowHitbox = new Rectangle(8,8,16,16);
 	private static double speed = 8;

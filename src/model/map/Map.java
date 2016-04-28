@@ -2,6 +2,7 @@ package model.map;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +18,11 @@ import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
 
-public class Map {
+public class Map implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int levelNum;
 	private static int levelWidth = 48;
 	private static int levelHeight = 34;
@@ -36,6 +41,27 @@ public class Map {
 	}
 	
 	public Game getGame(){return game;}
+	
+	public void setGame(Game game){
+		this.game = game;
+		for(Monster m : monsters) {
+			m.setGame(game);
+		}
+		for(GameObject go : gameObjects) {
+			go.setGame(game);
+		}
+		for(Projectile p: projectiles) {
+			p.setGame(game);
+		}
+		for(CollectableObject co : collectableObjects) {
+			co.setGame(game);
+		}
+		for(int i=0;i<tiles.length;i++) {
+			for(int j=0;j<tiles[0].length;j++) {
+				getTileAt(i,j).setGame(game);
+			}
+		}
+	}
 	
 	public ArrayList<GameObject> getGameObjects() {return this.gameObjects;}
 	

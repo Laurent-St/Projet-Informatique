@@ -1,7 +1,13 @@
 package animation;
 
-public class Count implements Runnable {
+import java.io.Serializable;
+
+public class Count implements Serializable, Runnable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int count = 0;
 	private int maxCount;
 	protected int sleepTime;

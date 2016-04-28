@@ -1,6 +1,10 @@
 package model.gameElements;
 
 public class Tomb extends CollectableObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Inventory inventory;
 	private int experience;
 

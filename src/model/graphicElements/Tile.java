@@ -1,9 +1,15 @@
 package model.graphicElements;
 
+import java.io.Serializable;
+
 import model.Game;
 
-public class Tile {
+public class Tile implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int[] reference = { 0, 0 };
 	private boolean isWalkable = true; // pour savoir si on peut marcher dessus
 	private boolean isPoisonous = false;
@@ -16,6 +22,10 @@ public class Tile {
 		reference[0] = ref[0];
 		reference[1] = ref[1];
 		this.type = type;
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	public boolean getIsPoisonous() {

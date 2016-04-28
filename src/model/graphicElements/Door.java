@@ -3,6 +3,10 @@ package model.graphicElements;
 import model.Game;
 
 public class Door extends Tile{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String name="door";
 	private boolean isOpen = false;
 	private int linkedLevel;

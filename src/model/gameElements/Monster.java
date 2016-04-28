@@ -7,6 +7,10 @@ import model.Game;
 
 public class Monster extends Actor implements Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int count;
 	private Thread monsterThread;
 

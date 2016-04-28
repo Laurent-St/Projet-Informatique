@@ -20,9 +20,9 @@ public class GButtonGraphics extends JPanel {
 	
 	public GButtonGraphics(GButton button) {
 		try {
-			mouseOutImage = ImageIO.read(new File("src/gui/button/mouseOut.png"));
-			mouseOverImage = ImageIO.read(new File("src/gui/button/mouseOver.png"));
-			mouseDownImage = ImageIO.read(new File("src/gui/button/mouseDown.png"));
+			mouseOutImage = ImageIO.read(new File("src/view/button/mouseOut.png"));
+			mouseOverImage = ImageIO.read(new File("src/view/button/mouseOver.png"));
+			mouseDownImage = ImageIO.read(new File("src/view/button/mouseDown.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

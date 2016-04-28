@@ -1,10 +1,15 @@
 package model.gameElements;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import view.InventoryObserver;
 
-public class Inventory implements InventorySubject{
+public class Inventory implements InventorySubject, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<CollectableObject> content;
 	private int maxSize = 5;
 	private InventoryObserver observer;

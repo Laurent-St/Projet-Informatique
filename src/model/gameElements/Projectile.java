@@ -7,6 +7,10 @@ import model.Game;
 
 public class Projectile extends Weapon implements Runnable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Thread movingWeaponThread;
 	private String direction;
 	private double speed;

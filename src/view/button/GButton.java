@@ -7,6 +7,8 @@ package view.button;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,6 +38,10 @@ public class GButton extends JPanel {
 		this.setVisible(true);
 	}
 
+	public void addMouseListener(MouseListener e) {
+		buttonImage.addMouseListener(e);
+	}
+	
 	public void initLabel(String text, int textSize) {
 		label = new JLabel();
 		label.setFont(FontLoader.getFont(textSize));

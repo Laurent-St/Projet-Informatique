@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -9,7 +8,7 @@ public class GameWindow extends JFrame {
 	private GamePanel gamePanel;
 	
 	public GameWindow(GamePanel gamePanel) {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setTitle("Hack And Slash");
 		this.setResizable(false);
 		
@@ -20,6 +19,12 @@ public class GameWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 	    this.setVisible(true);
 	    System.out.println("new GameWindow");
+	    
+	    this.addWindowListener(new WindowListener(gamePanel.getGame()));
+	}
+	
+	public void windowClosed() {
+		
 	}
 
 	

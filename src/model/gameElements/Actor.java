@@ -10,6 +10,10 @@ import model.map.Map;
 
 
 public class Actor extends GameObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected int damage;
 	protected int health = 100;
 	protected int maxHealth = 100;

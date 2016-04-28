@@ -5,6 +5,10 @@ import java.awt.Rectangle;
 import model.Game;
 
 public class CollectableObject extends GameObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 
 	public CollectableObject(String name, double x, double y, String image_url, Rectangle hitbox, Game game) {

@@ -6,6 +6,10 @@ import model.Game;
 
 public class Axe extends HandWeapon {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Rectangle axeHitBox = new Rectangle(0,0,32,32);
 	private static String imageUrl = "src/model/gameElements/axe.png";
 	private static int damage = 10;

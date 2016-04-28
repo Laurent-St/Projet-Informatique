@@ -23,8 +23,6 @@ public class GamePanel extends JPanel {
 		this.setLayout(null);
 		this.setVisible(true);
 		this.setBackground(Color.BLACK);
-		initInventoryWindow();
-		initStatsPanel();
 		System.out.println("new GamePanel");
 	}
 	
@@ -41,6 +39,7 @@ public class GamePanel extends JPanel {
 		this.add(inventoryWindow);
 		this.setComponentZOrder(inventoryWindow, 0);
 		inventoryWindow.setVisible(true);
+		this.repaint();
 		inventoryWindow.repaint();
 	}
 	

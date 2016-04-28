@@ -8,6 +8,10 @@ import model.graphicElements.Tile;
 import view.StatsPanel;
 
 public class Player extends Actor implements Runnable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Inventory inventory;
 	private int level=1;
 	private int mana=50;

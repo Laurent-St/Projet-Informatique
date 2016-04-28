@@ -6,6 +6,10 @@ import model.Game;
 
 public class FireballWeapon extends ThrowableWeapon {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Rectangle hitbox = new Rectangle(-16,-16,32,32);
 	private static int damage = 20;
 	private static int fireballMana = 20;

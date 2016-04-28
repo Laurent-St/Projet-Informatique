@@ -18,7 +18,7 @@ public class MenuPanel extends JPanel {
 		this.setLayout(null);
 		this.setBounds(0,0,(int)gp.getDimensions().getWidth(),(int)gp.getDimensions().getHeight());
 		gp.removePanels();
-		gp.addPanel(this);
+		gp.add(this);
 		this.setVisible(true);
 	}
 	

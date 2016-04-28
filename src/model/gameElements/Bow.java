@@ -6,6 +6,10 @@ import model.Game;
 
 public class Bow extends ThrowableWeapon {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Rectangle hitbox = new Rectangle(0,0,32,32);
 	private static int damage = 30;
 	private static int bowMana = 5;

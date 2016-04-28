@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import model.Game;
 
 public class Weapon extends CollectableObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int damage;
 	private int manaConsumption;
 

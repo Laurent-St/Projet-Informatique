@@ -1,9 +1,15 @@
 package animation;
 
+import java.io.Serializable;
+
 import javax.swing.JComponent;
 
-public class GraphicsClock implements Runnable {
+public class GraphicsClock implements Serializable, Runnable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int delay;
 	private JComponent source;
 	

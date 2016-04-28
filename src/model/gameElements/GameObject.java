@@ -4,14 +4,20 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+
 import javax.imageio.ImageIO;
 import model.Game;
 
-public class GameObject {
+public class GameObject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// private int position;
 	private double posx;
 	private double posy;
-	private Image object_image;
+	private transient Image object_image;
 	private String image_url;
 	private Game game;
 	private Rectangle hitbox;
@@ -27,6 +33,11 @@ public class GameObject {
 		this.image_url = image_url;
 		setImage();
 		this.game = game;
+	}
+	
+	public void reloadAction(Game game) {
+		this.game = game;
+		setImage();
 	}
 
 	public void setImage() {
