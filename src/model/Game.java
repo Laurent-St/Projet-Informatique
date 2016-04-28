@@ -162,9 +162,13 @@ public class Game implements Serializable {
 			this.player = savedGame.player;
 			player.reloadAction(this);
 			player.getCount().activeCountThread();
-			player.getHandWeapon().activateCountThread();
-			player.getHandWeapon().reloadAction(this);
-			player.getThrowableWeapon().reloadAction(this);
+			if(player.getHandWeapon()!=null) {
+				player.getHandWeapon().activateCountThread();
+				player.getHandWeapon().reloadAction(this);
+			}
+			if(player.getThrowableWeapon()!=null) {
+				player.getThrowableWeapon().reloadAction(this);
+			}
 			for(CollectableObject co : player.getInventory().getExistingContent()) {
 				co.reloadAction(this);
 			}

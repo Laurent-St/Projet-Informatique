@@ -2,6 +2,9 @@ package model.gameElements;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Random;
+
 import model.Game;
 //import model.graphicElements.PoisonousTile;
 import model.graphicElements.Tile;
@@ -187,7 +190,32 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void die() {
-		//setHealth(0);
+		this.setHealth(maxHealth);
+		this.setMana(maxMana);
+		this.setExperience(0);
+		if(getHandWeapon()!=null) {
+			getGame().getCurrentMap().addCollectableObject(this.getHandWeapon());
+			getHandWeapon().setX(getXdouble()+5);
+			getHandWeapon().setY(getYdouble()+5);
+			handWeapon = null;
+		}
+		if(getThrowableWeapon()!=null) {
+			getGame().getCurrentMap().addCollectableObject(this.getThrowableWeapon());
+			getThrowableWeapon().setX(getXdouble()-5);
+			getThrowableWeapon().setY(getYdouble()-5);
+			throwableWeapon = null;
+		}
+		ArrayList<CollectableObject> cos = (ArrayList<CollectableObject>) getInventory().getExistingContent().clone();
+		for (CollectableObject object: cos){
+			getInventory().dropObject(object);
+			Random rand = new Random();
+			int dx = rand.nextInt(20)-10;
+			int dy = rand.nextInt(20)-10;
+			object.setX(object.getXdouble()+dx);
+			object.setY(object.getYdouble()+dy);
+		}
+		this.setX(40);
+		this.setY(30);
 	}
 	
 	public void drinkPotion(Potion potion) {

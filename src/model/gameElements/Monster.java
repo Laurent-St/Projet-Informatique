@@ -24,7 +24,7 @@ public class Monster extends Actor implements Runnable {
 	}
 	
 	public void die() {
-		monsterThread.stop();
+		monsterThread.interrupt();
 		randomDrop();
 		getGame().getCurrentMap().removeMonster(this);
 	}
@@ -69,11 +69,33 @@ public class Monster extends Actor implements Runnable {
 				if (count == 80) {
 					count = 0;
 				}
+				if(count%40 == 0) {
+					tryAttack();
+				}
 				move();
 				Thread.sleep(15);
 			}
 		} catch (Exception e) {
 		}
+	}
+	
+	public void tryAttack() {
+		Player player = getGame().getPlayer();
+		int range = 15;
+		
+		Rectangle testHitbox1 = new Rectangle(getX()+(int)getHitbox().getMinX()-range,
+				getY()+(int)getHitbox().getMinY()-range,
+				(int)getHitbox().getWidth()+range,
+				(int)getHitbox().getHeight()+range);
+		Rectangle testHitbox2 = new Rectangle(player.getX()+(int)player.getHitbox().getMinX(),
+				player.getY()+(int)player.getHitbox().getMinY(),
+				(int)player.getHitbox().getWidth(),
+				(int)player.getHitbox().getHeight());
+		if(testHitbox1.intersects(testHitbox2)) {
+			System.out.print("Player tabassé");
+			player.setHealth(player.getHealth()-getDamage());
+		}
+				
 	}
 
 	public void interruptThread() {

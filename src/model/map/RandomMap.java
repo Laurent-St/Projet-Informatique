@@ -12,13 +12,15 @@ import model.gameElements.Monster;
 import model.graphicElements.Door;
 import model.graphicElements.Floor;
 import model.graphicElements.PoisonousTile;
-//import model.graphicElements.PoisonousTile;
-import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
 
 public class RandomMap extends Map {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Point> holes;
 	private Game game;
@@ -55,7 +57,7 @@ public class RandomMap extends Map {
 			do {
 				int randX = rnd.nextInt(920);
 				int randY = rnd.nextInt(640);
-				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 50, 100, 0.5, getGame(), new Rectangle(8,0,15,31));
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 15, 100, 0.5, getGame(), new Rectangle(8,0,15,31));
 			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
 					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
 			
