@@ -105,7 +105,7 @@ public class Game {
 			player.setY(30);
 		} else {
 			player.setX(890);
-			player.setY(610);
+			player.setY(620);
 		}
 		
 		if(levelNum>levels.size()) {
