@@ -17,8 +17,8 @@ public class Player extends Actor implements Runnable{
 	private static final long serialVersionUID = 1L;
 	private Inventory inventory;
 	private int level=1;
-	private int mana=50;
-	private int maxMana=100;
+	private int mana;
+	private int maxMana;
 	private int experience=0;
 	private int experienceForLevel=30;
 	private static double playerSpeed  = 1.8;
@@ -32,11 +32,11 @@ public class Player extends Actor implements Runnable{
 		super("src/model/gameElements/characterWarrior.png",40,30,damage,health, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
+		setMaxMana(mana);
 		setMana(mana);
 		setDamage(damage);
-		setMaxMana(mana);
 		setMoving("null");
-		setExperienceForLevel(10);
+		setExperienceForLevel(50+getLevel()*20);
 		
 		Thread actorThread = new Thread(this);
 		actorThread.start();	
@@ -131,13 +131,11 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void setMana(int mana) {
-		if (mana <= 0) {
+		this.mana = mana;
+		if(this.mana>getMaxMana()) {
+			this.mana = getMaxMana();
+		} else if(this.mana<0) {
 			this.mana = 0;
-		} else {
-			this.mana = mana;
-			if(this.mana>getMaxMana()) {
-				this.mana = getMaxMana();
-			}
 		}
 		updateStatsPanel();
 	}
@@ -184,7 +182,7 @@ public class Player extends Actor implements Runnable{
 		setMaxHealth(getMaxHealth() + 10);
 		setMaxMana(getMaxMana() + 10);
 		setDamage(getDamage() + 5);
-		setExperienceForLevel(getLevel()*10);
+		setExperienceForLevel(50+getLevel()*20);
 		updateStatsPanel();
 		// unlockNewAbility(); DEBLOCAGE DE SORTS ET TALENTS
 	}
@@ -194,8 +192,8 @@ public class Player extends Actor implements Runnable{
 	}
 
 	public void die() {
-		this.setHealth(maxHealth);
-		this.setMana(maxMana);
+		this.setHealth(getMaxHealth());
+		this.setMana(getMaxMana());
 		this.setExperience(0);
 		if(getHandWeapon()!=null) {
 			getGame().getCurrentMap().addCollectableObject(this.getHandWeapon());
@@ -224,7 +222,7 @@ public class Player extends Actor implements Runnable{
 	
 	public void drinkPotion(Potion potion) {
 		if (potion instanceof HealthPotion) {
-			setHealth(health + potion.getValue());
+			setHealth(getHealth() + potion.getValue());
 			inventory.removeFromInventory(potion);
 		} else if (potion instanceof ManaPotion) {
 			setMana(mana + potion.getValue());

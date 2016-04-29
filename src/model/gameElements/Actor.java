@@ -12,9 +12,9 @@ public class Actor extends GameObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected int damage;
-	protected int health = 100;
-	protected int maxHealth = 100;
+	private int damage;
+	private int health;
+	private int maxHealth;
 	
 	private Count animationCount;
 
@@ -64,7 +64,7 @@ public class Actor extends GameObject {
 
 	public void setHealth(int health) {
 		this.health = health;
-		if(this.health >= getMaxHealth()) {
+		if(this.health > getMaxHealth()) {
 			this.health = getMaxHealth();
 		} else if (this.health<=0) {
 			this.health = 0;
@@ -77,11 +77,7 @@ public class Actor extends GameObject {
 	}
 
 	public void setMaxHealth(int maxHealth) {
-		if (maxHealth >= 0) {
-			this.maxHealth = maxHealth;
-		} else {
-			this.maxHealth = 0;
-		}
+		this.maxHealth = maxHealth;
 	}
 	
 	public Point getFootPosition() {

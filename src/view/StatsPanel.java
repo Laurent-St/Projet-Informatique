@@ -102,9 +102,9 @@ public class StatsPanel extends JPanel{
 	}
 	
 	public void update() {
-		mana.setValue((int) Math.floor(100/player.getMaxMana()*player.getMana()));
-		xp.setValue((int) Math.floor(100/player.getMaxExperienceForLevel()*player.getExperience()));
-		health.setValue((int) Math.floor(100/player.getMaxHealth()*player.getHealth()));
+		mana.setValue((int) Math.floor(100.0/(double)player.getMaxMana()*(double)player.getMana()));
+		xp.setValue((int) Math.floor(100.0/(double)player.getMaxExperienceForLevel()*(double)player.getExperience()));
+		health.setValue((int) Math.floor(100.0/(double)player.getMaxHealth()*(double)player.getHealth()));
 		levelLabel.setText("Level "+String.valueOf(player.getLevel()));
 		attackBonus.setText("Damage Bonus: "+String.valueOf(player.getDamage()));
 		

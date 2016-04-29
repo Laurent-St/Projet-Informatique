@@ -57,7 +57,9 @@ public class RandomMap extends Map {
 			do {
 				int randX = rnd.nextInt(920);
 				int randY = rnd.nextInt(640);
-				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY, 15, 100, 0.5, 10, getGame(), new Rectangle(8,0,15,31));
+				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY,
+						8+getLevelNum()*2, 98+getLevelNum()*2, 0.45+(long)getLevelNum()/20.0, 10,
+						getGame(), new Rectangle(8,0,15,31));
 			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
 					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
 			

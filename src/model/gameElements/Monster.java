@@ -23,7 +23,7 @@ public class Monster extends Actor implements Runnable {
 	}
 	
 	public void die() {
-		monsterThread.interrupt();
+		interruptThread();
 		randomDrop();
 		getGame().getPlayer().gainXP(this.xpReward);
 		getGame().getCurrentMap().removeMonster(this);
