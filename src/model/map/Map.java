@@ -32,6 +32,7 @@ public class Map implements Serializable {
 	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	private ArrayList<CollectableObject> collectableObjects=new ArrayList<CollectableObject>();
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	private ArrayList<GameObject> specialFX = new ArrayList<GameObject>();
 	private Game game;
 	
 	public Map(int levelNum, Game game) {
@@ -68,6 +69,12 @@ public class Map implements Serializable {
 	public void addCollectableObject(CollectableObject co) {collectableObjects.add(co);}
 	
 	public void removeCollectableObject(CollectableObject co) {collectableObjects.remove(co);}
+	
+	public ArrayList<GameObject> getSpecialFX(){return specialFX;}
+	
+	public void addSpecialFX(GameObject sfx) {specialFX.add(sfx);}
+	
+	public void removeSpecialFX(GameObject sfx) {specialFX.remove(sfx);}
 	
 	public ArrayList<Monster> getMonsters(){return monsters;}
 	

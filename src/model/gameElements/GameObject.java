@@ -86,4 +86,9 @@ public class GameObject implements Serializable {
 	public Rectangle getHitbox() {
 		return this.hitbox;
 	}
+
+	public int getAnimationCount() {
+		//A REDEFINIR
+		return 0;
+	}
 }

@@ -69,6 +69,7 @@ public class LevelPanel extends JPanel {
 		paintObjects(g);
 		paintAllActors(g);
 		paintWeapon(g);
+		paintSpecialFX(g);
 	}
 	
 	public void paintBackground(Graphics g) {
@@ -160,13 +161,24 @@ public class LevelPanel extends JPanel {
 	public void paintObjects(Graphics g){
 		for (GameObject object: getMap().getGameObjects()){
 			Image image=object.getImage();
-			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getMaxX(), object.getY()+(int)object.getHitbox().getMaxY(),
 					0,0,31,31,null);
 		}
 		for (CollectableObject object: getMap().getCollectableObjects()){
 			Image image=object.getImage();
-			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getWidth(), object.getY()+(int)object.getHitbox().getHeight(),
+			g.drawImage(image, object.getX(), object.getY(),object.getX()+(int)object.getHitbox().getMaxX(), object.getY()+(int)object.getHitbox().getMaxY(),
 					0,0,31,31,null);
+		}
+	}
+	
+	public void paintSpecialFX(Graphics g) {
+		for(GameObject sfx: getMap().getSpecialFX()) {
+			if(sfx!=null) {
+				Image image = sfx.getImage();
+				int c = sfx.getAnimationCount();
+				g.drawImage(image, sfx.getX(), sfx.getY(), sfx.getX()+(int)sfx.getHitbox().getMaxX(), sfx.getY()+(int)sfx.getHitbox().getMaxY(),
+						32*c,0,32*c+31,31,null);
+			}
 		}
 	}
 }

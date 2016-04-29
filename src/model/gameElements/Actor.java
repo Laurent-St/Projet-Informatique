@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import animation.Count;
 import model.Game;
+import model.graphicElements.Slash;
 import model.map.Map;
 
 
@@ -63,12 +64,17 @@ public class Actor extends GameObject {
 	}
 
 	public void setHealth(int health) {
+		int lastHealth = getHealth();
 		this.health = health;
 		if(this.health > getMaxHealth()) {
 			this.health = getMaxHealth();
 		} else if (this.health<=0) {
 			this.health = 0;
 			die();
+		}
+		
+		if(lastHealth>getHealth()) {
+			new Slash(getX(),getY(),getGame(),getGame().getCurrentMap());
 		}
 	}
 
