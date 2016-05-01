@@ -16,7 +16,7 @@ import model.gameElements.HandWeapon;
 import model.gameElements.Monster;
 import model.gameElements.Player;
 import model.gameElements.Projectile;
-import model.gameElements.Weapon;
+import model.graphicElements.SpecialFX;
 import model.graphicElements.TileLibrary;
 import model.map.Map;
 import view.GamePanel;
@@ -175,9 +175,10 @@ public class LevelPanel extends JPanel {
 		for(GameObject sfx: getMap().getSpecialFX()) {
 			if(sfx!=null) {
 				Image image = sfx.getImage();
+				int size = ((SpecialFX) sfx).getSize();
 				int c = sfx.getAnimationCount();
 				g.drawImage(image, sfx.getX(), sfx.getY(), sfx.getX()+(int)sfx.getHitbox().getMaxX(), sfx.getY()+(int)sfx.getHitbox().getMaxY(),
-						32*c,0,32*c+31,31,null);
+						size*c,0,size*c+size-1,size,null);
 			}
 		}
 	}

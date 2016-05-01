@@ -7,8 +7,10 @@ import view.FontLoader;
 import view.GamePanel;
 import view.GameWindow;
 import view.level.LevelPanel;
+import view.menu.InstructionsMenu;
 import view.menu.MainMenu;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,6 +33,7 @@ public class Game implements Serializable {
 	private transient GamePanel gamePanel;
 	private transient LevelPanel levelPanel;
 	private transient MainMenu mainMenu;
+	private transient InstructionsMenu instructionsMenu;
 	
 	private Player player;
 	private transient PlayerControls playerControls;
@@ -72,6 +75,7 @@ public class Game implements Serializable {
 	}
 	
 	public void initMenu(){
+		instructionsMenu = new InstructionsMenu(this);
 		mainMenu = new MainMenu(this);
 		gamePanel.setMenu(mainMenu);
 	}
@@ -118,16 +122,22 @@ public class Game implements Serializable {
 	public Player getPlayer() {
 		return this.player;
 	}
+	
+	public void backToMainMenu() {
+		gamePanel.setMenu(mainMenu);
+	}
+	
+	public void switchToInstructionsMenu() {
+		gamePanel.setMenu(instructionsMenu);
+	}
 
 	public void changeLevel(int levelNum) {
 		System.out.println("go to "+String.valueOf(levelNum));
 		getCurrentMap().stopAllThreads();
 		if(getCurrentMap().getLevelNum()<levelNum) {
-			player.setX(40);
-			player.setY(30);
+			getCurrentMap().tryToTeleport(player, new Point(40,30));
 		} else {
-			player.setX(900);
-			player.setY(620);
+			getCurrentMap().tryToTeleport(player, new Point(900,620));
 		}
 		
 		if(levelNum>levels.size()) {

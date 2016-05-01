@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Game;
-//import model.graphicElements.PoisonousTile;
+import model.graphicElements.DeadMessage;
+import model.graphicElements.LevelUP;
 import model.graphicElements.Tile;
 import view.StatsPanel;
 
@@ -184,7 +185,7 @@ public class Player extends Actor implements Runnable{
 		setDamage(getDamage() + 5);
 		setExperienceForLevel(50+getLevel()*20);
 		updateStatsPanel();
-		// unlockNewAbility(); DEBLOCAGE DE SORTS ET TALENTS
+		new LevelUP(getX(),getY()-32,getGame(),getGame().getCurrentMap());
 	}
 	
 	public int getLevel() {
@@ -207,6 +208,7 @@ public class Player extends Actor implements Runnable{
 			getThrowableWeapon().setY(getYdouble()-5);
 			throwableWeapon = null;
 		}
+		@SuppressWarnings("unchecked")
 		ArrayList<CollectableObject> cos = (ArrayList<CollectableObject>) getInventory().getExistingContent().clone();
 		for (CollectableObject object: cos){
 			getInventory().dropObject(object);
@@ -216,8 +218,8 @@ public class Player extends Actor implements Runnable{
 			object.setX(object.getXdouble()+dx);
 			object.setY(object.getYdouble()+dy);
 		}
-		this.setX(40);
-		this.setY(30);
+		new DeadMessage(this.getX()-16,this.getY()-16,getGame(),getGame().getCurrentMap());
+		getGame().getCurrentMap().tryToTeleport(this, new Point(40,30));
 	}
 	
 	public void drinkPotion(Potion potion) {

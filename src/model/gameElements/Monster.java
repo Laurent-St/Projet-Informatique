@@ -26,17 +26,19 @@ public class Monster extends Actor implements Runnable {
 		interruptThread();
 		randomDrop();
 		getGame().getPlayer().gainXP(this.xpReward);
-		getGame().getCurrentMap().removeMonster(this);
+		while(Thread.currentThread()==monsterThread) {
+		}
 		monsterThread.interrupt();
+		getGame().getCurrentMap().removeMonster(this);
 	}
 	
 	public void randomDrop() {
 		Random random = new Random();
 		int rnd = random.nextInt(100);
 		if(rnd<=10) {
-			getGame().getCurrentMap().addCollectableObject(new HealthPotion(getX(),getY(),50,getGame()));
+			getGame().getCurrentMap().addCollectableObject(new HealthPotion(getX(),getY(),45+getDamage(),getGame()));
 		} else if(rnd>10 && rnd <=20) {
-			getGame().getCurrentMap().addCollectableObject(new ManaPotion(getX(),getY(),50,getGame()));
+			getGame().getCurrentMap().addCollectableObject(new ManaPotion(getX(),getY(),45+getDamage(),getGame()));
 
 		} else {
 			getGame().getCurrentMap().addGameObject(new Skull(getX(),getY(),getGame()));
@@ -48,7 +50,7 @@ public class Monster extends Actor implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				if(!threadSuspended) {
+				if(!threadSuspended && this!=null) {
 					if (count == 0) {
 						Random randomGenerator = new Random();
 						int randomNum = randomGenerator.nextInt(4);
@@ -83,8 +85,8 @@ public class Monster extends Actor implements Runnable {
 		
 		Rectangle testHitbox1 = new Rectangle(getX()+(int)getHitbox().getMinX()-range,
 				getY()+(int)getHitbox().getMinY()-range,
-				(int)getHitbox().getWidth()+range,
-				(int)getHitbox().getHeight()+range);
+				(int)getHitbox().getWidth()+range*2,
+				(int)getHitbox().getHeight()+range*2);
 		Rectangle testHitbox2 = new Rectangle(player.getX()+(int)player.getHitbox().getMinX(),
 				player.getY()+(int)player.getHitbox().getMinY(),
 				(int)player.getHitbox().getWidth(),

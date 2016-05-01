@@ -261,6 +261,21 @@ public class Map implements Serializable {
 		}
 		return detectedMonsters;
 	}
+	
+	public void tryToTeleport(Player player, Point point) {
+		int x = point.x;
+		int y = point.y;
+		int step = 1;
+		int inv = 1;
+		while(isPositionOccupied(x,y,player,false) || !isPositionWalkable(x,y,player.getHitbox())) {
+			x += step*inv;
+			y += step*inv;
+			step++;
+			inv*=-1;
+		}
+		player.setX(x);
+		player.setY(y);
+	}
 
 	public void stopAllThreads() {
 		for(Projectile p: getProjectiles()) {

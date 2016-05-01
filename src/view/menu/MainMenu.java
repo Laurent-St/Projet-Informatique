@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 
+import controls.InstructionsMouseListener;
 import controls.LoadMouseListener;
 import controls.PlayMouseListener;
 import model.Game;
@@ -32,6 +33,7 @@ public class MainMenu extends MenuPanel {
 		instructionsButton.setLocation(700, 550);
 		instructionsButton.addTo(this);
 		instructionsButton.setVisible(true);
+		instructionsButton.addMouseListener(new InstructionsMouseListener(game));
 		
 		loadButton=new GButton("LOAD", 18, new Dimension(250,66));
 		loadButton.setLocation(700, 450);

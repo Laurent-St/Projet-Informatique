@@ -8,20 +8,20 @@ import model.Game;
 import model.gameElements.GameObject;
 import model.map.Map;
 
-public class Slash extends GameObject implements CountTimerListener, SpecialFX {
+public class DeadMessage extends GameObject implements CountTimerListener, SpecialFX {
 	
 
 	private static final long serialVersionUID = 1L;
-	private static Rectangle slashHitbox = new Rectangle(0,0,32,32);
-	private static String url = "src/model/graphicElements/slash.png";
+	private static Rectangle slashHitbox = new Rectangle(0,0,64,64);
+	private static String url = "src/model/graphicElements/dead.png";
 	private Map linkedMap;
 	private CountTimer ct;
 
-	public Slash(double x, double y, Game game, Map level) {
+	public DeadMessage(double x, double y, Game game, Map level) {
 		super(x, y, url, slashHitbox, game);
 		this.linkedMap = level;
 		level.addSpecialFX(this);
-		ct = new CountTimer(5,100,this);
+		ct = new CountTimer(5,250,this);
 		
 	}
 	@Override
@@ -41,7 +41,7 @@ public class Slash extends GameObject implements CountTimerListener, SpecialFX {
 	}
 	@Override
 	public int getSize() {
-		return 32;
+		return 64;
 	}
 	
 	
