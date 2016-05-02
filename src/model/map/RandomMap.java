@@ -8,7 +8,9 @@ import java.util.Random;
 import model.Game;
 import model.gameElements.Axe;
 import model.gameElements.Bow;
+import model.gameElements.FireballWeapon;
 import model.gameElements.Monster;
+import model.gameElements.Sword;
 import model.graphicElements.Door;
 import model.graphicElements.Floor;
 import model.graphicElements.PoisonousTile;
@@ -69,13 +71,36 @@ public class RandomMap extends Map {
 	}
 	
 	public void initGameObjects(){
-		Axe axe= new Axe("hache", 180, 200, getGame(), getGame().getPlayer());
-		addCollectableObject(axe);
-		
-		Bow bow = new Bow(getGame(),getGame().getPlayer());
-		bow.setX(300);
-		bow.setY(300);
-		addCollectableObject(bow);
+		Random rnd = new Random();
+		int randomParameter = 3;
+		if(rnd.nextInt(randomParameter)==1) {
+			Axe axe= new Axe("hache", 0, 0, getGame(), getGame().getPlayer());
+			addCollectableObject(axe);
+			tryToTeleport(axe, randomPoint());
+		}
+		if(rnd.nextInt(randomParameter)==1) {
+			Bow bow = new Bow(getGame(),getGame().getPlayer());
+			addCollectableObject(bow);
+			tryToTeleport(bow, randomPoint());
+		}
+		if(rnd.nextInt(randomParameter)==1) {
+			Sword sword = new Sword("epee",0,0,getGame(), getGame().getPlayer());
+			addCollectableObject(sword);
+			tryToTeleport(sword,randomPoint());
+		}
+		if(rnd.nextInt(randomParameter)==1) {
+			FireballWeapon fbw = new FireballWeapon(getGame(),getGame().getPlayer());
+			addCollectableObject(fbw);
+			tryToTeleport(fbw,randomPoint());
+		}
+		System.out.println(String.valueOf(getCollectableObjects().size()));
+	}
+	
+	public Point randomPoint() {
+		Random rnd = new Random();
+		Point p = new Point();
+		p.setLocation(rnd.nextInt(getLevelWidth()*20-40)+20, rnd.nextInt(getLevelHeight()*20-40)+20);
+		return p;
 	}
 	
 

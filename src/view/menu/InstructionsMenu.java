@@ -14,7 +14,7 @@ public class InstructionsMenu extends MenuPanel {
 
 	public InstructionsMenu(Game game) {
 		super(game.getGamePanel());
-		this.setBackgroundImage("src/view/menu/gameMenu.png");
+		this.setBackgroundImage("src/view/menu/instructionsMenu.png");
 		back = new GButton("Back",24,new Dimension(250,75));
 		back.setLocation(700, 675);
 		back.addTo(this);
