@@ -23,12 +23,13 @@ public class Monster extends Actor implements Runnable {
 	}
 	
 	public void die() {
-		interruptThread();
+		
 		randomDrop();
 		getGame().getPlayer().gainXP(this.xpReward);
 		while(Thread.currentThread()==monsterThread) {
 		}
-		monsterThread.interrupt();
+		//monsterThread.interrupt();
+		interruptThread();
 		getGame().getCurrentMap().removeMonster(this);
 	}
 	
@@ -100,6 +101,7 @@ public class Monster extends Actor implements Runnable {
 
 	public void interruptThread() {
 		threadSuspended = true;
+		//monsterThread.interrupt();  //car threadSuspended ne permet pas d'arrêter les attaques.
 	}
 	
 	public void resumeThread() {
@@ -111,5 +113,8 @@ public class Monster extends Actor implements Runnable {
 		monsterThread=new Thread(this);
 		monsterThread.start();
 		super.reloadAction(game);
+	}
+	public Thread getMonsterThread(){
+		return monsterThread;
 	}
 }

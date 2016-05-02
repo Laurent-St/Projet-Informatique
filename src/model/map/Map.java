@@ -80,7 +80,10 @@ public class Map implements Serializable {
 	
 	public void addMonster(Monster m) {monsters.add(m);}
 	
-	public void removeMonster(Monster m) {monsters.remove(m);}
+	public void removeMonster(Monster m) {
+		monsters.remove(m);
+		//m.getMonsterThread().interrupt();
+	}
 	
 	public void addGameObject(GameObject o) {gameObjects.add(o);}
 	
