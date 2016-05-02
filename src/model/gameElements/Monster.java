@@ -5,32 +5,25 @@ import java.util.Random;
 
 import model.Game;
 
-public class Monster extends Actor implements Runnable {
+public class Monster extends Actor {
 
 	private static final long serialVersionUID = 1L;
 	private int count;
 	private int xpReward;
-	private transient Thread monsterThread;
-	private boolean threadSuspended = false;
+	private boolean dead;
 
 	public Monster(String name, double x, double y, int damage, int health, double speed, int xp, Game game, Rectangle hitbox) {
 		super(name, x, y, damage, health, speed, game, hitbox);
 		this.xpReward = xp;
-		monsterThread = new Thread(this);
-		monsterThread.start();
 		count = 0;
+		dead = false;
 
 	}
 	
 	public void die() {
-		
 		randomDrop();
 		getGame().getPlayer().gainXP(this.xpReward);
-		while(Thread.currentThread()==monsterThread) {
-		}
-		//monsterThread.interrupt();
-		interruptThread();
-		getGame().getCurrentMap().removeMonster(this);
+		dead = true;
 	}
 	
 	public void randomDrop() {
@@ -45,39 +38,6 @@ public class Monster extends Actor implements Runnable {
 			getGame().getCurrentMap().addGameObject(new Skull(getX(),getY(),getGame()));
 		}
 		
-	}
-
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				if(!threadSuspended && this!=null) {
-					if (count == 0) {
-						Random randomGenerator = new Random();
-						int randomNum = randomGenerator.nextInt(4);
-						if (randomNum == 1) {
-							setMoving("up");
-						} else if (randomNum == 2) {
-							setMoving("down");
-						} else if (randomNum == 3) {
-							setMoving("right");
-						} else {
-							setMoving("left");
-						}
-					}
-					count += 1;
-					if (count == 80) {
-						count = 0;
-					}
-					if(count%40 == 0) {
-						tryAttack();
-					}
-					move();
-				}
-				Thread.sleep(15);
-			}
-		} catch (Exception e) {
-		}
 	}
 	
 	public void tryAttack() {
@@ -98,23 +58,16 @@ public class Monster extends Actor implements Runnable {
 		}
 				
 	}
-
-	public void interruptThread() {
-		threadSuspended = true;
-		//monsterThread.interrupt();  //car threadSuspended ne permet pas d'arrêter les attaques.
+	
+	public int getCount() {
+		return this.count;
 	}
 	
-	public void resumeThread() {
-		threadSuspended = false;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
-	
-	public void reloadAction(Game game) {
-		monsterThread=new Thread(this);
-		monsterThread.start();
-		super.reloadAction(game);
-	}
-	public Thread getMonsterThread(){
-		return monsterThread;
+	public boolean isDead() {
+		return dead;
 	}
 }

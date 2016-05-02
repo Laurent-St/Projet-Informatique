@@ -34,6 +34,7 @@ public class Game implements Serializable {
 	private transient LevelPanel levelPanel;
 	private transient MainMenu mainMenu;
 	private transient InstructionsMenu instructionsMenu;
+	private transient Thread monsterAI;
 	
 	private Player player;
 	private transient PlayerControls playerControls;
@@ -56,6 +57,7 @@ public class Game implements Serializable {
 		if(!loadGame) {
 			initLevel();
 			initPlayer();
+			initAI();
 			getCurrentMap().initActorsAndObjects();
 		} else {
 			restoreGame();
@@ -101,6 +103,11 @@ public class Game implements Serializable {
 		player = new Player(0, 100, 100, this);
 		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
 		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
+	}
+	
+	public void initAI() {
+		monsterAI = new Thread(new MonsterAIRunnable(this));
+		monsterAI.start();
 	}
 
 	public GameWindow getGameWindow() {	

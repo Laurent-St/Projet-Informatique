@@ -4,10 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
-
 import model.Game;
-import model.gameElements.Axe;
 import model.gameElements.CollectableObject;
 import model.gameElements.GameObject;
 import model.gameElements.Monster;
@@ -80,10 +77,7 @@ public class Map implements Serializable {
 	
 	public void addMonster(Monster m) {monsters.add(m);}
 	
-	public void removeMonster(Monster m) {
-		monsters.remove(m);
-		//m.getMonsterThread().interrupt();
-	}
+	public void removeMonster(Monster m) {monsters.remove(m);}
 	
 	public void addGameObject(GameObject o) {gameObjects.add(o);}
 	
@@ -284,17 +278,11 @@ public class Map implements Serializable {
 		for(Projectile p: getProjectiles()) {
 			p.interruptThread();
 		}
-		for(Monster m: getMonsters()) {
-			m.interruptThread();
-		}
 	}
 	
 	public void resumeAllThreads() {
 		for(Projectile p: getProjectiles()) {
 			p.resumeThread();
-		}
-		for(Monster m: getMonsters()) {
-			m.resumeThread();
 		}
 	}
 	
