@@ -66,7 +66,7 @@ public class RandomMap extends Map {
 					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
 			
 			addMonster(newMonster);
-			System.out.println("Monstre ajouté");
+			System.out.println("Monstre ajoutï¿½");
 		}
 	}
 	
@@ -93,7 +93,6 @@ public class RandomMap extends Map {
 			addCollectableObject(fbw);
 			tryToTeleport(fbw,randomPoint());
 		}
-		System.out.println(String.valueOf(getCollectableObjects().size()));
 	}
 	
 	public Point randomPoint() {
