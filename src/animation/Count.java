@@ -41,6 +41,7 @@ public class Count implements Serializable, Runnable {
 		count = val;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void stop() {
 		clock.stop();
 	}

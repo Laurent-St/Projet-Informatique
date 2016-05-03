@@ -11,7 +11,7 @@ public class Door extends Tile{
 	private boolean isOpen = false;
 	private int linkedLevel;
 	public Door(int linkedLevel, Game game) {
-		super(TileLibrary.DOOR_CLOSED, "door", game);
+		super(TileLibrary.DOOR_CLOSED, name, game);
 		this.linkedLevel = linkedLevel;
 		setIsWalkable(false);		//la porte est fermée à la base
 	}

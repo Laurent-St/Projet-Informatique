@@ -63,12 +63,12 @@ public class InventoryWindow extends JPanel implements InventoryObserver {		//mo
 			g.drawChars(space, 0, 5, (inventory.getMaxSize()+2)*50, 50);
 			g.drawChars(shift, 0, 5, (inventory.getMaxSize()+3)*50, 50);
 			if(inventory.getAttachedPlayer().getHandWeapon()!=null) {
-				g.drawImage(inventory.getAttachedPlayer().getHandWeapon().getImage(), inventory.getMaxSize()*50+105, 0, inventory.getMaxSize()*50+145, 40,
-						0,0,32,32,null);
+				g.drawImage(inventory.getAttachedPlayer().getHandWeapon().getImage(), inventory.getMaxSize()*50+105, 0, inventory.getMaxSize()*50+144, 39,
+						0,0,31,31,null);
 			}
 			if(inventory.getAttachedPlayer().getThrowableWeapon()!=null) {
-				g.drawImage(inventory.getAttachedPlayer().getThrowableWeapon().getImage(), inventory.getMaxSize()*50+155, 0, inventory.getMaxSize()*50+195, 40,
-						0,0,32,32,null);
+				g.drawImage(inventory.getAttachedPlayer().getThrowableWeapon().getImage(), inventory.getMaxSize()*50+155, 0, inventory.getMaxSize()*50+194, 39,
+						0,0,31,31,null);
 			}
 		}
 	}

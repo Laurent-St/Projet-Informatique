@@ -11,15 +11,12 @@ import view.menu.InstructionsMenu;
 import view.menu.MainMenu;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
-
 import controls.PlayerControls;
 import model.gameElements.*;
 
@@ -104,6 +101,14 @@ public class Game implements Serializable {
 		player = new Player(0, 100, 100, this);
 		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
 		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
+		
+		//EPEE PAR DEFAUT
+		Sword sword = new Sword("epee",0,0,this, player);
+		player.equipHandWeapon(sword);
+		
+		//FIREBALL PAR DEFAUT
+		FireballWeapon fw = new FireballWeapon(this, player);
+		player.equipThrowableWeapon(fw);
 	}
 	
 	public void initAI() {

@@ -3,23 +3,28 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javafx.scene.input.KeyCode;
 import model.gameElements.Player;
 
 public class PlayerControls implements KeyListener {
 	
-	private static int z = 90;
-	private static int q = 81;
-	private static int s = 83;
-	private static int d = 68;
-	private static int space = 32;
-	private static int lshift = 16;
-	private static int k1 = 49;
-	private static int k2 = 50;
-	private static int k3 = 51;
-	private static int k4 = 52;
-	private static int k5 = 53;
-	private static int f = 70;
-	private static int ctrl= 17;
+	private static int z = KeyEvent.VK_Z;
+	private static int q = KeyEvent.VK_Q;
+	private static int s = KeyEvent.VK_S;
+	private static int d = KeyEvent.VK_D;
+	private static int space = KeyEvent.VK_SPACE;
+	private static int lshift = KeyEvent.VK_SHIFT;
+	private static int k1 = KeyEvent.VK_1;
+	private static int k2 = KeyEvent.VK_2;
+	private static int k3 = KeyEvent.VK_3;
+	private static int k4 = KeyEvent.VK_4;
+	private static int k5 = KeyEvent.VK_5;
+	private static int f = KeyEvent.VK_F;
+	private static int ctrl= KeyEvent.VK_CONTROL;
+	private static int dup = KeyEvent.VK_UP;
+	private static int ddown = KeyEvent.VK_DOWN;
+	private static int dleft = KeyEvent.VK_LEFT;
+	private static int dright = KeyEvent.VK_RIGHT;
 	//private static int e =KeyEvent.VK_E; 
 	
 	private boolean up;
@@ -43,16 +48,16 @@ public class PlayerControls implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode()==z) {
+		if (e.getKeyCode()==z || e.getKeyCode()==dup) {
 			up = true;
 			player.setMoving("up");
-		} else if (e.getKeyCode()==q) {
+		} else if (e.getKeyCode()==q || e.getKeyCode()==dleft) {
 			left = true;
 			player.setMoving("left");
-		} else if (e.getKeyCode()==s) {
+		} else if (e.getKeyCode()==s || e.getKeyCode()==ddown) {
 			down = true;
 			player.setMoving("down");
-		} else if (e.getKeyCode()==d) {
+		} else if (e.getKeyCode()==d || e.getKeyCode()==dright) {
 			right = true;
 			player.setMoving("right");
 		} else if (e.getKeyCode()==space) {
@@ -99,13 +104,13 @@ public class PlayerControls implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode()==z) {
+		if (e.getKeyCode()==z || e.getKeyCode()==dup) {
 			up = false;
-		} else if (e.getKeyCode()==q) {
+		} else if (e.getKeyCode()==q || e.getKeyCode()==dleft) {
 			left = false;
-		} else if (e.getKeyCode()==s) {
+		} else if (e.getKeyCode()==s || e.getKeyCode()==ddown) {
 			down = false;
-		} else if (e.getKeyCode()==d) {
+		} else if (e.getKeyCode()==d || e.getKeyCode()==dright) {
 			right = false;
 		}
 		

@@ -34,6 +34,8 @@ public class Monster extends Actor {
 		} else if(rnd>10 && rnd <=20) {
 			getGame().getCurrentMap().addCollectableObject(new ManaPotion(getX(),getY(),45+getDamage(),getGame()));
 
+		} else if(rnd==21 || rnd == 22 || rnd == 23) {
+			getGame().getCurrentMap().addCollectableObject(new Lightsaber("Lightsaber",getX(),getY(),getGame(),getGame().getPlayer()));
 		} else {
 			getGame().getCurrentMap().addGameObject(new Skull(getX(),getY(),getGame()));
 		}

@@ -12,8 +12,7 @@ public class PoisonousTile extends Tile implements PoisonningObject {
 	private PoisonRunnable poisonRunnable;
 	private transient Thread poisonThread;
 	private boolean poisonThreadRunning = false;
-	private Game game;
-
+	
 	public PoisonousTile(Game game) {
 		super(TileLibrary.POISON_TRAP, "poisonTile", game);
 		setIsPoisonous(true);

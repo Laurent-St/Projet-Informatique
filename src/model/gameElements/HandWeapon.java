@@ -46,7 +46,9 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 			attackAnimationCount = null;
 			attackAnimationCount = new CountTimer(5,50,this);
 			updatePosition();
-			inflictDirectDamage(getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox()));
+			int range = getRange();
+			Rectangle hitboxWithRange = new Rectangle(-range,-range,(int)getHitbox().getWidth()+2*range,(int)getHitbox().getHeight()+2*range);
+			inflictDirectDamage(getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), hitboxWithRange));
 			super.attack();
 		}
 	}

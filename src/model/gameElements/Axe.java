@@ -13,7 +13,7 @@ public class Axe extends HandWeapon {
 	private static Rectangle axeHitBox = new Rectangle(0,0,32,32);
 	private static String imageUrl = "src/model/gameElements/axe.png";
 	private static int damage = 30;
-	private static int range = 2;
+	private static int range = 1;
 	private static int manaAxe = 0;
 	
 	public Axe(String name, int x, int y, Game game, Player attachedPlayer) {

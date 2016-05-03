@@ -42,14 +42,6 @@ public class Player extends Actor implements Runnable{
 		Thread actorThread = new Thread(this);
 		actorThread.start();	
 		System.out.println("new Player");
-		
-		//EPEE PAR DEFAUT
-		Sword sword = new Sword("epee",0,0,getGame(), this);
-		equipHandWeapon(sword);
-		
-		//FIREBALL PAR DEFAUT
-		FireballWeapon fw = new FireballWeapon(getGame(), this);
-		equipThrowableWeapon(fw);
 	}
 
 	public void reloadAction(Game game) {

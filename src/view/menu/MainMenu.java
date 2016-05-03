@@ -17,7 +17,6 @@ public class MainMenu extends MenuPanel {
 	private GButton playButton;
 	private GButton instructionsButton;
 	private GButton loadButton;
-	private Game game;
 	
 	public MainMenu(Game game) {
 		super(game.getGamePanel());
