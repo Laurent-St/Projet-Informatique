@@ -61,6 +61,7 @@ public class Game implements Serializable {
 			getCurrentMap().initActorsAndObjects();
 		} else {
 			restoreGame();
+			initAI();
 		}
 		
 		gamePanel.removeMenus();
