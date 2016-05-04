@@ -1,8 +1,6 @@
 package model.gameElements;
 
 import java.awt.Rectangle;
-import java.util.Random;
-
 import model.Game;
 
 public class Monster extends Actor {
@@ -12,8 +10,8 @@ public class Monster extends Actor {
 	private int xpReward;
 	private boolean dead;
 
-	public Monster(String name, double x, double y, int damage, int health, double speed, int xp, Game game, Rectangle hitbox) {
-		super(name, x, y, damage, health, speed, game, hitbox);
+	public Monster(String name, double x, double y, int damage, int health, int mana, double speed, int xp, Game game, Rectangle hitbox) {
+		super(name, x, y, damage, health, mana, speed, game, hitbox);
 		this.xpReward = xp;
 		count = 0;
 		dead = false;
@@ -21,25 +19,11 @@ public class Monster extends Actor {
 	}
 	
 	public void die() {
-		randomDrop();
-		getGame().getPlayer().gainXP(this.xpReward);
 		dead = true;
 	}
 	
 	public void randomDrop() {
-		Random random = new Random();
-		int rnd = random.nextInt(100);
-		if(rnd<=10) {
-			getGame().getCurrentMap().addCollectableObject(new HealthPotion(getX(),getY(),45+getDamage(),getGame()));
-		} else if(rnd>10 && rnd <=20) {
-			getGame().getCurrentMap().addCollectableObject(new ManaPotion(getX(),getY(),45+getDamage(),getGame()));
-
-		} else if(rnd==21 || rnd == 22 || rnd == 23) {
-			getGame().getCurrentMap().addCollectableObject(new Lightsaber("Lightsaber",getX(),getY(),getGame(),getGame().getPlayer()));
-		} else {
-			getGame().getCurrentMap().addGameObject(new Skull(getX(),getY(),getGame()));
-		}
-		
+		//A REDEFINIR
 	}
 	
 	public void tryAttack() {
@@ -71,5 +55,9 @@ public class Monster extends Actor {
 
 	public boolean isDead() {
 		return dead;
+	}
+	
+	public int getXPReward() {
+		return this.xpReward;
 	}
 }

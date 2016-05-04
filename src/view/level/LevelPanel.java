@@ -115,8 +115,9 @@ public class LevelPanel extends JPanel {
 		} else if (a.getOrientation()=="right") {
 			ycount = 3;
 		}
-		g.drawImage(a.getImage(), a.getX(), a.getY(), a.getX()+32, a.getY()+32,
-				32*xcount, ycount*32, 32*xcount+32, ycount*32+32,
+		int size=a.getActorSize();
+		g.drawImage(a.getImage(), a.getX(), a.getY(), a.getX()+size, a.getY()+size,
+				size*xcount, ycount*size, size*xcount+size, ycount*size+size,
 				null);
 	}
 	

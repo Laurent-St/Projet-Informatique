@@ -9,12 +9,9 @@ import model.Game;
 import model.gameElements.Axe;
 import model.gameElements.Bow;
 import model.gameElements.FireballWeapon;
-import model.gameElements.Monster;
 import model.gameElements.Sword;
-import model.graphicElements.Door;
 import model.graphicElements.Floor;
 import model.graphicElements.PoisonousTile;
-import model.graphicElements.TileLibrary;
 import model.graphicElements.Wall;
 
 public class RandomMap extends Map {
@@ -47,27 +44,8 @@ public class RandomMap extends Map {
 	}
 
 	public void initActorsAndObjects() {
-		initMonsters();
+		generateZombies(numberOfMonsters);
 		initGameObjects();
-	}
-	
-	
-	public void initMonsters(){
-		for (int i=0; i<numberOfMonsters; i++){
-			Random rnd = new Random();
-			Monster newMonster;
-			do {
-				int randX = rnd.nextInt(920);
-				int randY = rnd.nextInt(640);
-				newMonster= new Monster("src/model/gameElements/zombie.png", randX, randY,
-						8+getLevelNum()*2, 98+getLevelNum()*2, 0.45+(long)getLevelNum()/20.0, 10,
-						getGame(), new Rectangle(8,0,15,31));
-			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
-					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
-			
-			addMonster(newMonster);
-			System.out.println("Monstre ajout�");
-		}
 	}
 	
 	public void initGameObjects(){
@@ -204,22 +182,6 @@ public class RandomMap extends Map {
 					}
 				}
 			}
-		}
-	}
-	
-	private void initDoors() {
-		Door door1 = new Door(getLevelNum()-1,getGame());
-		door1.doorOpen();
-		Door door2 = new Door(getLevelNum()+1,getGame());
-		if(getLevelNum()!=1) {
-			setTileAt(2,0,door1);
-			setTileAt(1,0,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
-			setTileAt(3,0,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
-		}
-		if(getLevelNum() !=10) {
-			setTileAt(getLevelWidth()-3, getLevelHeight()-1, door2);
-			setTileAt(getLevelWidth()-4, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
-			setTileAt(getLevelWidth()-2, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
 		}
 	}
 	

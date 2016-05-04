@@ -1,6 +1,7 @@
 package model;
 
 import model.graphicElements.*;
+import model.map.BossMap;
 import model.map.Map;
 import model.map.RandomMap;
 import view.FontLoader;
@@ -154,7 +155,12 @@ public class Game implements Serializable {
 		}
 		
 		if(levelNum>levels.size()) {
-			RandomMap newLevel = new RandomMap(levelNum,this);
+			Map newLevel;
+			if(levelNum%5==0) {
+				newLevel = new BossMap(levelNum,this);
+			} else {
+				newLevel = new RandomMap(levelNum,this);
+			}
 			levels.add(newLevel);
 			newLevel.initActorsAndObjects();
 			setCurrentMap(newLevel);

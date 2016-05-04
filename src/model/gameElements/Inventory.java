@@ -41,11 +41,14 @@ public class Inventory implements InventorySubject, Serializable{
 		}
 	}
 
-	public void dropObject(CollectableObject object){
-		attachedPlayer.getGame().getCurrentMap().addCollectableObject(object);
-		object.setX(attachedPlayer.getXdouble());
-		object.setY(attachedPlayer.getYdouble());
-		removeFromInventory(object);
+	public void dropObject(int i){
+		CollectableObject co = getFromInventory(i-1);
+		if(co!=null) {
+			attachedPlayer.getGame().getCurrentMap().addCollectableObject(co);
+			co.setX(attachedPlayer.getXdouble());
+			co.setY(attachedPlayer.getYdouble());
+			removeFromInventory(co);
+		}
 	}
 	
 	public void removeFromInventory(CollectableObject object) {

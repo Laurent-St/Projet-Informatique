@@ -14,22 +14,27 @@ public class Weapon extends CollectableObject {
 	private int damage;
 	private int manaConsumption;
 
-	private Player attachedPlayer;
+	private Actor attachedActor;
 	private boolean attackMode = false;
 	// range=1 correspond à la case d'à côté(arme au cac), range>1 correspond à
 	// une arme à distance.
 
 	public Weapon(String name, double x, double y, int damage, int manaConsumption, String image_url, Rectangle hitbox,
-			Game game, Player attachedPlayer) {
+			Game game, Actor attachedActor) {
 		super(name, x, y, image_url, hitbox, game);
 		setDamage(damage);
-		setAttachedPlayer(attachedPlayer);
+		setAttachedActor(attachedActor);
 		this.manaConsumption = manaConsumption;
 	}
 
-	private void setAttachedPlayer(Player attachedPlayer) {
-		this.attachedPlayer = attachedPlayer;
+	private void setAttachedActor(Actor attachedActor) {
+		this.attachedActor = attachedActor;
 		this.attackMode = true;		
+	}
+	
+	
+	public Actor getAttachedActor() {
+		return this.attachedActor;
 	}
 
 	public int getDamage() {
@@ -47,18 +52,14 @@ public class Weapon extends CollectableObject {
 	
 	public void attack() {
 		if(enoughMana()) {
-			getAttachedPlayer().setMana(getAttachedPlayer().getMana()-getManaConsumption());
+			getAttachedActor().setMana(getAttachedActor().getMana()-getManaConsumption());
 		}
 	}
 	
-	public void inflictDirectDamage(ArrayList<Monster> hitMonsters) {
-		for (Monster m : hitMonsters) {
-			m.setHealth(m.getHealth()-getDamage()-getAttachedPlayer().getDamage());
+	public void inflictDirectDamage(ArrayList<Actor> hitActors) {
+		for (Actor a : hitActors) {
+			a.setHealth(a.getHealth()-getDamage()-getAttachedActor().getDamage());
 		}
-	}
-	
-	public Player getAttachedPlayer() {
-		return this.attachedPlayer;
 	}
 	
 	public boolean inAttackMode() {
@@ -70,7 +71,7 @@ public class Weapon extends CollectableObject {
 	}
 	
 	public boolean enoughMana() {
-		return getAttachedPlayer().getMana()>=getManaConsumption();
+		return getAttachedActor().getMana()>=getManaConsumption();
 	}
 	
 }

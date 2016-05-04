@@ -18,8 +18,8 @@ public class Projectile extends Weapon implements Runnable{
 	private boolean dead;
 	private boolean threadSuspended = false;
 	
-	public Projectile(String name, double x, double y, int damage, String direction, double speed, String image_url, Rectangle hitbox, Game game, Player attachedPlayer) {
-		super(name,  x,  y,  damage, 0,  image_url,  hitbox, game,  attachedPlayer);
+	public Projectile(String name, double x, double y, int damage, String direction, double speed, String image_url, Rectangle hitbox, Game game, Actor a) {
+		super(name,  x,  y,  damage, 0,  image_url,  hitbox, game,  a);
 		this.direction = direction;
 		this.speed = speed;
 		this.travelling = true;
@@ -28,8 +28,8 @@ public class Projectile extends Weapon implements Runnable{
 	
 	public void activate() {
 		threadSuspended = false;
-		double x = getAttachedPlayer().getXdouble()+getAttachedPlayer().getHitbox().getCenterX()-getHitbox().getCenterX();
-		double y = getAttachedPlayer().getYdouble()+getAttachedPlayer().getHitbox().getCenterY()-getHitbox().getCenterY();
+		double x = getAttachedActor().getXdouble()+getAttachedActor().getHitbox().getCenterX()-getHitbox().getCenterX();
+		double y = getAttachedActor().getYdouble()+getAttachedActor().getHitbox().getCenterY()-getHitbox().getCenterY();
 		this.setX(x);
 		this.setY(y);
 		getGame().getCurrentMap().addProjectile(this);
@@ -51,12 +51,12 @@ public class Projectile extends Weapon implements Runnable{
 
 	@Override
 	public void run() {
-		ArrayList<Monster> hitMonsters = new ArrayList<Monster>();
+		ArrayList<Actor> hitActors = new ArrayList<Actor>();
 		while(true) {
 			if(threadSuspended==false) {
-				hitMonsters = getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), getHitbox());
+				hitActors = getGame().getCurrentMap().getActorsInRectangle(getX(), getY(), getHitbox(), getAttachedActor());
 				if(getGame().getCurrentMap().isPositionWalkable(getX(), getY(), getHitbox()) 
-				&& hitMonsters.size()==0) {
+				&& hitActors.size()==0) {
 					if(this.direction=="up") {
 						setY(getYdouble()-this.speed);
 					} else if (this.direction=="down") {
@@ -67,7 +67,7 @@ public class Projectile extends Weapon implements Runnable{
 						setX(getXdouble()-this.speed);
 					}
 				} else {
-					explode(hitMonsters);
+					explode(hitActors);
 					this.threadSuspended = true;
 				}
 			}
@@ -80,8 +80,8 @@ public class Projectile extends Weapon implements Runnable{
 		}		
 	}
 	
-	public void explode(ArrayList<Monster> hitMonsters) {
-		inflictDirectDamage(hitMonsters);
+	public void explode(ArrayList<Actor> hitActors) {
+		inflictDirectDamage(hitActors);
 		System.out.println("exploded");
 		this.travelling = false;
 		this.dead = true;

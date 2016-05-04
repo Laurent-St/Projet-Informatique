@@ -21,9 +21,9 @@ public class Bow extends ThrowableWeapon {
 	
 	public void attack() {
 		if(enoughMana()) {
-			Player p = getAttachedPlayer();
-			Arrow a = new Arrow(0, 0, p.getOrientation(), getGame(), p);
-			super.attack(a);
+			Actor a = getAttachedActor();
+			Arrow arrow = new Arrow(0, 0, a.getOrientation(), getGame(), a);
+			super.attack(arrow);
 		}
 	}
 	

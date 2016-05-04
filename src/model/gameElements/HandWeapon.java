@@ -48,25 +48,25 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 			updatePosition();
 			int range = getRange();
 			Rectangle hitboxWithRange = new Rectangle(-range,-range,(int)getHitbox().getWidth()+2*range,(int)getHitbox().getHeight()+2*range);
-			inflictDirectDamage(getGame().getCurrentMap().getMonstersInRectangle(getX(), getY(), hitboxWithRange));
+			inflictDirectDamage(getGame().getCurrentMap().getActorsInRectangle(getX(), getY(), hitboxWithRange, getAttachedActor()));
 			super.attack();
 		}
 	}
 	
 	public void updatePosition() {
-		Player p = getAttachedPlayer();
-		if (p.getOrientation()=="left") {
-			setX(p.getX()-10);
-			setY(p.getY());
-		} else if (getAttachedPlayer().getOrientation()=="right"){
-			setX(p.getX()+10);
-			setY(p.getY());
-		} else if (getAttachedPlayer().getOrientation()=="down") {
-			setX(p.getX());
-			setY(p.getY()+25);
-		} else if (getAttachedPlayer().getOrientation()=="up") {
-			setX(p.getX());
-			setY(p.getY()-20);
+		Actor a = getAttachedActor();
+		if (a.getOrientation()=="left") {
+			setX(a.getX()-10);
+			setY(a.getY());
+		} else if (getAttachedActor().getOrientation()=="right"){
+			setX(a.getX()+10);
+			setY(a.getY());
+		} else if (getAttachedActor().getOrientation()=="down") {
+			setX(a.getX());
+			setY(a.getY()+25);
+		} else if (getAttachedActor().getOrientation()=="up") {
+			setX(a.getX());
+			setY(a.getY()-20);
 		}
 	}
 	
@@ -75,11 +75,14 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	}
 	
 	public void inventorySelectAction() {
-		HandWeapon currentWeapon = getAttachedPlayer().getHandWeapon();
-		getAttachedPlayer().equipHandWeapon(this);
-		getAttachedPlayer().getInventory().removeFromInventory(this);
-		if(currentWeapon!=null) {
-			getAttachedPlayer().getInventory().setInInventory(currentWeapon);
+		if(getAttachedActor() instanceof Player) {
+			Player p = (Player) getAttachedActor();
+			HandWeapon currentWeapon = p.getHandWeapon();
+			p.equipHandWeapon(this);
+			p.getInventory().removeFromInventory(this);
+			if(currentWeapon!=null) {
+				p.getInventory().setInInventory(currentWeapon);
+			}
 		}
 	}
 

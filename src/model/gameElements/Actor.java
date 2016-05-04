@@ -16,18 +16,23 @@ public class Actor extends GameObject {
 	private int damage;
 	private int health;
 	private int maxHealth;
+	private int mana;
+	private int maxMana;
 	
 	private Count animationCount;
 
 	private double speed;
 	private String movingState;
 	private String orientation;
+	private int actorSize = 32;
 
-	public Actor(String imageUrl, double x, double y, int damage, int health, double speed, Game game, Rectangle hitbox) {
+	public Actor(String imageUrl, double x, double y, int damage, int health, int mana, double speed, Game game, Rectangle hitbox) {
 		super(x, y, imageUrl, hitbox, game);
 		setDamage(damage);
 		setMaxHealth(health);
 		setHealth(health);
+		setMaxMana(mana);
+		setMana(mana);
 		this.setMoving("null");
 		
 		this.speed = speed;
@@ -37,6 +42,15 @@ public class Actor extends GameObject {
 		setOrientation("south");
 		
 	}
+	
+	public int getActorSize() {
+		return this.actorSize;
+	}
+	
+	public void setActorSize(int size) {
+		this.actorSize = size;
+	}
+	 
 	
 	public void setOrientation(String val) {
 		this.orientation = val;
@@ -84,6 +98,27 @@ public class Actor extends GameObject {
 
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
+	}
+	
+	public void setMana(int mana) {
+		this.mana = mana;
+		if(this.mana>getMaxMana()) {
+			this.mana = getMaxMana();
+		} else if(this.mana<0) {
+			this.mana = 0;
+		}
+	}
+	
+	public int getMana() {
+		return this.mana;
+	}
+
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
 	}
 	
 	public Point getFootPosition() {

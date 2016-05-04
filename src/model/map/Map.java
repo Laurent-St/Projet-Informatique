@@ -4,12 +4,17 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
+
 import model.Game;
+import model.gameElements.Actor;
 import model.gameElements.CollectableObject;
 import model.gameElements.GameObject;
 import model.gameElements.Monster;
 import model.gameElements.Player;
 import model.gameElements.Projectile;
+import model.gameElements.Zombie;
+import model.graphicElements.Door;
 import model.graphicElements.Floor;
 import model.graphicElements.Tile;
 import model.graphicElements.TileLibrary;
@@ -123,15 +128,31 @@ public class Map implements Serializable {
 		int height = (int) bounds.getHeight();
 		int width = (int) bounds.getWidth();
 		
-		setTileAt(x,y, new Wall(TileLibrary.WALL_CORNER_TL, game));
-		setTileAt(x,y+height, new Wall(TileLibrary.WALL_CORNER_BL, game));
-		setTileAt(x+width,y, new Wall(TileLibrary.WALL_CORNER_TR, game));
-		setTileAt(x+width,y+height, new Wall(TileLibrary.WALL_CORNER_BR, game));
+		setTileAt(x,y, new Wall(TileLibrary.WALL_CORNER_BR, game));
+		setTileAt(x,y+height, new Wall(TileLibrary.WALL_CORNER_TR, game));
+		setTileAt(x+width,y, new Wall(TileLibrary.WALL_CORNER_BL, game));
+		setTileAt(x+width,y+height, new Wall(TileLibrary.WALL_CORNER_TL, game));
 
 		fill(new Rectangle(x+1,y,width-1,1), new Wall(TileLibrary.WALL_H, game));
 		fill(new Rectangle(x+1,y+height,width-1,1), new Wall(TileLibrary.WALL_H, game));
 		fill(new Rectangle(x,y+1,1,height-1), new Wall(TileLibrary.WALL_V, game));
 		fill(new Rectangle(x+width,y+1,1,height-1), new Wall(TileLibrary.WALL_V, game));
+	}
+	
+	public void initDoors() {
+		Door door1 = new Door(getLevelNum()-1,getGame());
+		door1.doorOpen();
+		Door door2 = new Door(getLevelNum()+1,getGame());
+		if(getLevelNum()!=1) {
+			setTileAt(2,0,door1);
+			setTileAt(1,0,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+			setTileAt(3,0,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		}
+		if(getLevelNum() !=10) {
+			setTileAt(getLevelWidth()-3, getLevelHeight()-1, door2);
+			setTileAt(getLevelWidth()-4, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_RIGHT, getGame()));
+			setTileAt(getLevelWidth()-2, getLevelHeight()-1,new Wall(TileLibrary.WALL_H_LEFT, getGame()));
+		}
 	}
 	
 	public void setTileAt(int x, int y, Tile tile) {
@@ -245,18 +266,21 @@ public class Map implements Serializable {
 		// A REDEFINIR DANS LES SOUS-CLASSES
 	}
 
-	public ArrayList<Monster> getMonstersInRectangle(int x, int y, Rectangle hitbox) {
-		ArrayList<Monster> detectedMonsters = new ArrayList<Monster>();
-		ArrayList<Monster> monsters = getGame().getCurrentMap().getMonsters();
+	public ArrayList<Actor> getActorsInRectangle(int x, int y, Rectangle hitbox, Actor reference) {
+		ArrayList<Actor> detectedActors = new ArrayList<Actor>();
+		@SuppressWarnings("unchecked")
+		ArrayList<Actor> actors = (ArrayList<Actor>) getGame().getCurrentMap().getMonsters().clone();
+		actors.add(getGame().getPlayer());
+		
 		Rectangle testHitbox=new Rectangle(x+(int)hitbox.getX(),y+(int)hitbox.getY(), (int)hitbox.getWidth(), (int)hitbox.getHeight());
-		for (Monster m : monsters) {
-			Rectangle testHitbox2 = new Rectangle(m.getX(), m.getY(), (int)m.getHitbox().getWidth(), (int)m.getHitbox().getHeight());
-			if(testHitbox2.intersects(testHitbox)) {
-				detectedMonsters.add(m);
-				System.out.println("Monstre touché");
+		for (Actor a : actors) {
+			Rectangle testHitbox2 = new Rectangle(a.getX(), a.getY(), (int)a.getHitbox().getWidth(), (int)a.getHitbox().getHeight());
+			if(testHitbox2.intersects(testHitbox) && reference!=a) {
+				detectedActors.add(a);
+				System.out.println("Actor touché");
 			}
 		}
-		return detectedMonsters;
+		return detectedActors;
 	}
 	
 	public void tryToTeleport(GameObject object, Point point) {
@@ -285,5 +309,23 @@ public class Map implements Serializable {
 			p.resumeThread();
 		}
 	}
+	public void generateZombies(int max){
+		for (int i=0; i<max; i++){
+			Random rnd = new Random();
+			Monster newMonster;
+			do {
+				int randX = rnd.nextInt(920);
+				int randY = rnd.nextInt(640);
+				newMonster= new Zombie(randX, randY,
+						8+getLevelNum()*2, 98+getLevelNum()*2, 0.45+(long)getLevelNum()/20.0, 10,
+						getGame(), new Rectangle(8,0,15,31));
+			} while(isPositionWalkable(newMonster.getX(), newMonster.getY(), newMonster.getHitbox())==false ||
+					isPositionOccupied(newMonster.getX(), newMonster.getY(), newMonster, true));
+			
+			addMonster(newMonster);
+			System.out.println("Monstre ajouté");
+		}
+	}
+	
 	
 }

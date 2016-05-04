@@ -39,7 +39,7 @@ public class SpecialFX extends GameObject implements CountTimerListener {
 	}
 
 	public int getSize() {
-		return 32;
+		return getHitbox().width;
 	}
 
 }

@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.gameElements.Boss;
 import model.gameElements.Monster;
+import model.gameElements.Zombie;
 
 public class MonsterAIRunnable implements Runnable {
 	
@@ -20,7 +22,7 @@ public class MonsterAIRunnable implements Runnable {
 				@SuppressWarnings("unchecked")
 				ArrayList<Monster> monsters = (ArrayList<Monster>) game.getCurrentMap().getMonsters().clone();
 				for(Monster m: monsters) {
-					if (m.getCount() == 0) {
+					if (m.getCount()%80 == 0) {
 						Random randomGenerator = new Random();
 						int randomNum = randomGenerator.nextInt(4);
 						if (randomNum == 1) {
@@ -33,19 +35,42 @@ public class MonsterAIRunnable implements Runnable {
 							m.setMoving("left");
 						}
 					}
-					m.setCount(m.getCount()+1);
-					if (m.getCount() == 80) {
-						m.setCount(0);
-					}
-					if(m.getCount()%40 == 0) {
-						m.tryAttack();
-					}
-					
-					m.move();
 					
 					if(m.isDead()) {
 						game.getCurrentMap().removeMonster(m);
 					}
+					m.setCount(m.getCount()+1);
+					if (m instanceof Zombie){
+						if (m.getCount() == 81) {
+							m.setCount(1);
+						}
+						if(m.getCount()%40 == 0) {
+							m.tryAttack();	
+						}
+					}
+					else {	//(m instanceof Boss)
+						Boss b=(Boss)m;
+						if (b.getCount()==800){
+							b.setCount(0);
+						}
+						if (b.getCount()%400==0){
+							b.poisonAttack();
+						}
+						if (b.getCount()%200==0){
+							b.tryAttack();
+							b.fireBallAttack();
+						}
+						if (b.getCount()%100==0){
+							b.tryAttack();
+						}
+						
+						
+					}
+					
+					
+					m.move();
+					
+					
 				}
 			}
 			try {

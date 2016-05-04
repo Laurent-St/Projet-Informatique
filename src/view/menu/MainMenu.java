@@ -2,13 +2,10 @@ package view.menu;
 
 import java.awt.Dimension;
 
-import javax.swing.JButton;
-
 import controls.InstructionsMouseListener;
 import controls.LoadMouseListener;
 import controls.PlayMouseListener;
 import model.Game;
-import view.GamePanel;
 import view.button.GButton;
 
 @SuppressWarnings("serial")

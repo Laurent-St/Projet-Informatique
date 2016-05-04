@@ -14,7 +14,7 @@ public class Arrow extends Projectile {
 	private static Rectangle arrowHitbox = new Rectangle(8,8,16,16);
 	private static double speed = 8;
 	
-	public Arrow(double x, double y, String direction, Game game, Player attachedPlayer) {
-		super("Arrow", x, y, arrowDamage, direction, speed, "src/model/gameElements/bow.png", arrowHitbox, game, attachedPlayer);
+	public Arrow(double x, double y, String direction, Game game, Actor a) {
+		super("Arrow", x, y, arrowDamage, direction, speed, "src/model/gameElements/bow.png", arrowHitbox, game, a);
 	}	
 }

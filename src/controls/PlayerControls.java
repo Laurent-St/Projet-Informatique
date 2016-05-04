@@ -3,7 +3,6 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javafx.scene.input.KeyCode;
 import model.gameElements.Player;
 
 public class PlayerControls implements KeyListener {
@@ -66,31 +65,31 @@ public class PlayerControls implements KeyListener {
 			player.attackSpecial();
 		} else if(e.getKeyCode()==k1) {
 			if (readyToRemove){
-				player.getInventory().dropObject(player.getInventory().getContent().get(0));
+				player.getInventory().dropObject(1);
 			} else{
 				player.getInventory().select(1);
 			}
 		} else if(e.getKeyCode()==k2) {
 			if (readyToRemove){
-				player.getInventory().dropObject(player.getInventory().getContent().get(1));
+				player.getInventory().dropObject(2);
 			} else{
 				player.getInventory().select(2);
 			}
 		} else if(e.getKeyCode()==k3) {
 			if (readyToRemove){
-				player.getInventory().dropObject(player.getInventory().getContent().get(2));
+				player.getInventory().dropObject(3);
 			} else{
 				player.getInventory().select(3);
 			}
 		} else if(e.getKeyCode()==k4) {
 			if (readyToRemove){
-				player.getInventory().dropObject(player.getInventory().getContent().get(3));
+				player.getInventory().dropObject(4);
 			} else{
 				player.getInventory().select(4);
 			}
 		} else if(e.getKeyCode()==k5) {
 			if (readyToRemove){
-				player.getInventory().dropObject(player.getInventory().getContent().get(4));
+				player.getInventory().dropObject(5);
 			} else{
 				player.getInventory().select(5);
 			}

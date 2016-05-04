@@ -18,8 +18,6 @@ public class Player extends Actor implements Runnable{
 	private static final long serialVersionUID = 1L;
 	private Inventory inventory;
 	private int level=1;
-	private int mana;
-	private int maxMana;
 	private int experience=0;
 	private int experienceForLevel=30;
 	private static double playerSpeed  = 1.8;
@@ -30,11 +28,9 @@ public class Player extends Actor implements Runnable{
 	private StatsPanel statsPanel;
 
 	public Player(int damage, int health, int mana, Game game) {
-		super("src/model/gameElements/characterWarrior.png",40,30,damage,health, playerSpeed, game, playerHitbox);
+		super("src/model/gameElements/characterWarrior.png",40,30,damage,health, mana, playerSpeed, game, playerHitbox);
 		inventory = new Inventory(5,this);
 		setLevel(1);
-		setMaxMana(mana);
-		setMana(mana);
 		setDamage(damage);
 		setMoving("null");
 		setExperienceForLevel(50+getLevel()*20);
@@ -119,26 +115,14 @@ public class Player extends Actor implements Runnable{
 		updateStatsPanel();
 	}
 
-	public int getMana() {
-		return mana;
-	}
-
+	
 	public void setMana(int mana) {
-		this.mana = mana;
-		if(this.mana>getMaxMana()) {
-			this.mana = getMaxMana();
-		} else if(this.mana<0) {
-			this.mana = 0;
-		}
+		super.setMana(mana);
 		updateStatsPanel();
 	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
+	
 	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
+		super.setMaxMana(maxMana);
 		updateStatsPanel();
 	}
 
@@ -202,13 +186,14 @@ public class Player extends Actor implements Runnable{
 		}
 		@SuppressWarnings("unchecked")
 		ArrayList<CollectableObject> cos = (ArrayList<CollectableObject>) getInventory().getExistingContent().clone();
-		for (CollectableObject object: cos){
-			getInventory().dropObject(object);
+		for (int i=1;i<=cos.size();i++){
+			getInventory().dropObject(i);
+			CollectableObject co = cos.get(i-1);
 			Random rand = new Random();
 			int dx = rand.nextInt(20)-10;
 			int dy = rand.nextInt(20)-10;
-			object.setX(object.getXdouble()+dx);
-			object.setY(object.getYdouble()+dy);
+			co.setX(co.getXdouble()+dx);
+			co.setY(co.getYdouble()+dy);
 		}
 		new DeadMessage(this.getX()-16,this.getY()-16,getGame(),getGame().getCurrentMap());
 		getGame().getCurrentMap().tryToTeleport(this, new Point(40,30));
@@ -219,7 +204,7 @@ public class Player extends Actor implements Runnable{
 			setHealth(getHealth() + potion.getValue());
 			inventory.removeFromInventory(potion);
 		} else if (potion instanceof ManaPotion) {
-			setMana(mana + potion.getValue());
+			setMana(getMana() + potion.getValue());
 			inventory.removeFromInventory(potion);
 		}
 	}

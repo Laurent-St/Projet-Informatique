@@ -14,7 +14,7 @@ public class Fireball extends Projectile {
 	private static Rectangle fireballHitbox = new Rectangle(7,5,16,26);
 	private static double speed = 5;
 	
-	public Fireball(double x, double y, String direction, Game game, Player attachedPlayer) {
-		super("Fireball", x, y, fireballDamage, direction, speed, "src/model/gameElements/fireball.png", fireballHitbox, game, attachedPlayer);
+	public Fireball(double x, double y, String direction, Game game, Actor a) {
+		super("Fireball", x, y, fireballDamage, direction, speed, "src/model/gameElements/fireball.png", fireballHitbox, game, a);
 	}	
 }
