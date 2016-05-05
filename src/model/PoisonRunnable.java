@@ -1,3 +1,8 @@
+/*
+ * Thread gérant l'infligation de dégats de poison au player
+ * Peut être appelé par n'importe quel objet implémentant l'interface PoisonningObject
+ */
+
 package model;
 
 import java.io.Serializable;
@@ -5,9 +10,7 @@ import java.io.Serializable;
 import model.gameElements.Player;
 
 public class PoisonRunnable implements Serializable, Runnable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Game game;
 	private Player player;
@@ -19,6 +22,9 @@ public class PoisonRunnable implements Serializable, Runnable {
 	}
 	@Override
 	public void run() {
+		
+		//inflige des dommages au joueur toutes les secondes pendant 4 secondes
+		
 		player=game.getPlayer();
 		int i = 0;
 		while (i < 4) {

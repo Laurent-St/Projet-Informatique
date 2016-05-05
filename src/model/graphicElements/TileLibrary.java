@@ -1,3 +1,11 @@
+/*
+ * Classe statique permettant de
+ * 	-Donner à la vue l'image des différentes tiles
+ * 	-D'attribuer à chaque tile une référence liant son type à son image présente dans Tiles.png, sous la forme d'un int[]
+ * 
+ * Au début du jeu, appeler la fonction TileLibrary.initImage(); afin de charger l'image des tiles
+ */
+
 package model.graphicElements;
 
 import java.awt.Image;
@@ -7,7 +15,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class TileLibrary {
+public final class TileLibrary {
 	private final static int tileSize = 20;
 	
 	public final static int[] FLOOR = {0,0};
@@ -34,6 +42,9 @@ public class TileLibrary {
 	private static Image tilesImage;
 	
 	public static void initImage() {
+		
+		//Initialise l'image des tiles
+		
 		try {
 			tilesImage = ImageIO.read(new File("src/model/graphicElements/Tiles.png"));
 		} catch (IOException e) {
@@ -50,6 +61,10 @@ public class TileLibrary {
 	}
 	
 	public static Rectangle getBoundsOf(Tile tile) {
+		
+		//Utile pour la vue
+		//Renvoie un rectangle correspondant à la sous-image de Tiles.png correspondant à la Tile donnée en paramètre
+		
 		int[] reference = tile.getReference();
 		return new Rectangle(tileSize*reference[0],tileSize*reference[1],
 				tileSize,tileSize);

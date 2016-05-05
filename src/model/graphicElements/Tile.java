@@ -1,14 +1,17 @@
+/*
+ * Classe abstraite définissant le comportement des cases de la map
+ * Celles-ci sont stockées dans des Map
+ * Elles sont liées à un int[] qui est donné par la classe statique TileLibrary (association du type de tile à son modèle graphique)
+ */
+
 package model.graphicElements;
 
 import java.io.Serializable;
 
 import model.Game;
 
-public class Tile implements Serializable {
+public abstract class Tile implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int[] reference = { 0, 0 };
 	private boolean isWalkable = true; // pour savoir si on peut marcher dessus
@@ -17,7 +20,9 @@ public class Tile implements Serializable {
 	private Game game;
 
 	public Tile(int[] ref, String type, Game game) {
-		// System.out.println("constru Tile");
+		
+		//initialisation de la Tile
+		
 		this.game=game;
 		reference[0] = ref[0];
 		reference[1] = ref[1];
@@ -48,23 +53,33 @@ public class Tile implements Serializable {
 	}
 
 	public int[] getReference() {
+		
+		//Renvoie la référence liant la tile à son modèle graphique
+		
 		return reference;
 	}
 	
 	public void setReference(int[] ref) {
+		
+		//int[] ref donné par TileLibrary
+		
 		this.reference = ref;
 	}
 
 	public String getType() {
-		// TODO Auto-generated method stub
 		return type;
 	}
-	
-	public void doorOpen(){}
 
-	public void envenom() {}
+	public void envenom() {};
 	
-	public boolean canTeleportToLevel() {return false;}
-	public int getLinkedLevel() {return 0;}
+	public boolean canTeleportToLevel() {
+		//Si la tile permet de téléporter le joueur d'un niveau à l'autre
+		return false;
+	}
+	
+	public int getLinkedLevel() {
+		//Dans le cas où la case permet de téléporter le joueur à un autre niveau spécifié (utile pour Door)
+		return 0;
+	}
 }
 

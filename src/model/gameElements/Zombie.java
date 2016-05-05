@@ -1,3 +1,7 @@
+/*
+ * Classe de monstre zombie, le monstre générique du jeu.
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
@@ -12,10 +16,12 @@ public class Zombie extends Monster {
 	public Zombie(double x, double y, int damage, int health, double speed, int xp, Game game,
 			Rectangle hitbox) {
 		super("src/model/gameElements/zombie.png", x, y, damage, health, 0, speed, xp, game, hitbox);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void randomDrop() {
+		
+		//Jette un objet aléatoire sur la map (arme, potion ou crane)
+		
 		Random random = new Random();
 		int rnd = random.nextInt(100);
 		if(rnd<=10) {
@@ -32,7 +38,7 @@ public class Zombie extends Monster {
 	
 	public void die() {
 		randomDrop();
-		getGame().getPlayer().gainXP(this.getXPReward());
+		getGame().getPlayer().gainXP(this.getXPReward()); //Gain d'XP pour le joueur
 		super.die();
 	}
 

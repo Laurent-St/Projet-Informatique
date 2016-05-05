@@ -1,3 +1,7 @@
+/*
+ * SpecialFX s'affichant lorsque le joueur passe de niveau
+ */
+
 package model.graphicElements;
 
 import java.awt.Rectangle;

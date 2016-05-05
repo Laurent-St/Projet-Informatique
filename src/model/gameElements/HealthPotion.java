@@ -1,3 +1,7 @@
+/*
+ * Potion de vie instantanée
+ */
+
 package model.gameElements;
 
 import model.Game;

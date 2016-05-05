@@ -1,3 +1,7 @@
+/*
+ * Classe gérant l'affichage de l'état du bouton en fonction de l'état de la souris
+ */
+
 package view.button;
 
 import java.awt.Graphics;
@@ -19,6 +23,9 @@ public class GButtonGraphics extends JPanel {
 	private GButton button;
 	
 	public GButtonGraphics(GButton button) {
+		
+		//Initialisation des graphismes du bouton et de son écouteur d'évènement
+		
 		try {
 			mouseOutImage = ImageIO.read(new File("src/view/button/mouseOut.png"));
 			mouseOverImage = ImageIO.read(new File("src/view/button/mouseOver.png"));
@@ -39,11 +46,17 @@ public class GButtonGraphics extends JPanel {
 	}
 	
 	public void updateImageSize() {
+		
+		//Mise à jour de l'affichage
+		
 		this.repaint();
 		button.repaint();
 	}
 
 	public void setGraphics(String type) {
+		
+		//Défini l'image à utiliser selon l'état reçu par le MouseListener
+		
 		if(type=="over") {
 			this.currentImage = mouseOverImage;
 		} else if (type=="down") {

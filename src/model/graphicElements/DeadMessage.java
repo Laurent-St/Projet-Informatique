@@ -1,3 +1,7 @@
+/*
+ * SpecialFX s'affichant lors de la mort du joueur 
+ */
+
 package model.graphicElements;
 
 import java.awt.Rectangle;

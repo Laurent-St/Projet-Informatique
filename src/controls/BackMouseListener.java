@@ -1,3 +1,8 @@
+/*
+ * Classe qui gère les clicks sur le bouton Back dans la parte Rules.
+ */
+
+
 package controls;
 
 import java.awt.event.MouseEvent;

@@ -1,3 +1,7 @@
+/*
+ * Listener qui change les états des boutons quand on passe dessus avec la souris.
+ */
+
 package controls;
 
 import java.awt.event.MouseEvent;

@@ -1,3 +1,9 @@
+/*
+ * Classe abstraite
+ * Les projectiles sont lancés quand le Player utilise sa Throwable Weapon. Ils implémentent l'interface Runnable
+ * Ils contiennent un Thread qui gère le déplacement du projectile
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
@@ -5,11 +11,8 @@ import java.util.ArrayList;
 
 import model.Game;
 
-public class Projectile extends Weapon implements Runnable{
+public abstract class Projectile extends Weapon implements Runnable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private transient Thread movingWeaponThread;
 	private String direction;
@@ -27,12 +30,18 @@ public class Projectile extends Weapon implements Runnable{
 	}
 	
 	public void activate() {
+		
+		//Méthode appelée lors de l'utilisation de l'arme du joueur afin de "lancer" le projectile
+		
 		threadSuspended = false;
+		//la position de départ du projectile est celle de l'Actor qui le lance (le Player ou le Boss)
 		double x = getAttachedActor().getXdouble()+getAttachedActor().getHitbox().getCenterX()-getHitbox().getCenterX();
 		double y = getAttachedActor().getYdouble()+getAttachedActor().getHitbox().getCenterY()-getHitbox().getCenterY();
 		this.setX(x);
 		this.setY(y);
 		getGame().getCurrentMap().addProjectile(this);
+		
+		//Lancement du thread de déplacement du projectile
 		movingWeaponThread = new Thread(this);
 		movingWeaponThread.start();
 	}
@@ -51,6 +60,8 @@ public class Projectile extends Weapon implements Runnable{
 
 	@Override
 	public void run() {
+		//Déplacement du projectile en vérifiant s'il touche des Actors ou des murs (la fonction de détection d'Actor 
+		//est getActorsInRectangle, définie dans Map
 		ArrayList<Actor> hitActors = new ArrayList<Actor>();
 		while(true) {
 			if(threadSuspended==false) {
@@ -67,6 +78,7 @@ public class Projectile extends Weapon implements Runnable{
 						setX(getXdouble()-this.speed);
 					}
 				} else {
+					//Code executé lors de la détection de collisions
 					explode(hitActors);
 					this.threadSuspended = true;
 				}
@@ -74,24 +86,25 @@ public class Projectile extends Weapon implements Runnable{
 			try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}		
 	}
 	
 	public void explode(ArrayList<Actor> hitActors) {
+		
+		//Méthode appelée lors de l'impact du projectile, inflige des dommages aux acteurs spécifiés en paramtère
+		
 		inflictDirectDamage(hitActors);
-		System.out.println("exploded");
 		this.travelling = false;
 		this.dead = true;
 		getGame().getCurrentMap().removeProjectile(this);
 	}
 	
-	public void attack() {
-		
-	}
+	public void attack() {}; //Afin de ne pas appeler la méthode attack() du parent
 
+	
+	//Méthodes utiles lors du changement de map
 	public void interruptThread() {
 		threadSuspended = true;
 	}

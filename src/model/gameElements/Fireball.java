@@ -1,3 +1,7 @@
+/*
+ * Boule de feu créée par l'utilisation de la FireballWeapon
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;

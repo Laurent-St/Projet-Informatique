@@ -1,3 +1,7 @@
+/*
+ * Classe gérant les contrôles du joueur.
+ */
+
 package controls;
 
 import java.awt.event.KeyEvent;
@@ -47,6 +51,8 @@ public class PlayerControls implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		//Les 4 premiers tests mettent le joueur dans un état de déplacement. Si le joueur est dans l'état up,
+		//il est orienté vers le haut et se déplacera vers le haut. Meme principe pour les 3 autres orientations.
 		if (e.getKeyCode()==z || e.getKeyCode()==dup) {
 			up = true;
 			player.setMoving("up");
@@ -113,6 +119,7 @@ public class PlayerControls implements KeyListener {
 			right = false;
 		}
 		
+		//Vérifie l'état de déplacement lorsque la touche est relachée.
 		if (up) {
 			player.setMoving("up");
 		} else if (down) {
@@ -133,7 +140,6 @@ public class PlayerControls implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

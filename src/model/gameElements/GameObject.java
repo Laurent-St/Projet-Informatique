@@ -1,3 +1,8 @@
+/*
+ * La superclasse de tous les éléments de la partie Model (à l'exception de Inventory): les Actor(Player et Monster)
+ *  et les CollectableObjects(Weapon, Potion, Projectile)
+ */
+
 package model.gameElements;
 
 import java.awt.Image;
@@ -9,12 +14,11 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 import model.Game;
 
-public class GameObject implements Serializable {
+public abstract class GameObject implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// private int position;
 	private double posx;
 	private double posy;
 	private transient Image object_image;
@@ -27,6 +31,7 @@ public class GameObject implements Serializable {
 		// nombre de pixels.
 		// Pour afficher l'objet avec ses vraies dimensions, il faudra donc
 		// multiplier par la dimension.
+		// Les objets ne sont pas liés à une case précise, d'où l'utilisation d'une Hitbox.
 		setX(x);
 		setY(y);
 		setHitbox(hitbox);
@@ -35,12 +40,16 @@ public class GameObject implements Serializable {
 		this.game = game;
 	}
 	
-	public void reloadAction(Game game) {
+	public void reloadAction(Game game) {	//sert lors de la restauration de la sauvegarde
 		this.game = game;
 		setImage();
 	}
 
 	public void setImage() {
+		
+		//Défini le fichier image lié au GameObject
+		//N'est JAMAIS manipulé par le modèle mais est utilisé par la vue pour dessiner l'objet
+		
 		try {
 			object_image = ImageIO.read(new File(image_url));
 		} catch (IOException e) {

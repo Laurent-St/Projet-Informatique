@@ -1,13 +1,15 @@
+/*
+ * Superclasse abstraite de tous les objets pouvant être ramassés. (contient spécifiquement la fonction inventorySelectAction())
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
 
 import model.Game;
 
-public class CollectableObject extends GameObject {
-	/**
-	 * 
-	 */
+public abstract class CollectableObject extends GameObject {
+
 	private static final long serialVersionUID = 1L;
 	private String name;
 
@@ -28,8 +30,7 @@ public class CollectableObject extends GameObject {
 		}
 	}
 
-	public void inventorySelectAction() {
-		// A redefinir selon l'objet
-		
+	public void inventorySelectAction(){
+		//A  redéfinir selon le type d'objet
 	}
 }

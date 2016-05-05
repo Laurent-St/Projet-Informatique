@@ -1,3 +1,7 @@
+/*
+ * Classe reprenant le joueur et les monstres. C'est ici que la fonction de déplacement move() est gérée.
+ */
+
 package model.gameElements;
 
 import java.awt.Point;
@@ -7,11 +11,8 @@ import model.Game;
 import model.graphicElements.Slash;
 import model.map.Map;
 
+public abstract class Actor extends GameObject {
 
-public class Actor extends GameObject {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int damage;
 	private int health;
@@ -22,8 +23,8 @@ public class Actor extends GameObject {
 	private Count animationCount;
 
 	private double speed;
-	private String movingState;
-	private String orientation;
+	private String movingState;	//direction dans laquelle l'Actor se déplace
+	private String orientation; //direction dans laquelle se trouve l'image de l'Actor
 	private int actorSize = 32;
 
 	public Actor(String imageUrl, double x, double y, int damage, int health, int mana, double speed, Game game, Rectangle hitbox) {
@@ -39,7 +40,7 @@ public class Actor extends GameObject {
 		
 		animationCount = new Count(4,90);
 		setMoving("null");
-		setOrientation("south");
+		setOrientation("south");	//choix arbitraire
 		
 	}
 	
@@ -69,7 +70,7 @@ public class Actor extends GameObject {
 			this.damage = damage;
 		} else {
 			this.damage = 0;
-			throw new RuntimeException("Dï¿½gï¿½ts nï¿½gatifs: valeur mise ï¿½ 0");
+			throw new RuntimeException("Degats negatifs, valeur mise à 0");
 		}
 	}
 
@@ -88,7 +89,7 @@ public class Actor extends GameObject {
 		}
 		
 		if(lastHealth>getHealth()) {
-			new Slash(getX(),getY(),getGame(),getGame().getCurrentMap());
+			new Slash(getX(),getY(),getGame(),getGame().getCurrentMap());	//animation quand l'Actor subit des dégâts
 		}
 	}
 
@@ -121,7 +122,7 @@ public class Actor extends GameObject {
 		this.maxMana = maxMana;
 	}
 	
-	public Point getFootPosition() {
+	public Point getFootPosition() {	//position des pieds de l'actor, utile pour la détection de case empoisonnées.
 		Point p = new Point();
 		double x = getX()+getHitbox().getCenterX();
 		double y = getY()+getHitbox().getMaxY();
@@ -138,6 +139,9 @@ public class Actor extends GameObject {
 	}
 	
 	public void setMoving(String state) {
+		
+		//Défini la direction de déplacement de l'Actor et met à jour son orientation corporelle
+		
 		this.movingState = state;
 		if(state!="null") {
 			setOrientation(state);
@@ -152,19 +156,25 @@ public class Actor extends GameObject {
 		animationCount.activeCountThread();
 	}
 	
-	public void reloadAction(Game game) {
+	public void reloadAction(Game game) {	//utilisé pour la restauration de la sauvegarde
 		launchAnimationCount();
 		super.reloadAction(game);
 	}
 	
 	public void basicAttack(Actor target) {
-		target.setHealth(target.getHealth() - damage);
+		
+		//Inflige des dégats directs à l'acteur spécifié
+		
+		target.setHealth(target.getHealth() - getDamage());
 	}
 
-	public void die() {
-	} // mï¿½thode abstraite qui va ï¿½tre implï¿½mentï¿½e dans Player et Monster
+	public abstract void die();
 	
 	public void move() {
+		
+		//Est appelé par le thread gérant l'Actor
+		//L'actor bouge dans sa direction à condition que la position atteinte soit libre
+		
 		String ms = getMovingState();
 		if(ms!="null") {
 			double speed = getSpeed();
@@ -181,8 +191,7 @@ public class Actor extends GameObject {
 			} else if (ms=="left") {
 				newX-=speed;
 			}
-			if(terrain.isPositionWalkable(newX,newY,getHitbox())&& terrain.isPositionOccupied(newX, newY, this, true)==false){
-				//System.out.print("Nouvelle position");
+			if(terrain.isPositionWalkable(newX,newY,getHitbox())&& terrain.isPositionOccupied(newX, newY, this)==false){
 				this.setX(newX);
 				this.setY(newY);
 			}

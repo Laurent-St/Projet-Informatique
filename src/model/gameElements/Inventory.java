@@ -1,47 +1,47 @@
+/*
+ * Gère l'inventaire du joueur, contient une liste de CollectableObject
+ * Doit être initialisé avec un Player (inventaire lié à un joueur)
+ */
+
 package model.gameElements;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import view.InventoryObserver;
+import view.level.InventoryObserver;
 
 public class Inventory implements InventorySubject, Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private ArrayList<CollectableObject> content;
 	private int maxSize = 5;
 	private InventoryObserver observer;
 	private Player attachedPlayer;
-	//private Game game;
 
 	public Inventory(int maxSize, Player attachedPlayer) {
 		
 		this.attachedPlayer = attachedPlayer;
 		content = new ArrayList<CollectableObject>();
 		setMaxSize(maxSize);
-//		for (int i=0; i<maxSize; i++){
-//			content.add(i, null);
-//		}
-		//this.inventoryWindow=game.getGamePanel().getInventoryWindow();
 		
 	}
 
 	public void setInInventory(CollectableObject object) {
+		
+		//Ajoute un objet à l'inventaire (si non plein)
+		
 		if (content.size() < maxSize) {
 			content.add(object);
-//			inventoryWindow.repaint();
 			notifyObserver();
 		} else {
-			System.out.println("Your inventory is full"); // à printer dans
-															// l'interface et
-															// pas dans la
-															// console.
+			System.out.println("Your inventory is full"); 
 		}
 	}
 
 	public void dropObject(int i){
+		
+		//Jete un objet sur la map et le retire de l'inventaire
+		
 		CollectableObject co = getFromInventory(i-1);
 		if(co!=null) {
 			attachedPlayer.getGame().getCurrentMap().addCollectableObject(co);
@@ -75,11 +75,15 @@ public class Inventory implements InventorySubject, Serializable{
 	public void setMaxSize(int maxSize) {
 		this.maxSize = maxSize;
 	}
+	
 	public ArrayList<CollectableObject> getExistingContent(){		//retourne une liste avec juste les éléments existants
 		return content;
 	}
 	
 	public CollectableObject getFromInventory(int i) {
+		
+		//Renvoie un objet de l'inventaire à la position i (selon l'input clavier du joueur)
+		
 		if(getExistingContent().size()>i) {
 			if(getExistingContent().get(i)!=null) {
 				return getExistingContent().get(i);

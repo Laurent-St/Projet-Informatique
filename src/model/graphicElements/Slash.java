@@ -1,3 +1,7 @@
+/*
+ * SpecialFX permettant d'afficher une prise de dégat par un Actor
+ */
+
 package model.graphicElements;
 
 import java.awt.Rectangle;

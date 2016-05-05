@@ -1,3 +1,7 @@
+/*
+ * MainMenu : Menu principal s'affichant au lancement du jeu
+ */
+
 package view.menu;
 
 import java.awt.Dimension;
@@ -17,6 +21,9 @@ public class MainMenu extends MenuPanel {
 	
 	public MainMenu(Game game) {
 		super(game.getGamePanel());
+		
+		//Définition du contenu du menu et initialisation des écouteurs d'évemenents pour les boutons
+		
 		this.setBackgroundImage("src/view/menu/gameMenu.png");
 		
 		playButton = new GButton("PLAY",24,new Dimension(250,100));

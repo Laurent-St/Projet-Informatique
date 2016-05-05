@@ -1,3 +1,7 @@
+/*
+ * Tile empoisonnée, utilisant un Thread au travers de la classe PoisonRunnable
+ */
+
 package model.graphicElements;
 
 import model.Game;
@@ -5,9 +9,7 @@ import model.PoisonRunnable;
 import model.PoisonningObject;
 
 public class PoisonousTile extends Tile implements PoisonningObject {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private PoisonRunnable poisonRunnable;
 	private transient Thread poisonThread;
@@ -21,6 +23,7 @@ public class PoisonousTile extends Tile implements PoisonningObject {
 	}
 	
 	public void envenom() {
+		//S'active quand le Player marche sur la case empoisonnée.
 		if(poisonThread==null){
 			setPoisonThreadRunning(true);
 			poisonThread = new Thread(poisonRunnable);

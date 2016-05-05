@@ -1,3 +1,9 @@
+/*
+ * Classe abstraite
+ * Défini le comportement des armes de main
+ * Contiennent un Thread permettant de gérer l'animation de l'arme lors de son utilisation
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
@@ -6,14 +12,11 @@ import animation.CountTimer;
 import animation.CountTimerListener;
 import model.Game;
 
-public class HandWeapon extends Weapon implements CountTimerListener  {
+public abstract class HandWeapon extends Weapon implements CountTimerListener  {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private int range;
-	private CountTimer attackAnimationCount;
+	private int range; //la portée est exprimée en pixels (extension de la hitbox de l'arme)
+	private CountTimer attackAnimationCount;	//compteur pour afficher le mouvement des armes
 	
 	public HandWeapon(String name, int x, int y, int damage, int manaConsumption, int range, String image_url, Rectangle hitbox,
 			Game game, Player attachedPlayer) {
@@ -21,11 +24,11 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 		
 		setAttackRange(range);
 		attackAnimationCount = new CountTimer(5,1000,this);
-		attackAnimationCount.stop();
+		attackAnimationCount.stop();	//pour ne pas que l'animation démarre à la création de l'arme
 		attackAnimationCount.setCount(4);
 	}
 	
-	public void activateCountThread(){	//utilisé pour la sérialisation
+	public void activateCountThread(){	//utilisé pour la restauration de la sauvegarde
 		attackAnimationCount.activeCountThread();
 	}
 	
@@ -42,6 +45,9 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	}
 	
 	public void attack() {
+		
+		//Inflige des dommages aux acteurs présents à portée de l'arme
+		
 		if(enoughMana()) {
 			attackAnimationCount = null;
 			attackAnimationCount = new CountTimer(5,50,this);
@@ -75,8 +81,9 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 	}
 	
 	public void inventorySelectAction() {
+		//Enlève l'arme d'une des 5 cases de l'inventaire et la place dans la case d'utilisation d'arme au corps-à-corps
 		if(getAttachedActor() instanceof Player) {
-			Player p = (Player) getAttachedActor();
+			Player p = (Player) getAttachedActor();	//exemple de généricité
 			HandWeapon currentWeapon = p.getHandWeapon();
 			p.equipHandWeapon(this);
 			p.getInventory().removeFromInventory(this);
@@ -95,7 +102,7 @@ public class HandWeapon extends Weapon implements CountTimerListener  {
 		}
 	}
 
-	public void reloadAction() {
+	public void reloadAction() {	//utilisé pour la restauration de la sauvegarde
 		attackAnimationCount = new CountTimer(5,1000,this);
 		attackAnimationCount.stop();
 		attackAnimationCount.setCount(4);

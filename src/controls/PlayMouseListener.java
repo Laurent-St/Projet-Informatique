@@ -1,3 +1,7 @@
+/*
+ * Classe qui gère les clicks sur le bouton Play du Menu.
+ */
+
 package controls;
 
 import java.awt.event.MouseEvent;

@@ -1,3 +1,7 @@
+/*
+ * Arme surpuissante (Lightsaber)
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;

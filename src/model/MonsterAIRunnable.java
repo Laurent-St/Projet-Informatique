@@ -1,3 +1,8 @@
+/*
+ * Classe qui gère l'IA des Monster avec un Thread. Le déplacement des Monster est aléatoire,
+ * ils ne font pas attention au Player. Le Boss dispose de plus d'attaques que les Monster
+ */
+
 package model;
 
 import java.util.ArrayList;
@@ -63,11 +68,7 @@ public class MonsterAIRunnable implements Runnable {
 						if (b.getCount()%100==0){
 							b.tryAttack();
 						}
-						
-						
 					}
-					
-					
 					m.move();
 					
 					
@@ -76,7 +77,6 @@ public class MonsterAIRunnable implements Runnable {
 			try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

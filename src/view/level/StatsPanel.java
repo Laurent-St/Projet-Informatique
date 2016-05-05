@@ -1,4 +1,10 @@
-package view;
+/*
+ * Classe graphique permettant d'afficher les statistiques du joueur.
+ * Celle-ci doit être initialisée avec un joueur en paramètre.
+ * Mise à jour de l'affichage par la fonction update
+ */
+
+package view.level;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import model.gameElements.Player;
+import view.FontLoader;
 
 public class StatsPanel extends JPanel{
 	
@@ -30,6 +37,9 @@ public class StatsPanel extends JPanel{
 	private Dimension barSize = new Dimension(100,20);
 	
 	public StatsPanel(Player player){
+		
+		//Définition de la mise en page du StatsPanel
+		
 		this.player = player;
 		this.setBounds(panelBounds);
 		this.setLayout(null);
@@ -102,11 +112,16 @@ public class StatsPanel extends JPanel{
 	}
 	
 	public void update() {
+		
+		//Mise à jour de l'affichage, requiert un accès aux différentes propriétés du joueur
+		
 		mana.setValue((int) Math.floor(100.0/(double)player.getMaxMana()*(double)player.getMana()));
 		xp.setValue((int) Math.floor(100.0/(double)player.getMaxExperienceForLevel()*(double)player.getExperience()));
 		health.setValue((int) Math.floor(100.0/(double)player.getMaxHealth()*(double)player.getHealth()));
 		levelLabel.setText("Level "+String.valueOf(player.getLevel()));
 		attackBonus.setText("Damage Bonus: "+String.valueOf(player.getDamage()));
+		
+		//Texte en rouge en-dessous de valeurs critiques
 		
 		if(player.getMana()<=10) {
 			manaLabel.setForeground(Color.RED);

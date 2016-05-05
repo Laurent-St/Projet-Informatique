@@ -1,10 +1,15 @@
+/*
+ * Classe abstraite
+ * gère le comportement des potions
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
 
 import model.Game;
 
-public class Potion extends CollectableObject {
+public abstract class Potion extends CollectableObject {
 	/**
 	 * 
 	 */

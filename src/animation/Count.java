@@ -13,14 +13,14 @@ public class Count implements Serializable, Runnable {
 	protected int sleepTime;
 	private transient Thread clock;
 	
-	public Count(int max, int time) {
+	public Count(int max, int sleepTime) {
 		count = 0;
 		maxCount = max;
-		sleepTime = time;
+		this.sleepTime = sleepTime;
 		clock = new Thread(this);
 		clock.start();
 	}
-	public void activeCountThread(){	//utilisé pour la sérialisation
+	public void activeCountThread(){	//utilisé pour la restauration de sauvegarde
 		clock=new Thread(this);
 		clock.start();
 	}

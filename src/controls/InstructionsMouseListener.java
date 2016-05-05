@@ -1,3 +1,8 @@
+/*
+ * Classe qui gère les clicks sur le bouton Rules du Menu.
+ */
+
+
 package controls;
 
 import java.awt.event.MouseEvent;

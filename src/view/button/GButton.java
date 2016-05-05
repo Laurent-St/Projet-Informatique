@@ -1,5 +1,5 @@
-/*----------------------------------
- * Bouton stylé homemade remplaçant le classique JButton
+/*
+ * Bouton remplaçant le JButton classique
  * A utiliser en faisant new GButton(String label, Dimension dimensions)
  */
 
@@ -25,6 +25,8 @@ public class GButton extends JPanel {
 	public GButton(String text, int textSize, Dimension dim) {
 		super();
 		
+		//Initialisation de l'affichage du bouton
+		
 		initLabel(text, textSize);
 		
 		this.dimensions = dim;
@@ -42,6 +44,9 @@ public class GButton extends JPanel {
 	}
 	
 	public void initLabel(String text, int textSize) {
+		
+		//Initialisation de l'affichage du texte du bouton
+		
 		label = new JLabel();
 		label.setFont(FontLoader.getFont(textSize));
 		label.setText(text);
@@ -51,6 +56,9 @@ public class GButton extends JPanel {
 	}
 	
 	public void setDimensions(Dimension dim) {
+		
+		//Définition de la taille du bouton
+		
 		this.dimensions = dim;
 		this.setSize(dimensions);
 		buttonImage.updateImageSize();
@@ -63,6 +71,9 @@ public class GButton extends JPanel {
 	}
 	
 	public void addTo(JPanel panel) {
+		
+		//A utiliser pour ajouter le composant à un JPanel
+		
 		panel.add(this);
 		buttonImage.updateImageSize();
 	}

@@ -1,3 +1,9 @@
+/*
+ * CLASSE PRINCIPALE CONTENANT LE JEU
+ * Contient la méthode main qui initialise les différentes parties du jeu
+ */
+
+
 package model;
 
 import model.graphicElements.*;

@@ -1,3 +1,7 @@
+/*
+ * Monstre de type boss
+ */
+
 package model.gameElements;
 
 import java.awt.Rectangle;
@@ -20,7 +24,11 @@ public class Boss extends Monster implements PoisonningObject {
 		poisonRunnable = new PoisonRunnable(game,this);
 		setActorSize(64);
 	}
-	public void fireBallAttack(){
+	
+	public void fireBallAttack(){	
+		
+		//envoie une boule de feu dans chaque direction
+		
 		Fireball fb1= new Fireball(getX(), getY(), "up", getGame(), this);
 		Fireball fb2= new Fireball(getX(), getY(), "down", getGame(), this);
 		Fireball fb3= new Fireball(getX(), getY(), "left", getGame(), this);
@@ -30,7 +38,11 @@ public class Boss extends Monster implements PoisonningObject {
 		fb3.activate();
 		fb4.activate();	
 	}
-	public void poisonAttack(){		//même code que la fonction envenom() de PoisonousTile
+	
+	public void poisonAttack(){	
+		
+		//inflige du poison au joueur
+		
 		Player player = getGame().getPlayer();
 		int range = 10;
 		
@@ -42,6 +54,8 @@ public class Boss extends Monster implements PoisonningObject {
 				player.getY()+(int)player.getHitbox().getMinY(),
 				(int)player.getHitbox().getWidth(),
 				(int)player.getHitbox().getHeight());
+		
+		//réutilise le code de la fonction envenom() de PoisonousTile
 		if(testHitbox1.intersects(testHitbox2)) {
 			System.out.print("Player empoisonné");
 			if(poisonThread==null){
@@ -59,6 +73,7 @@ public class Boss extends Monster implements PoisonningObject {
 	public void setPoisonThreadRunning(boolean isPoisonThreadRunning){
 		poisonThreadRunning=isPoisonThreadRunning;
 	}	
+	
 	public void die(){
 		super.die();
 		epicDrop();	// le Boss lache d'office un sabre laser
@@ -67,6 +82,7 @@ public class Boss extends Monster implements PoisonningObject {
 		}
 		getGame().getPlayer().gainXP(getXPReward());
 	}
+	
 	public void epicDrop(){
 		getGame().getCurrentMap().addCollectableObject(new Lightsaber("Lightsaber",getX(),getY(),getGame(),getGame().getPlayer()));
 	}
