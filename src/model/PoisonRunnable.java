@@ -1,5 +1,5 @@
 /*
- * Thread gérant l'infligation de dégats de poison au player
+ * Thread gérant les dégats de poison infligés au player
  * Peut être appelé par n'importe quel objet implémentant l'interface PoisonningObject
  */
 

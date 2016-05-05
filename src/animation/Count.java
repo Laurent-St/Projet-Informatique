@@ -1,12 +1,14 @@
+/*
+ * Compteur utilisé par certaines classes afin de pouvoir accéder à un compte qui s'incrémente après un intervalle de temps donné.
+ * (Utile pour les animations de déplacements)
+ */
+
 package animation;
 
 import java.io.Serializable;
 
 public class Count implements Serializable, Runnable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int count = 0;
 	private int maxCount;

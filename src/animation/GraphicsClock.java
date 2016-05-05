@@ -1,3 +1,8 @@
+/*
+ * Thread agissant comme horloge: toutes les 15 millisecondes, il appelle la méthode paintComponent
+ *  du JComponent auquel il est associé.
+ */
+
 package animation;
 
 import java.io.Serializable;

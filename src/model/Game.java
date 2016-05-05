@@ -1,6 +1,9 @@
 /*
  * CLASSE PRINCIPALE CONTENANT LE JEU
- * Contient la méthode main qui initialise les différentes parties du jeu
+ * Contient
+ * -la méthode main qui initialise les différentes parties du jeu
+ * -les méthodes qui permettent de passer entre les niveaux
+ * -les méthodes de sérialisation
  */
 
 
@@ -29,9 +32,6 @@ import model.gameElements.*;
 
 public class Game implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private transient GameWindow gameWindow;
 	private transient GamePanel gamePanel;
@@ -43,10 +43,13 @@ public class Game implements Serializable {
 	private Player player;
 	private transient PlayerControls playerControls;
 	
+	//Permet de stocker les 10 terrains du jeu
 	private ArrayList<Map> levels = new ArrayList<Map>(); 
 	private Map currentMap;
 	
 	public static void main(String[] args) {
+		
+		//Initialisation de la police de jeu et des graphismes du terrain
 		FontLoader.loadGameFont();
 		TileLibrary.initImage();
 		new Game();
@@ -58,6 +61,10 @@ public class Game implements Serializable {
 	}
 	
 	public void play(boolean loadGame) {
+		
+		//Méthode appelée pour démarrer la partie
+		//Si loadGame est true, il y a une restauration de la partie précédente
+		
 		if(!loadGame) {
 			initLevel();
 			initPlayer();
@@ -68,35 +75,43 @@ public class Game implements Serializable {
 			initAI();
 		}
 		
+		//Les menus sont retirés et les graphismes et les contrôles du jeu sont initialisés
 		gamePanel.removeMenus();
 		initGraphics();
 		initControls();
 		
+		//Initialisation des panneaux d'inventaires et de statistiques du joueur
 		gamePanel.initInventoryWindow(player.getInventory());
 		gamePanel.initStatsPanel(player);
 	}
 	
 	public void initGUI() {
+		//Méthode qui gère l'initialisation de la fenêtre de jeu
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel); //Affiche la fenêtre principale
 	}
 	
 	public void initMenu(){
+		//Méthode qui gère l'initialisation des menus de jeu
 		instructionsMenu = new InstructionsMenu(this);
 		mainMenu = new MainMenu(this);
 		gamePanel.setMenu(mainMenu);
 	}
+	
 	public void initLevel() {
+		//Méthode qui initialise le premier niveau à afficher
 		RandomMap level1 = new RandomMap(1,this);
 		levels.add(level1);
 		setCurrentMap(level1);
 	}
 	
 	public void initGraphics() {
+		//Méthode qui initialise la vue du terrain et des GameObjects
 		levelPanel = new LevelPanel(this, getCurrentMap());
 	}
 
 	public void initControls() {
+		//Méthode initialisant les contrôles
 		playerControls = new PlayerControls(player);
 		gamePanel.setFocusable(true);
 		gamePanel.requestFocus();
@@ -105,6 +120,7 @@ public class Game implements Serializable {
 	
 	
 	public void initPlayer(){
+		//Crée le joueur et lui donne 2 potions.
 		player = new Player(0, 100, 100, this);
 		player.getInventory().setInInventory(new HealthPotion(0,0,50,this));
 		player.getInventory().setInInventory(new ManaPotion(0,0,50,this));
@@ -119,6 +135,7 @@ public class Game implements Serializable {
 	}
 	
 	public void initAI() {
+		//Initialisation du thread des monstres
 		monsterAI = new Thread(new MonsterAIRunnable(this));
 		monsterAI.start();
 	}
@@ -131,7 +148,7 @@ public class Game implements Serializable {
 		return this.currentMap;
 	}
 
-	private void setCurrentMap(Map map) {
+	public void setCurrentMap(Map map) {
 		this.currentMap = map;	
 	}
 	
@@ -152,14 +169,15 @@ public class Game implements Serializable {
 	}
 
 	public void changeLevel(int levelNum) {
-		System.out.println("go to "+String.valueOf(levelNum));
-		getCurrentMap().stopAllThreads();
-		if(getCurrentMap().getLevelNum()<levelNum) {
-			getCurrentMap().tryToTeleport(player, new Point(40,30));
-		} else {
-			getCurrentMap().tryToTeleport(player, new Point(900,620));
-		}
 		
+		//Permet de passer au niveau indiqué par levelNum. Celui-ci correspond à une map stockée dans la liste levels
+
+		//Mise en pause des gameObjects ayant un thread
+		getCurrentMap().stopAllThreads();
+		
+		int currentLevelNum = getCurrentMap().getLevelNum();
+		
+		//Création d'une nouvelle map si la map appelée est inexistante. Sinon, une carte existante est chargée
 		if(levelNum>levels.size()) {
 			Map newLevel;
 			if(levelNum%5==0) {
@@ -176,9 +194,17 @@ public class Game implements Serializable {
 		}
 		
 		levelPanel.setMap(getCurrentMap());
+		
+		//Téléportation du joueur après avoir passé la porte
+		if(getCurrentMap().getLevelNum()>currentLevelNum) {
+			getCurrentMap().tryToTeleport(player, new Point(40,30));
+		} else {
+			getCurrentMap().tryToTeleport(player, new Point(900,620));
+		}
 	}
 	
 	public void saveGame(){
+		//Utilise le mécanisme de sérialisation. Sauvegarde l'ensemble des éléments du jeu.
 		try{
 		ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("save_game.serial"));
 		oos.writeObject(this);
@@ -189,6 +215,8 @@ public class Game implements Serializable {
 		}
 	}
 	public void restoreGame(){
+		//Restaure la sauvegarde. Il faut relancer tous les Thread manuellement car ceux-ci ne sont pas
+		//sérialisables et sont donc spécifiés "transient".
 		try{
 			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("save_game.serial"));
 			Game savedGame = (Game) ois.readObject();
