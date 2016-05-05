@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="model.gameElements.GameObject" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/GameObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="199" y="-232"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="model.gameElements.Actor" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Actor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="799" width="377" x="394" y="-478"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="model.gameElements.Arrow" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Arrow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="924" y="-391"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="model.gameElements.Axe" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Axe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="215" width="304" x="771" y="-304"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="model.gameElements.Boss" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Boss.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="291" width="336" x="1077" y="-479"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="model.gameElements.Bow" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Bow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1503" y="-381"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="model.gameElements.CollectableObject" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/CollectableObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1003" y="8"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="model.gameElements.Fireball" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Fireball.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1396" y="-102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.gameElements.FireballWeapon" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/FireballWeapon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1391" y="85"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.gameElements.HandWeapon" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/HandWeapon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="339" width="505" x="771" y="106"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="model.gameElements.HealthPotion" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/HealthPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1418" y="253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="model.gameElements.Inventory" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="207" y="252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="model.gameElements.InventorySubject" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/InventorySubject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1189" y="490"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="model.gameElements.Lightsaber" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/Lightsaber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1417" y="431"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="model.gameElements.ManaPotion" project="Projet-Informatique" 
+    file="/Projet-Informatique/src/model/gameElements/ManaPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="536" y="388"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

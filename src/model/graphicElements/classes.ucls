@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="animation.Count" project="Hack And Slash" 
-    file="/Hack And Slash/src/animation/Count.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="75" y="140"/>    
+  <class id="1" language="java" name="model.graphicElements.DeadMessage" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/DeadMessage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="116" y="88"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="animation.CountTimer" project="Hack And Slash" 
-    file="/Hack And Slash/src/animation/CountTimer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="256" y="68"/>    
+  <class id="2" language="java" name="model.graphicElements.Door" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/Door.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="314" y="115"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="animation.CountTimerListener" project="Hack And Slash" 
-    file="/Hack And Slash/src/animation/CountTimerListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="75" y="323"/>    
+  <class id="3" language="java" name="model.graphicElements.Floor" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/Floor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="465" y="52"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </interface>  
-  <class id="4" language="java" name="animation.GraphicsClock" project="Hack And Slash" 
-    file="/Hack And Slash/src/animation/GraphicsClock.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="207" x="152" y="329"/>    
+  </class>  
+  <class id="4" language="java" name="model.graphicElements.LevelUP" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/LevelUP.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="224" x="4" y="175"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="controls.BackMouseListener" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/BackMouseListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="233" x="363" y="1"/>    
+  <class id="5" language="java" name="model.graphicElements.PoisonousTile" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/PoisonousTile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="225" x="4" y="347"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="controls.GButtonGraphicsMouse" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/GButtonGraphicsMouse.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="479" y="286"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="controls.InstructionsMouseListener" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/InstructionsMouseListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="693" y="95"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="controls.LoadMouseListener" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/LoadMouseListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="693" y="286"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="controls.PlayerControls" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/PlayerControls.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="876" y="275"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="controls.PlayMouseListener" project="Hack And Slash" 
-    file="/Hack And Slash/src/controls/PlayMouseListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="207" x="152" y="139"/>    
+  <class id="6" language="java" name="model.graphicElements.Slash" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/Slash.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="190" x="532" y="3"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="model.graphicElements.SpecialFX" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/SpecialFX.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="879" y="97"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="model.graphicElements.Tile" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/Tile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="314" y="432"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.graphicElements.TileLibrary" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/TileLibrary.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="190" x="532" y="175"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.graphicElements.Wall" project="Hack And Slash" 
+    file="/Hack And Slash/src/model/graphicElements/Wall.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="465" y="153"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    

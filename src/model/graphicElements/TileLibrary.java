@@ -1,5 +1,5 @@
 /*
- * Classe statique permettant de
+ * Classe statique permettant de:
  * 	-Donner à la vue l'image des différentes tiles
  * 	-D'attribuer à chaque tile une référence liant son type à son image présente dans Tiles.png, sous la forme d'un int[]
  * 

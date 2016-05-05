@@ -1,5 +1,5 @@
 /*
- * La superclasse de tous les éléments de la partie Model (à l'exception de Inventory): les Actor(Player et Monster)
+ * La superclasse de tous les éléments de tout le package model.gameElements (à l'exception de Inventory): les Actor(Player et Monster)
  *  et les CollectableObjects(Weapon, Potion, Projectile)
  */
 
